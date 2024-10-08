@@ -21,4 +21,10 @@ public class WeeklyJournalSteps {
 //        Todo in next PR: implementation
         //        at the moment, this just shows the type & duration, not the details added when tracking new exercise
     }
+
+    @Then("I can see my workout in the journal")
+    public void iCanSeeMyWorkoutInTheJournal() {
+        Assertions.assertEquals(1, 1);
+//        Todo in next PR: implementation
+    }
 }
