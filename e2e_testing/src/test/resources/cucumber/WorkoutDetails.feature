@@ -1,7 +1,7 @@
 Feature: Workout details
-#  Background:
-#    Given I have an account
-#    And I have logged into the app
+  Background:
+    Given I have an account for "user1" with password "password"
+    And I login to the app using the username "user1" and password "password"
 
   Scenario: Users can see full details of their completed workouts
     Given I have entered my completed workout
