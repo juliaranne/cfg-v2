@@ -1,13 +1,16 @@
-package e2e_testing.stepDefinitions;
+package cucumber.stepDefs;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
 
 public class StepDefs {
     @Given("^I have entered my completed workout$")
     public void iHaveEnteredMyCompletedWorkout() {
+        System.out.println("hi");
+        Assertions.assertEquals(1,1);
     // login
     //
     }
@@ -31,6 +34,9 @@ public class StepDefs {
 
     @Then("^I can see a daily breakdown of my workout week in the journal$")
     public void iCanSeeADailyBreakdownOfMyWorkoutWeekInTheJournal() {
+        System.out.println("hi");
+        Assertions.assertEquals(1,1);
+
         // add the expected text
         // using selenium, navigate to the weekly journal button/area the info lives
         // assert this info is there

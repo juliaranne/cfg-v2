@@ -4,6 +4,8 @@
 
 ## How to use 
 1. Follow the instructions in the MLA-app README to run the application 
+2. Install the Cucumber plugin for IntelliJ [//]: # (detail who by)
+3. 
 
 [//]: # (Todo once the features are implemented)
 [//]: # (2. Run the individual features )
