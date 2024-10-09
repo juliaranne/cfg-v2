@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class E2eTestingApplicationTests {
-
+//todo - remove in next PR
 	@Test
 	void contextLoads() {
 	}
