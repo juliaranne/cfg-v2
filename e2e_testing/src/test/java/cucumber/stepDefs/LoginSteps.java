@@ -8,16 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 public class LoginSteps {
-// todo have chrome driver config in a spring config file
-@Autowired
-@Qualifier("chromeDriver")
-private WebDriver chromeDriver;
+    @Autowired
+    @Qualifier("chromeDriver")
+    private WebDriver chromeDriver;
 
     @Given("I have an account for {string} with password {string}")
     public void iHaveAnAccountForWithPassword(String username, String password) {
-
-        // Initialize the Chrome WebDriver
-//        driver = new ChromeDriver();
 
         chromeDriver.get("https://www.google.com");
 
