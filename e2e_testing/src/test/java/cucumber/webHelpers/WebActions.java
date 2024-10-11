@@ -46,6 +46,19 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
 
     } // todo have this as an enum of different types // maybe have in separate classes for the different webpages
 
+    public void clickSubmit(){
+        WebDriverWait wait = wait(chromeDriver);
+        try {
+            WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='submit' and contains(text(), 'Save activity')]")));
+
+            saveButton.click();
+
+            System.out.println("Save activity button clicked successfully.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void assertHeader(String headerType, String contents){
         WebDriverWait wait = wait(chromeDriver);
@@ -81,6 +94,6 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
     }
 
     private WebDriverWait wait(WebDriver chromeDriver) {
-        return new WebDriverWait(chromeDriver, Duration.ofSeconds(10));
+        return new WebDriverWait(chromeDriver, Duration.ofSeconds(5));
     } // can this be turned into a variable for the class instead
 }
