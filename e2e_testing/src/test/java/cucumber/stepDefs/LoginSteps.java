@@ -4,21 +4,22 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 public class LoginSteps {
 // todo have chrome driver config in a spring config file
-    private WebDriver driver;
+@Autowired
+@Qualifier("chromeDriver")
+private WebDriver chromeDriver;
 
     @Given("I have an account for {string} with password {string}")
     public void iHaveAnAccountForWithPassword(String username, String password) {
-        // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "C:/Users/baron/Code/chromedriver-win64/chromedriver-win64/chromedriver.exe");
 
         // Initialize the Chrome WebDriver
-        driver = new ChromeDriver();
+//        driver = new ChromeDriver();
 
-        driver.get("https://www.google.com");
+        chromeDriver.get("https://www.google.com");
 
         Assertions.assertEquals(1, 1);
 //        Todo in next PR: implementation
