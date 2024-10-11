@@ -7,22 +7,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
-import java.time.Duration;
 import java.util.UUID;
 
 import static cucumber.util.Context.KEY_PASSWORD;
 import static cucumber.util.Context.KEY_USERNAME;
 
 @Slf4j
-public class LoginSteps {
+public class LoginSteps { // maybe change the name if having all steps within
 
     private WebDriver chromeDriver = WebDriverManager.getDriver(); // Get the shared WebDriver
 
@@ -30,6 +23,8 @@ public class LoginSteps {
 
     private WebActions webActions = new WebActions(chromeDriver);
 
+    // maye change the below to be 'i am logged in with a random username and password' or something simiarl
+// todo sort out the timeouts
     @Given("I have an account for {string} with password {string}")
     public void iHaveAnAccountForWithPassword(String username, String password) { // remove the fields
         String username1 = UUID.randomUUID().toString();
@@ -38,15 +33,12 @@ public class LoginSteps {
         Context.set(KEY_USERNAME, username1);
         Context.set(KEY_PASSWORD, password1);
 
-
-        // have to either:
-        // try logging in and see if it lets, and if not signup
-        // or signup and see what happens
-        // or create a new account
         chromeDriver.get(baseUrl);
-        webActions.clickOnButtonToRedirect("Sign up");
-        webActions.populateField("formUsername", username1);
-        webActions.populateField("formPassword", password1);
+        webActions.clickOnButtonByLinkText("Sign up");
+        webActions.populateField("formBasicEmail", username1); // highlight this to team
+        webActions.populateField("formBasicPassword", password1);
+        webActions.clickOnButtonByPath("//button[@type='submit']");
+        webActions.assertHeader("h3", "Track exercise");
 
     }
 
@@ -65,6 +57,12 @@ public class LoginSteps {
 //        // Click the login button
 //        WebElement loginButton = chromeDriver.findElement(By.xpath("//button[@type='submit']"));
 //        loginButton.click();
+//        Todo in next PR: implementation
+    }
+
+    @Given("^I have entered a completed workout$")
+    public void iHaveEnteredACompletedWorkout() {
+        Assertions.assertEquals(1, 1);
 //        Todo in next PR: implementation
     }
 
