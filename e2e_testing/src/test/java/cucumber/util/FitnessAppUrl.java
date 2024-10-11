@@ -1,13 +1,13 @@
-package cucumber;
+package cucumber.util;
 
-public enum Url {
+public enum FitnessAppUrl {
     LOGIN("/login"),
     TRACK_EXERCISE("/trackExercise"),
     WEEKLY_JOURNAL("/journal");
 
     private final String url;
 
-    Url(String url) {
+    FitnessAppUrl(String url) {
         this.url = url;
     }
 }

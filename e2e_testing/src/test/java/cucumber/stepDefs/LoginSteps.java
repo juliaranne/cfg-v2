@@ -5,11 +5,10 @@ import io.cucumber.java.en.Given;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 public class LoginSteps {
+
     @Autowired
-    @Qualifier("chromeDriver")
     private WebDriver chromeDriver;
 
     @Given("I have an account for {string} with password {string}")

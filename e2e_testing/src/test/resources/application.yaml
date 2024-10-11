@@ -2,4 +2,5 @@ MLA:
   baseurl: http://localhost
 
 ## Todo replace the below
-chromedriver_path: "C:\Users\baron\Code\chromedriver-win64\chromedriver-win64\chromedriver.exe"
+chromedriver:
+  path: "C:/Users/baron/Code/chromedriver-win64/chromedriver-win64/chromedriver.exe"
