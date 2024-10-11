@@ -1,6 +1,7 @@
 package cucumber.stepDefs;
 
 import cucumber.config.WebDriverManager;
+import cucumber.util.Context;
 import cucumber.webHelpers.WebActions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -17,6 +18,9 @@ import org.springframework.beans.factory.annotation.Value;
 import java.time.Duration;
 import java.util.UUID;
 
+import static cucumber.util.Context.KEY_PASSWORD;
+import static cucumber.util.Context.KEY_USERNAME;
+
 @Slf4j
 public class LoginSteps {
 
@@ -28,14 +32,21 @@ public class LoginSteps {
 
     @Given("I have an account for {string} with password {string}")
     public void iHaveAnAccountForWithPassword(String username, String password) { // remove the fields
+        String username1 = UUID.randomUUID().toString();
+        String password1 = UUID.randomUUID().toString();
+
+        Context.set(KEY_USERNAME, username1);
+        Context.set(KEY_PASSWORD, password1);
+
+
         // have to either:
         // try logging in and see if it lets, and if not signup
         // or signup and see what happens
         // or create a new account
         chromeDriver.get(baseUrl);
         webActions.clickOnButtonToRedirect("Sign up");
-        webActions.populateField("formUsername", UUID.randomUUID().toString());
-        webActions.populateField("formPassword", UUID.randomUUID().toString());
+        webActions.populateField("formUsername", username1);
+        webActions.populateField("formPassword", password1);
 
     }
 
