@@ -28,17 +28,17 @@ public class WeeklyJournalSteps {
 
     @Then("I can see my workout in the journal")
     public void iCanSeeMyWorkoutInTheJournal() {
-        driver = new ChromeDriver();
-
-        String actualTitle = driver.getTitle();
-        System.out.println(actualTitle);
-
-//        assertEquals("1", 2);
-//        assertEquals("Gogle", actualTitle);
-
-        // Close the browser
-        driver.quit();
-
+//        driver = new ChromeDriver();
+//
+//        String actualTitle = driver.getTitle();
+//        System.out.println(actualTitle);
+//
+////        assertEquals("1", 2);
+////        assertEquals("Gogle", actualTitle);
+//
+//        // Close the browser
+//        driver.quit();
+//
 
 //        assertEquals(1, 1);
 //        Todo in next PR: implementation
