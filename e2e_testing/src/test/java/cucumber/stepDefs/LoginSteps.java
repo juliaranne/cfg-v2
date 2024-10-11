@@ -23,7 +23,7 @@ public class LoginSteps { // maybe change the name if having all steps within
 
     private WebActions webActions = new WebActions(chromeDriver);
 
-    // maye change the below to be 'i am logged in with a random username and password' or something simiarl
+    // maye change the below to be like 'i sign up and i am logged in with a random username and password' or something simiarl
 // todo sort out the timeouts
     @Given("I have an account for {string} with password {string}")
     public void iHaveAnAccountForWithPassword(String username, String password) { // remove the fields
