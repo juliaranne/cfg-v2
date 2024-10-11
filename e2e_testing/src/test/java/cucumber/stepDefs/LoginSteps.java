@@ -6,7 +6,6 @@ import cucumber.webHelpers.WebActions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
 import java.util.UUID;
@@ -36,7 +35,7 @@ public class LoginSteps { // maybe change the name if having all steps within
         chromeDriver.get(baseUrl);
         webActions.clickOnButtonByLinkText("Sign up");
         webActions.populateField("formBasicEmail", username1); // highlight this to team
-        webActions.populateField("formBasicPassword", password1);
+        webActions.populateField("formBasicPassword", password1); // double check as this seems to be double populating
         webActions.clickOnButtonByPath("//button[@type='submit']");
         webActions.assertHeader("h3", "Track exercise");
 
@@ -62,8 +61,12 @@ public class LoginSteps { // maybe change the name if having all steps within
 
     @Given("^I have entered a completed workout$")
     public void iHaveEnteredACompletedWorkout() {
-        Assertions.assertEquals(1, 1);
-//        Todo in next PR: implementation
+    webActions.clickOnExerciseType(); // why this take so long?
+    webActions.populateField("description", "This is my exercise description");
+    webActions.populateField("duration", "90");
+        webActions.clickOnButtonByPath("//button[@type='submit' and contains(text(), 'Save activity')]");
+// above isn't working (the click button)
+
     }
 
 }

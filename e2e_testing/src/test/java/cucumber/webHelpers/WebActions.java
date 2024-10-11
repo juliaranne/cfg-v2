@@ -34,6 +34,19 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
 
     }
 
+    public void clickOnExerciseType(){
+        WebDriverWait wait = wait(chromeDriver);
+
+        try {
+            WebElement runningButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class, 'MuiIconButton') and .//*[name()='svg' and contains(@data-testid, 'DirectionsRunIcon')]]")));
+            runningButton.click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    } // todo have this as an enum of different types // maybe have in separate classes for the different webpages
+
+
     public void assertHeader(String headerType, String contents){
         WebDriverWait wait = wait(chromeDriver);
 
