@@ -11,11 +11,11 @@ import java.util.UUID;
 @Slf4j
 public class LoginSteps {
 
+    private WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
+
+
     @Given("I create account")
     public void iCreateAccount() {
-        WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class); // maye have as global for the class, and ensure to cleardown in hooks
-
-
         String username1 = UUID.randomUUID().toString();
         String password1 = UUID.randomUUID().toString();
 
@@ -28,7 +28,6 @@ public class LoginSteps {
 
     @And("I am logged in")
     public void iAmLoggedIn() {
-        WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
         webActions.assertLogoutButtonVisible();
     }
 }

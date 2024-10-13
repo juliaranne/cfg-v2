@@ -22,7 +22,7 @@ public class WebActions { // todo remove anything unused
 
     public void clickOnButtonByLinkText(String button) {
         WebDriverWait wait = wait(chromeDriver);
-wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click();
     }
 
     public void populateField(String field, String contents) {
@@ -32,21 +32,19 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
 
     }
 
-    public void clickOnButtonByPath(String path){
+    public void clickOnButtonByPath(String path) {
         chromeDriver.findElement(By.xpath(path)).click();
     }
 
-    public void clickOnRunningButton(){ // todo maybe split by webpage here
+    public void clickOnRunningButton() { // todo maybe split by webpage here
         WebDriverWait wait = wait(chromeDriver);
 
-        WebElement runningButton = wait.until(
-                ExpectedConditions.elementToBeClickable(By.id("runningButton"))
-        );
+        WebElement runningButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("runningButton")));
 
         runningButton.click();
     } // todo have this as an enum of different types // maybe have in separate classes for the different webpages
 
-    public void clickSubmit(){
+    public void clickSubmit() {
         WebDriverWait wait = wait(chromeDriver);
         try {
             WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='submit' and contains(text(), 'Save activity')]")));
@@ -60,25 +58,23 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
         }
     }
 
-    public void assertMessageAppears(String contents){
+    public void assertMessageAppears(String contents) {
         WebDriverWait wait = wait(chromeDriver);
 
-        String successMessage = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("//p[contains(text(),'%s')]", contents)))
-        ).getText();
+        String successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("//p[contains(text(),'%s')]", contents)))).getText();
 
         assertTrue(successMessage.equals(contents), String.format("Actual message contents: %s, expected: %s", successMessage, contents));
 
     }
 
-    public void assertLogoutButtonVisible(){
+    public void assertLogoutButtonVisible() {
         WebDriverWait wait = wait(chromeDriver);
         WebElement logoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Logout']")));
         assertTrue(logoutButton.isDisplayed(), "Logout button is not visible");
 
     }
 
-    public void assertHeader(String headerType, String contents){
+    public void assertHeader(String headerType, String contents) {
         WebDriverWait wait = wait(chromeDriver);
 
         try {
@@ -94,24 +90,21 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
         }
     }
 
-    public void awaitAndAssertRedirection(String endpoint){
+    public void awaitAndAssertRedirection(String endpoint) {
         WebDriverWait wait = wait(chromeDriver);
         String currentUrl = chromeDriver.getCurrentUrl();
         log.info("ADDI" + currentUrl);
 
 
-        wait.until(ExpectedConditions.urlToBe("http://localhost/trackExercise" +endpoint));
+        wait.until(ExpectedConditions.urlToBe("http://localhost/trackExercise" + endpoint));
 
 
-
-        Assert.assertEquals(currentUrl, "http://localhost/trackExercise" +endpoint, "The user was not redirected to /trackExercise, currentURL: " + currentUrl);
-
-
+        Assert.assertEquals(currentUrl, "http://localhost/trackExercise" + endpoint, "The user was not redirected to /trackExercise, currentURL: " + currentUrl);
 
 
     }
 
-    public void assertExerciseRecordIsPresent(String expectedRecord){
+    public void assertExerciseRecordIsPresent(String expectedRecord) {
 
         WebElement exerciseList = chromeDriver.findElement(By.tagName("ul"));
 

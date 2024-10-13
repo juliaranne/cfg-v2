@@ -6,9 +6,11 @@ import io.cucumber.java.en.When;
 
 public class NavigationSteps {
 
+    private WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
+
+
     @When("I go to the {string} page")
     public void iGoToThePage(String page) {
-        WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
         webActions.clickOnButtonByLinkText(page);
     }
 }

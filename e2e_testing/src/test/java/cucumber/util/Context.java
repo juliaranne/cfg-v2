@@ -1,7 +1,6 @@
 package cucumber.util;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.Duration;
 import java.util.Map;
@@ -19,6 +18,7 @@ public class Context { // todo add a java doc to explain the purpose of this cla
     public static final String WEEKLY_JOURNAL_RECORD_TEXT = "%s - %s minutes";
 
     private static ThreadLocal<Map<String, Object>> data = ThreadLocal.withInitial(HashMap::new);
+
     public static <T> T get(String key, Function<Object, T> converter) {
         var value = data.get().get(key);
         if (value == null) {
@@ -26,13 +26,16 @@ public class Context { // todo add a java doc to explain the purpose of this cla
         }
         return converter.apply(value);
     }
+
     public static <T> T get(String key, Class<T> clazz) {
         return get(key, clazz::cast);
     }
+
     public static Object get(String key) {
         return get(key, Function.identity());
     }
 
     public static <T> void set(String key, T value) {
         data.get().put(key, value);
-    }}
+    }
+}

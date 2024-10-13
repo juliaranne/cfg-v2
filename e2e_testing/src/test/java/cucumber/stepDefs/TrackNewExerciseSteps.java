@@ -6,10 +6,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 
 public class TrackNewExerciseSteps {
+    private WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
 
     @Given("^I have entered a completed workout$")
     public void iHaveEnteredACompletedWorkout() {
-        WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
 
         String exerciseType = "Running";
         String exerciseDuration = "90";
@@ -25,7 +25,6 @@ public class TrackNewExerciseSteps {
 
     @And("I am on the track exercise page")
     public void iAmOnTheTrackExercisePage() {
-        WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
         webActions.assertHeader("h3", "Track exercise");
     }
 }
