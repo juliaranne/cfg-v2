@@ -13,5 +13,6 @@ public class SeleniumSteps {
         WebDriver chromeDriver = WebDriverManager.getDriver();
         WebActions webActions = new WebActions(chromeDriver);
         Context.set(Context.KEY_WEB_ACTIONS, webActions);
+        Context.set(Context.KEY_CHROME_DRIVER, chromeDriver);
     }
 }
