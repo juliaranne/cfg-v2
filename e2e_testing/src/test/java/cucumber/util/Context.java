@@ -14,6 +14,7 @@ public class Context { // todo add a java doc to explain the purpose of this cla
 
     public static String KEY_EXERCISE_TYPE = "exercise_type";
     public static String KEY_EXERCISE_DURATION = "exercise_duration";
+    public static String KEY_WEB_ACTIONS = "web_actions";
 
     public static final String WEEKLY_JOURNAL_RECORD_TEXT = "%s - %s minutes";
 

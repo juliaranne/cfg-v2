@@ -1,8 +1,10 @@
 Feature: Weekly Journal
 
   Background:
-    Given I create account
-    And I am logged into the track exercise page
+    Given a web connection is established
+    And I create account
+    And I am logged in
+    And I am on the track exercise page
 
     # a currently fulfilled scenario
   Scenario: Users can see their completed workout duration and type in their weekly journal

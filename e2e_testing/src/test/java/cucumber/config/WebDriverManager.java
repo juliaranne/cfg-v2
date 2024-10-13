@@ -9,7 +9,7 @@ public class WebDriverManager {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver",  "C:/Users/baron/Code/chromedriver-win64/chromedriver-win64/chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:/Users/baron/Code/chromedriver-win64/chromedriver-win64/chromedriver.exe"); // Todo get from app.yml or something
             driver = new ChromeDriver();
             driver.get(baseUrl);
         }

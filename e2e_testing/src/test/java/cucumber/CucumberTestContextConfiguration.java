@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 
 import org.springframework.test.context.junit4.SpringRunner;
 
-
 @CucumberContextConfiguration
 @RunWith(SpringRunner.class)
 public class CucumberTestContextConfiguration {

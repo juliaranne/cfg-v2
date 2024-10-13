@@ -1,46 +1,21 @@
 package cucumber.stepDefs;
 
-import io.cucumber.java.en.And;
+import cucumber.util.Context;
+import cucumber.webHelpers.WebActions;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WeeklyJournalSteps {
     private WebDriver driver;
 
-    @Then("^I can see a daily breakdown of my workout week in the journal$")
-    public void iCanSeeADailyBreakdownOfMyWorkoutWeekInTheJournal() {
-        assertEquals(1, 1);
-//        Todo in next PR: implementation
-        // add the expected text
-        // using selenium, navigate to the weekly journal button/area the info lives
-        // assert this info is there
-    }
+    @Then("I can see the workout type and duration in the journal")
+    public void iCanSeeTheWorkoutTypeAndDurationInTheJournal() {
+        WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
 
-    @And("^I can see the full details of each workout$")
-    public void iCanSeeTheFullDetailsOfEachWorkout() {
-        assertEquals(1, 1);
-//        Todo in next PR: implementation
-        //        at the moment, this just shows the type & duration, not the details added when tracking new exercise
-    }
+        String duration = Context.get(Context.KEY_EXERCISE_DURATION).toString();
+        String exerciseType = Context.get(Context.KEY_EXERCISE_TYPE).toString();
 
-    @Then("I can see my workout in the journal")
-    public void iCanSeeMyWorkoutInTheJournal() {
-//        driver = new ChromeDriver();
-//
-//        String actualTitle = driver.getTitle();
-//        System.out.println(actualTitle);
-//
-////        assertEquals("1", 2);
-////        assertEquals("Gogle", actualTitle);
-//
-//        // Close the browser
-//        driver.quit();
-//
-
-//        assertEquals(1, 1);
-//        Todo in next PR: implementation
+        String expectedRecord = String.format(Context.WEEKLY_JOURNAL_RECORD_TEXT, exerciseType, duration);
+        webActions.assertExerciseRecordIsPresent(expectedRecord);
     }
 }

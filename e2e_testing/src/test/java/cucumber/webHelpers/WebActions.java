@@ -71,6 +71,13 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
 
     }
 
+    public void assertLogoutButtonVisible(){
+        WebDriverWait wait = wait(chromeDriver);
+        WebElement logoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Logout']")));
+        assertTrue(logoutButton.isDisplayed(), "Logout button is not visible");
+
+    }
+
     public void assertHeader(String headerType, String contents){
         WebDriverWait wait = wait(chromeDriver);
 
