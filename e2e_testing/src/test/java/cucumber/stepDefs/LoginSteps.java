@@ -61,13 +61,11 @@ public class LoginSteps { // maybe change the name if having all steps within
 
     @Given("^I have entered a completed workout$")
     public void iHaveEnteredACompletedWorkout() {
-    webActions.clickOnExerciseType(); // why this take so long?
+    webActions.clickOnRunningButton();
     webActions.populateField("description", "This is my exercise description");
     webActions.populateField("duration", "90");
-//        webActions.clickOnButtonByPath("//button[@type='submit' and contains(text(), 'Save activity')]");
-        webActions.clickSubmit();
-// above isn't working (the click button)
-
+    webActions.clickSubmit();
+    // assert happy text populated
     }
 
 }

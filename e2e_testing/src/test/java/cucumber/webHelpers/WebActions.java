@@ -31,19 +31,16 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
 
     public void clickOnButtonByPath(String path){
         chromeDriver.findElement(By.xpath(path)).click();
-
     }
 
-    public void clickOnExerciseType(){
+    public void clickOnRunningButton(){ // todo maybe split by webpage here
         WebDriverWait wait = wait(chromeDriver);
 
-        try {
-            WebElement runningButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class, 'MuiIconButton') and .//*[name()='svg' and contains(@data-testid, 'DirectionsRunIcon')]]")));
-            runningButton.click();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        WebElement runningButton = wait.until(
+                ExpectedConditions.elementToBeClickable(By.id("runningButton"))
+        );
 
+        runningButton.click();
     } // todo have this as an enum of different types // maybe have in separate classes for the different webpages
 
     public void clickSubmit(){
