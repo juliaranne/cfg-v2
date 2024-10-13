@@ -16,5 +16,5 @@ Feature: Weekly Journal
 #  Scenario: Users can see a daily breakdown of their completed workouts in their weekly journal
 #    Given I have entered a completed workout
 #    When I go to the "Weekly Journal" page
-#    Then I can see a daily breakdown of my workout week in the journal
+#    Then I can see the workout type and duration in the journal
 #    And I can see the full details of each workout
