@@ -25,6 +25,6 @@ public class TrackNewExerciseSteps {
 
     @And("I am on the track exercise page")
     public void iAmOnTheTrackExercisePage() {
-        webActions.assertHeader("h3", "Track exercise");
+        webActions.assertHeaderPresent("h3", "Track exercise");
     }
 }

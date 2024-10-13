@@ -2,7 +2,6 @@ package cucumber.webHelpers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
@@ -25,24 +25,9 @@ public class WebActions { // todo remove anything unused
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click();
     }
 
-    public void populateField(String field, String contents) {
-        WebDriverWait wait = wait(chromeDriver);
-        WebElement usernameField = wait.until(ExpectedConditions.elementToBeClickable(By.id(field)));
-        usernameField.sendKeys(contents);
-
-    }
-
     public void clickOnButtonByPath(String path) {
         chromeDriver.findElement(By.xpath(path)).click();
     }
-
-    public void clickOnRunningButton() { // todo maybe split by webpage here
-        WebDriverWait wait = wait(chromeDriver);
-
-        WebElement runningButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("runningButton")));
-
-        runningButton.click();
-    } // todo have this as an enum of different types // maybe have in separate classes for the different webpages
 
     public void clickSubmit() {
         WebDriverWait wait = wait(chromeDriver);
@@ -58,6 +43,13 @@ public class WebActions { // todo remove anything unused
         }
     }
 
+    public void populateField(String field, String contents) {
+        WebDriverWait wait = wait(chromeDriver);
+        WebElement usernameField = wait.until(ExpectedConditions.elementToBeClickable(By.id(field)));
+        usernameField.sendKeys(contents);
+
+    }
+
     public void assertMessageAppears(String contents) {
         WebDriverWait wait = wait(chromeDriver);
 
@@ -67,40 +59,31 @@ public class WebActions { // todo remove anything unused
 
     }
 
-    public void assertLogoutButtonVisible() {
-        WebDriverWait wait = wait(chromeDriver);
-        WebElement logoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Logout']")));
-        assertTrue(logoutButton.isDisplayed(), "Logout button is not visible");
-
-    }
-
-    public void assertHeader(String headerType, String contents) {
+    public void assertHeaderPresent(String headerType, String contents) {
         WebDriverWait wait = wait(chromeDriver);
 
         try {
             WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("//%s[contains(text(), '%s')]", headerType, contents))));
 
             String headerText = header.getText();
-            Assert.assertEquals("Header does not contain 'Track exercise'", "Track exercise", headerText);
-
-            System.out.println("The header contains the correct text: 'Track exercise'");
-
+            assertEquals(contents, headerText, String.format("Header does not contain: %s", contents));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void awaitAndAssertRedirection(String endpoint) {
+    public void clickOnRunningButton() { // todo maybe split by webpage here
         WebDriverWait wait = wait(chromeDriver);
-        String currentUrl = chromeDriver.getCurrentUrl();
-        log.info("ADDI" + currentUrl);
 
+        WebElement runningButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("runningButton")));
 
-        wait.until(ExpectedConditions.urlToBe("http://localhost/trackExercise" + endpoint));
+        runningButton.click();
+    } // todo have this as an enum of different types // maybe have in separate classes for the different webpages
 
-
-        Assert.assertEquals(currentUrl, "http://localhost/trackExercise" + endpoint, "The user was not redirected to /trackExercise, currentURL: " + currentUrl);
-
+    public void assertLogoutButtonVisible() {
+        WebDriverWait wait = wait(chromeDriver);
+        WebElement logoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Logout']")));
+        assertTrue(logoutButton.isDisplayed(), "Logout button is not visible");
 
     }
 
