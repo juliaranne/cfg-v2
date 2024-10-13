@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.util.function.Function;
 
 @Getter
-public class Context { // todo add a java doc to explain the purpose of this class
+public class Context {
+    /**
+     * A class to share context between Cucumber steps
+     */
     private static final Duration waitDuration = Duration.ofSeconds(10);
 
     public static String KEY_EXERCISE_TYPE = "exercise_type";
