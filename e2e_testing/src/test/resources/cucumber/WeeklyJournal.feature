@@ -7,7 +7,7 @@ Feature: Weekly Journal
     # a currently fullfilled scenario
   Scenario: Users can see their completed workouts in their weekly journal
     Given I have entered a completed workout
-#    When I go to the "Weekly Journal" page
+    When I go to the "Weekly Journal" page
 #    Then I can see my workout in the journal
 
 #    # our unfullfilled scenario

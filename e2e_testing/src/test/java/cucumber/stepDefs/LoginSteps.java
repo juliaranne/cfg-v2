@@ -5,7 +5,9 @@ import cucumber.util.Context;
 import cucumber.webHelpers.WebActions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
 import java.util.UUID;
@@ -66,6 +68,11 @@ public class LoginSteps { // maybe change the name if having all steps within
     webActions.populateField("duration", "90");
     webActions.clickSubmit();
     webActions.assertTemporaryMessage("Activity logged successfully! Well done!");
+    }
+
+    @When("I go to the {string} page")
+    public void iGoToThePage(String page) {
+        webActions.clickOnButtonByLinkText(page);
     }
 
 }
