@@ -12,9 +12,6 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.UUID;
 
-import static cucumber.util.Context.KEY_PASSWORD;
-import static cucumber.util.Context.KEY_USERNAME;
-
 @Slf4j
 public class LoginSteps { // maybe change the name if having all steps within
 
@@ -55,12 +52,9 @@ public class LoginSteps { // maybe change the name if having all steps within
         String username1 = UUID.randomUUID().toString();
         String password1 = UUID.randomUUID().toString();
 
-        Context.set(KEY_USERNAME, username1);
-        Context.set(KEY_PASSWORD, password1);
-
         webActions.clickOnButtonByLinkText("Sign up");
-        webActions.populateField("formBasicEmail", username1); // highlight this to team
-        webActions.populateField("formBasicPassword", password1); // double check as this seems to be double populating
+        webActions.populateField("formBasicEmail", username1); // highlight this to team - wording is different
+        webActions.populateField("formBasicPassword", password1);
         webActions.clickOnButtonByPath("//button[@type='submit']");
     }
 
