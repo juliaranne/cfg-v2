@@ -18,12 +18,9 @@ import static cucumber.util.Context.KEY_USERNAME;
 @Slf4j
 public class LoginSteps { // maybe change the name if having all steps within
 
-    private WebDriver chromeDriver = WebDriverManager.getDriver(); // Get the shared WebDriver
-
+    private WebDriver chromeDriver = WebDriverManager.getDriver();
     private String baseUrl = "http://localhost";
-
     private WebActions webActions = new WebActions(chromeDriver);
-
 
     @Given("^I have entered a completed workout$")
     public void iHaveEnteredACompletedWorkout() {
@@ -61,7 +58,6 @@ public class LoginSteps { // maybe change the name if having all steps within
         Context.set(KEY_USERNAME, username1);
         Context.set(KEY_PASSWORD, password1);
 
-        chromeDriver.get(baseUrl);
         webActions.clickOnButtonByLinkText("Sign up");
         webActions.populateField("formBasicEmail", username1); // highlight this to team
         webActions.populateField("formBasicPassword", password1); // double check as this seems to be double populating
