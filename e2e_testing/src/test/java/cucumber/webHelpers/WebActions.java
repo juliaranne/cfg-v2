@@ -30,10 +30,6 @@ public class WebActions {
         clickElement(By.xpath(path));
     }
 
-    public void clickSubmit() {
-        clickElement(By.xpath("//button[@type='submit' and contains(text(), 'Save activity')]"), "Save activity button");
-    }
-
     public void populateField(String fieldId, String contents) {
         WebElement field = wait.until(ExpectedConditions.elementToBeClickable(By.id(fieldId)));
         field.sendKeys(contents);

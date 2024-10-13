@@ -19,7 +19,7 @@ public class TrackNewExerciseSteps {
         Context.set(Context.KEY_EXERCISE_TYPE, exerciseType);
         Context.set(Context.KEY_EXERCISE_DURATION, exerciseDuration);
 
-        trackExerciseActions.clickOnRunningButton(); // Todo SOMEHOW USE THE EXERCISEtYPE FROM ABOVE
+        trackExerciseActions.clickOnRunningButton();
         trackExerciseActions.populateField("description", "This is my exercise description");
         trackExerciseActions.populateField("duration", exerciseDuration);
         trackExerciseActions.clickSubmit();

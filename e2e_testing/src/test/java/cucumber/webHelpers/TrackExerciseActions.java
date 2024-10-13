@@ -13,4 +13,8 @@ public class TrackExerciseActions extends WebActions{
         clickElement(By.id("runningButton"), "Running Button");
     }
 
+    public void clickSubmit() {
+        clickElement(By.xpath("//button[@type='submit' and contains(text(), 'Save activity')]"), "Save activity button");
+    }
+
 }

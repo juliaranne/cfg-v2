@@ -21,7 +21,7 @@ public class LoginSteps {
         String password1 = UUID.randomUUID().toString();
 
         loginActions.clickOnButtonByLinkText("Sign up");
-        loginActions.populateField("formBasicEmail", username1); // highlight this to team - wording is different
+        loginActions.populateField("formBasicEmail", username1);
         loginActions.populateField("formBasicPassword", password1);
         loginActions.clickOnButtonByPath("//button[@type='submit']");
     }
