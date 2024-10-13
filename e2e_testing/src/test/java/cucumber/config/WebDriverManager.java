@@ -10,7 +10,7 @@ public class WebDriverManager {
     private static WebDriver driver;
     private static Config config;
 
-    // Static block to load the configuration at the time of class loading
+    // Todo use springboot to load the config
     static {
         try (InputStream in = WebDriverManager.class.getClassLoader().getResourceAsStream("application.yaml")) {
             if (in == null) {
