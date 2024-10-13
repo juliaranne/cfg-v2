@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Slf4j
 @RequiredArgsConstructor
 public class WebActions {
@@ -55,6 +57,17 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void assertTemporaryMessage(String contents){
+        WebDriverWait wait = wait(chromeDriver);
+
+        String successMessage = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("//p[contains(text(),'%s')]", contents)))
+        ).getText();
+
+        assertTrue(successMessage.equals(contents), String.format("Actual message contents: %s, expected: %s", successMessage, contents));
+
     }
 
     public void assertHeader(String headerType, String contents){

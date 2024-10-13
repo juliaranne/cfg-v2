@@ -65,7 +65,7 @@ public class LoginSteps { // maybe change the name if having all steps within
     webActions.populateField("description", "This is my exercise description");
     webActions.populateField("duration", "90");
     webActions.clickSubmit();
-    // assert happy text populated
+    webActions.assertTemporaryMessage("Activity logged successfully! Well done!");
     }
 
 }
