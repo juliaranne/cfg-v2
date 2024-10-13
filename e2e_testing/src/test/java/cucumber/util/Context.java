@@ -14,6 +14,10 @@ public class Context { // todo add a java doc to explain the purpose of this cla
 
     public static String KEY_USERNAME = "username";
     public static String KEY_PASSWORD = "password";
+    public static String KEY_EXERCISE_TYPE = "exercise_type";
+    public static String KEY_EXERCISE_DURATION = "exercise_duration";
+
+    public static final String WEEKLY_JOURNAL_RECORD_TEXT = "%s - %s minutes";
 
     private static ThreadLocal<Map<String, Object>> data = ThreadLocal.withInitial(HashMap::new);
     public static <T> T get(String key, Function<Object, T> converter) {

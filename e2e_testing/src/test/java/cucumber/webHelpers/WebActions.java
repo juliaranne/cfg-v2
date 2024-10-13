@@ -10,12 +10,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 @RequiredArgsConstructor
-public class WebActions {
+public class WebActions { // todo remove anything unused
 
     private final WebDriver chromeDriver;
 
@@ -59,7 +60,7 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
         }
     }
 
-    public void assertTemporaryMessage(String contents){
+    public void assertMessageAppears(String contents){
         WebDriverWait wait = wait(chromeDriver);
 
         String successMessage = wait.until(
@@ -100,6 +101,25 @@ wait.until(ExpectedConditions.elementToBeClickable(By.linkText(button))).click()
 
 
 
+
+    }
+
+    public void assertExerciseRecordIsPresent(String expectedRecord){
+
+        WebElement exerciseList = chromeDriver.findElement(By.tagName("ul"));
+
+        List<WebElement> exercises = exerciseList.findElements(By.tagName("li"));
+
+        boolean recordFound = false;
+
+        for (WebElement exercise : exercises) {
+            if (exercise.getText().equals(expectedRecord)) {
+                recordFound = true;
+                break;
+            }
+        }
+
+        assertTrue(recordFound, String.format("%s record wasn't found", expectedRecord));
 
     }
 

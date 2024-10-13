@@ -5,9 +5,9 @@ import cucumber.util.Context;
 import cucumber.webHelpers.WebActions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 
 import java.util.UUID;
@@ -63,11 +63,16 @@ public class LoginSteps { // maybe change the name if having all steps within
 
     @Given("^I have entered a completed workout$")
     public void iHaveEnteredACompletedWorkout() {
-    webActions.clickOnRunningButton();
+        String exerciseType = "Running";
+        String exerciseDuration = "90";
+        Context.set(Context.KEY_EXERCISE_TYPE, exerciseType);
+        Context.set(Context.KEY_EXERCISE_DURATION, exerciseDuration);
+
+    webActions.clickOnRunningButton(); // SOMEHOW USE THE EXERCISEtYPE FROM ABOVE
     webActions.populateField("description", "This is my exercise description");
-    webActions.populateField("duration", "90");
+    webActions.populateField("duration", exerciseDuration);
     webActions.clickSubmit();
-    webActions.assertTemporaryMessage("Activity logged successfully! Well done!");
+    webActions.assertMessageAppears("Activity logged successfully! Well done!");
     }
 
     @When("I go to the {string} page")
@@ -75,4 +80,12 @@ public class LoginSteps { // maybe change the name if having all steps within
         webActions.clickOnButtonByLinkText(page);
     }
 
+    @Then("I can see the workout type and duration in the journal")
+    public void iCanSeeTheWorkoutTypeAndDurationInTheJournal() {
+       String duration = Context.get(Context.KEY_EXERCISE_DURATION).toString();
+       String exerciseType = Context.get(Context.KEY_EXERCISE_TYPE).toString();
+
+       String expectedRecord = String.format(Context.WEEKLY_JOURNAL_RECORD_TEXT, exerciseType, duration);
+        webActions.assertExerciseRecordIsPresent(expectedRecord);
+    }
 }
