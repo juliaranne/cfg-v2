@@ -8,16 +8,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 public class WebActions {
 
-    private final WebDriver chromeDriver;
-    private WebDriverWait wait;
+    protected final WebDriver chromeDriver;
+    protected WebDriverWait wait;
 
     public WebActions(WebDriver chromeDriver) {
         this.chromeDriver = chromeDriver;
@@ -51,30 +49,7 @@ public class WebActions {
         assertEquals(contents, header.getText(), String.format("Header does not contain: %s", contents));
     }
 
-    public void clickOnRunningButton() {
-        clickElement(By.id("runningButton"), "Running Button");
-    }
-
-    public void assertLogoutButtonVisible() {
-        WebElement logoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Logout']")));
-        assertTrue(logoutButton.isDisplayed(), "Logout button is not visible");
-    }
-
-    public void assertExerciseRecordIsPresent(String expectedRecord) {
-        WebElement exerciseList = chromeDriver.findElement(By.tagName("ul"));
-        List<WebElement> exercises = exerciseList.findElements(By.tagName("li"));
-
-        boolean recordFound = exercises.stream().anyMatch(exercise -> exercise.getText().equals(expectedRecord));
-
-        assertTrue(recordFound, String.format("%s record wasn't found", expectedRecord));
-    }
-
-    private void clickElement(By locator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        element.click();
-    }
-
-    private void clickElement(By locator, String elementDescription) {
+    protected void clickElement(By locator, String elementDescription) {
         try {
             WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
             element.click();
@@ -83,5 +58,10 @@ public class WebActions {
             log.error("Failed to click on {}", elementDescription, e);
             throw e;
         }
+    }
+
+    private void clickElement(By locator) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        element.click();
     }
 }

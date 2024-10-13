@@ -1,12 +1,15 @@
 package cucumber.stepDefs;
 
 import cucumber.util.Context;
-import cucumber.webHelpers.WebActions;
+import cucumber.webHelpers.TrackExerciseActions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TrackNewExerciseSteps {
-    private WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
+
+    private final ChromeDriver chromeDriver = Context.get(Context.KEY_CHROME_DRIVER, ChromeDriver.class);
+    private final TrackExerciseActions trackExerciseActions = new TrackExerciseActions(chromeDriver);
 
     @Given("^I have entered a completed workout$")
     public void iHaveEnteredACompletedWorkout() {
@@ -16,15 +19,15 @@ public class TrackNewExerciseSteps {
         Context.set(Context.KEY_EXERCISE_TYPE, exerciseType);
         Context.set(Context.KEY_EXERCISE_DURATION, exerciseDuration);
 
-        webActions.clickOnRunningButton(); // SOMEHOW USE THE EXERCISEtYPE FROM ABOVE
-        webActions.populateField("description", "This is my exercise description");
-        webActions.populateField("duration", exerciseDuration);
-        webActions.clickSubmit();
-        webActions.assertMessageAppears("Activity logged successfully! Well done!");
+        trackExerciseActions.clickOnRunningButton(); // Todo SOMEHOW USE THE EXERCISEtYPE FROM ABOVE
+        trackExerciseActions.populateField("description", "This is my exercise description");
+        trackExerciseActions.populateField("duration", exerciseDuration);
+        trackExerciseActions.clickSubmit();
+        trackExerciseActions.assertMessageAppears("Activity logged successfully! Well done!");
     }
 
     @And("I am on the track exercise page")
     public void iAmOnTheTrackExercisePage() {
-        webActions.assertHeaderPresent("h3", "Track exercise");
+        trackExerciseActions.assertHeaderPresent("h3", "Track exercise");
     }
 }

@@ -1,11 +1,14 @@
 package cucumber.stepDefs;
 
 import cucumber.util.Context;
-import cucumber.webHelpers.WebActions;
+import cucumber.webHelpers.WeeklyJournalActions;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class WeeklyJournalSteps {
-    private WebActions webActions = Context.get(Context.KEY_WEB_ACTIONS, WebActions.class);
+
+    private final ChromeDriver chromeDriver = Context.get(Context.KEY_CHROME_DRIVER, ChromeDriver.class);
+    private final WeeklyJournalActions weeklyJournalActions = new WeeklyJournalActions(chromeDriver);
 
     @Then("I can see the workout type and duration in the journal")
     public void iCanSeeTheWorkoutTypeAndDurationInTheJournal() {
@@ -13,6 +16,6 @@ public class WeeklyJournalSteps {
         String exerciseType = Context.get(Context.KEY_EXERCISE_TYPE).toString();
 
         String expectedRecord = String.format(Context.WEEKLY_JOURNAL_RECORD_TEXT, exerciseType, duration);
-        webActions.assertExerciseRecordIsPresent(expectedRecord);
+        weeklyJournalActions.assertExerciseRecordIsPresent(expectedRecord);
     }
 }
