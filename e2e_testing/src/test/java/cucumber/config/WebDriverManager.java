@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
+import java.util.Map;
 
 public class WebDriverManager {
     private static WebDriver driver;
@@ -18,6 +19,10 @@ public class WebDriverManager {
             }
             Yaml yaml = new Yaml();
             config = yaml.loadAs(in, Config.class);
+
+            String chromeDriverPath = resolveEnvVars(config.getWebdriver().getChromeDriverPath());
+            config.getWebdriver().setChromeDriverPath(chromeDriverPath);
+
         } catch (Exception e) {
             throw new RuntimeException("Error loading configuration", e);
         }
@@ -37,5 +42,14 @@ public class WebDriverManager {
             driver.quit();
             driver = null;
         }
+    }
+
+    private static String resolveEnvVars(String path) {
+        if (path != null && path.contains("${")) {
+            for (Map.Entry<String, String> env : System.getenv().entrySet()) {
+                path = path.replace("${" + env.getKey() + "}", env.getValue());
+            }
+        }
+        return path;
     }
 }

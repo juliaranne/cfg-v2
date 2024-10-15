@@ -5,7 +5,7 @@ An app to test the MLA fitness app in a black box manner, from a user's perspect
 1. Follow the instructions in the MLA-app README to run the application 
 2. Install the Cucumber plugin for IntelliJ
 3. Download & setup ChromeDriver (for selenium, follow below steps)
-4. Set your chrome driver destination in your (test) application.yaml file 
+4. Set your the environment variable `CHROME_DRIVER_PATH` on your device, with the path to the chrome driver executable 
 4. Run CucumberTest class
 
 ### Downloading ChromeDriver
