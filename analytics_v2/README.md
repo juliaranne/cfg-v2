@@ -8,22 +8,24 @@ classDiagram
         - List~Exercise~
     }
 
-    class User {
-        - userId: UUID
-        - username: string
-    }
+    class User 
 
     class Exercise {
-        - exerciseType: string
-        - duration: int
+        - exercise_id: UUID
+        - exercise_details: ExerciseDetails
     }
+    
+    class ExerciseDetails 
+
 
     Statistics --> User : 
     Statistics --> Exercise : 
+    Exercise --> ExerciseDetails : contains 
 
     %% Key for DDD Components
-    note for User "Entity: \n Unique identity (userId)"
-    note for Exercise "Value Object: \n Immutable and no identity"
+    note for User "Entity: \n Unique identity (username)"
+    note for Exercise "Entity: \n Unique identity (exercise_id)"
+    note for ExerciseDetails "Value Object: \n Immutable and no identity"
     note for Statistics "Aggregate: \n Collating a User and Exercises"
 
 ```
