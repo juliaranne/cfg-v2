@@ -1,4 +1,9 @@
+from dataclasses import dataclass
+
+from analytics_v2.domain.StatisticsAggregate.ExerciseEntity import ExerciseDetails
+
+
+@dataclass(frozen=True)
 class Exercise:
-    def __init__(self, id, exercise_details):
-        self._id = id
-        self._exercise_details = exercise_details
+    id: str
+    exercise_details: ExerciseDetails

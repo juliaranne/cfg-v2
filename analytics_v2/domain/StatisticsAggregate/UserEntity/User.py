@@ -1,3 +1,6 @@
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
 class User:
-    def __init__(self, username):
-        self._username = username
+    username: str

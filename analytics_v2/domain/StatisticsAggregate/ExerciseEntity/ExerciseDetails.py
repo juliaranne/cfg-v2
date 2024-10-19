@@ -1,6 +1,9 @@
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
 class ExerciseDetails:
-    def __init__(self, date, duration, exercise_type, description):
-        self._date = date
-        self._duration = duration
-        self._exercise_type = exercise_type
-        self._description = description
+    date: str
+    duration: int
+    exercise_type: str  # todo, make enum
+    description: str
