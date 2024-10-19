@@ -4,19 +4,3 @@ class ExerciseDetails:
         self._duration = duration
         self._exercise_type = exercise_type
         self._description = description
-
-    @property
-    def date(self):
-        return self._date
-
-    @property
-    def duration(self):
-        return self._duration
-
-    @property
-    def exercise_type(self):
-        return self._exercise_type
-
-    @property
-    def exercise_type(self):
-        return self._description
