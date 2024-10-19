@@ -36,6 +36,15 @@ services:
     networks:
       - app-network
 
+  analytics_v2:
+    build:
+      context: ./analytics_v2
+      dockerfile: Dockerfile
+    ports:
+      - "5051:5051"
+    networks:
+      - app-network
+
   authservice:
     build:
       context: ./authservice
