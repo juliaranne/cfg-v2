@@ -4,4 +4,3 @@ class ExerciseDetails:
         self.duration = duration
         self.exercise_type = exercise_type
         self.description = description
-#  specify the type of input for the above
