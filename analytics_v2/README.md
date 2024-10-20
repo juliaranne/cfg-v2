@@ -4,16 +4,13 @@ A rewrite of the existing analytics service.
 ```mermaid
 classDiagram
     class Statistics {
-        - userId: UUID
+        - User 
         - List~Exercise~
     }
 
     class User 
 
-    class Exercise {
-        - exercise_id: UUID
-        - exercise_details: ExerciseDetails
-    }
+    class Exercise 
     
     class ExerciseDetails 
 
