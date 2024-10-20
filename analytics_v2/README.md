@@ -15,8 +15,8 @@ classDiagram
     class ExerciseDetails 
 
 
-    Statistics --> User : 
-    Statistics --> Exercise : 
+    Statistics --> User : contains
+    Statistics --> Exercise : contains
     Exercise --> ExerciseDetails : contains 
 
     %% Key for DDD Components
