@@ -52,7 +52,8 @@ const Journal = ({ currentUser }) => {
         {exercises && exercises.length > 0 ? (
           exercises.map((exercise, index) => (
             <li key={index} className="exercise-journal-data">
-              {exercise.exerciseType} - {exercise.totalDuration} minutes
+              {exercise.exerciseType} - {exercise.totalDuration} minutes<br />
+              {exercise.description}
             </li>
           ))
         ) : (
