@@ -133,7 +133,8 @@ def weekly_user_stats():
         {
             "$group": {
                 "_id": {
-                    "exerciseType": "$exerciseType"
+                    "exerciseType": "$exerciseType",
+                    "description": "$description"
                 },
                 "totalDuration": {"$sum": "$duration"}
             }
@@ -142,6 +143,7 @@ def weekly_user_stats():
             "$project": {
                 "exerciseType": "$_id.exerciseType",
                 "totalDuration": 1,
+                "description": "$_id.description",
                 "_id": 0
             }
         }
