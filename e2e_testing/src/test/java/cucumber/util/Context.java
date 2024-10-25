@@ -16,6 +16,7 @@ public class Context {
 
     public static String KEY_EXERCISE_TYPE = "exercise_type";
     public static String KEY_EXERCISE_DURATION = "exercise_duration";
+    public static String KEY_EXERCISE_DESCRIPTION = "exercise_description";
     public static String KEY_WEB_ACTIONS = "web_actions";
     public static String KEY_CHROME_DRIVER = "chrome_driver";
 
