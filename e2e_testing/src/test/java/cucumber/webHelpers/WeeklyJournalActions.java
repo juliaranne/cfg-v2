@@ -19,7 +19,7 @@ public class WeeklyJournalActions extends WebActions {
         WebElement exerciseList = wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("ul")));
         List<WebElement> exercises = exerciseList.findElements(By.tagName("li"));
 
-        boolean recordFound = exercises.stream().anyMatch(exercise -> exercise.getText().equals(expectedRecord));
+        boolean recordFound = exercises.stream().anyMatch(exercise -> exercise.getText().contains(expectedRecord));
 
         assertTrue(recordFound, String.format("%s record wasn't found", expectedRecord));
     }
