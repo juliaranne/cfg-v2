@@ -22,5 +22,7 @@ public class WeeklyJournalSteps {
 
     @And("I can see the full details of each workout")
     public void iCanSeeTheFullDetailsOfEachWorkout() {
+        String description = Context.get(Context.KEY_EXERCISE_DESCRIPTION).toString();
+        weeklyJournalActions.assertExerciseRecordContainsDescription(description);
     }
 }

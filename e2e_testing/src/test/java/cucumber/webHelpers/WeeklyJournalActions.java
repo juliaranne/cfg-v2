@@ -16,11 +16,17 @@ public class WeeklyJournalActions extends WebActions {
     }
 
     public void assertExerciseRecordIsPresent(String expectedRecord) {
-        WebElement exerciseList = wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("ul")));
-        List<WebElement> exercises = exerciseList.findElements(By.tagName("li"));
-
-        boolean recordFound = exercises.stream().anyMatch(exercise -> exercise.getText().contains(expectedRecord));
-
+        boolean recordFound = getListFromPage().stream().anyMatch(exercise -> exercise.getText().contains(expectedRecord));
         assertTrue(recordFound, String.format("%s record wasn't found", expectedRecord));
+    }
+
+    public void assertExerciseRecordContainsDescription(String expectedDescription) {
+        boolean recordFound = getListFromPage().stream().anyMatch(exercise -> exercise.getText().contains(expectedDescription));
+        assertTrue(recordFound, String.format("Description wasn't found: ", expectedDescription));
+    }
+
+    private List<WebElement> getListFromPage() {
+        WebElement exerciseList = wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("ul")));
+        return exerciseList.findElements(By.tagName("li"));
     }
 }
