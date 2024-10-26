@@ -16,11 +16,13 @@ public class TrackNewExerciseSteps {
 
         String exerciseType = "Running";
         String exerciseDuration = "90";
+        String exerciseDescription = "This is my exercise description";
+        Context.set(Context.KEY_EXERCISE_DESCRIPTION, exerciseDescription);
         Context.set(Context.KEY_EXERCISE_TYPE, exerciseType);
         Context.set(Context.KEY_EXERCISE_DURATION, exerciseDuration);
 
         trackExerciseActions.clickOnRunningButton();
-        trackExerciseActions.populateField("description", "This is my exercise description");
+        trackExerciseActions.populateField("description", exerciseDescription);
         trackExerciseActions.populateField("duration", exerciseDuration);
         trackExerciseActions.clickSubmit();
         trackExerciseActions.assertMessageAppears("Activity logged successfully! Well done!");
