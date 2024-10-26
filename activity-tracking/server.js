@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5300;
-const uri = process.env.MONGODB_URI;
 const mongoUri = config.mongoUri;
 const mongoDb = config.mongoDB;
 
@@ -16,7 +15,7 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose
-  .connect(mongoUri, { useNewUrlParser: true })
+  .connect(mongoUri, {dbName: mongoDb, useNewUrlParser: true })
   .then(() => console.log("MongoDB database connection established successfully"))
   .catch((error) => console.error("MongoDB connection error:", error));
 
