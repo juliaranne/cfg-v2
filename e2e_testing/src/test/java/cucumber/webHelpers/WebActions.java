@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static cucumber.util.Context.BASE_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Slf4j
@@ -19,7 +20,7 @@ public class WebActions {
 
     public WebActions(WebDriver chromeDriver) {
         this.chromeDriver = chromeDriver;
-        this.wait = new WebDriverWait(chromeDriver, Duration.ofSeconds(5));
+        this.wait = new WebDriverWait(chromeDriver, Duration.ofSeconds(2));
     }
 
     public void clickOnButtonByLinkText(String button) {
@@ -43,6 +44,16 @@ public class WebActions {
     public void assertHeaderPresent(String headerType, String contents) {
         WebElement header = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("//%s[contains(text(), '%s')]", headerType, contents))));
         assertEquals(contents, header.getText(), String.format("Header does not contain: %s", contents));
+    }
+
+    public Boolean assertOnPage(String expectedUrl) {
+        try {
+            return wait.until(driver -> chromeDriver.getCurrentUrl().equals(BASE_URL + expectedUrl));
+        } catch (Exception e) {
+            String currentUrl = chromeDriver.getCurrentUrl();
+            log.warn("Expected URL: {}, but was on: {}", BASE_URL + expectedUrl, currentUrl);
+            return false;
+        }
     }
 
     protected void clickElement(By locator, String elementDescription) {
