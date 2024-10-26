@@ -1,6 +1,34 @@
 # Analytics V2 
 A rewrite of the existing analytics service. 
 
+```mermaid
+classDiagram
+    class Statistics {
+        - User 
+        - List~Exercise~
+    }
+
+    class User 
+
+    class Exercise 
+    
+    class ExerciseDetails 
+
+
+    Statistics --> User : contains
+    Statistics --> Exercise : contains
+    Exercise --> ExerciseDetails : contains 
+
+    %% Key for DDD Components
+    note for User "Entity: \n Unique identity (username)"
+    note for Exercise "Entity: \n Unique identity (exercise_id)"
+    note for ExerciseDetails "Value Object: \n Immutable and no identity"
+    note for Statistics "Aggregate: \n Collating a User and Exercises"
+
+```
+
+[//]: # (To render the above, install a mermaid plugin)
+
 ## How to run: 
 
 <details>
