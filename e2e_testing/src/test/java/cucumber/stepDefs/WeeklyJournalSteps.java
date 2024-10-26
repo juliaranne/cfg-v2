@@ -2,6 +2,7 @@ package cucumber.stepDefs;
 
 import cucumber.util.Context;
 import cucumber.webHelpers.WeeklyJournalActions;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -17,5 +18,11 @@ public class WeeklyJournalSteps {
 
         String expectedRecord = String.format(Context.WEEKLY_JOURNAL_RECORD_TEXT, exerciseType, duration);
         weeklyJournalActions.assertExerciseRecordIsPresent(expectedRecord);
+    }
+
+    @And("I can see the full details of each workout")
+    public void iCanSeeTheFullDetailsOfEachWorkout() {
+        String description = Context.get(Context.KEY_EXERCISE_DESCRIPTION).toString();
+        weeklyJournalActions.assertExerciseRecordContainsDescription(description);
     }
 }
