@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 5300;
 const uri = process.env.MONGODB_URI;
 const mongoUri = config.mongoUri;
+const mongoDb = config.mongoDB;
 
 // Middleware setup
 app.use(cors());
