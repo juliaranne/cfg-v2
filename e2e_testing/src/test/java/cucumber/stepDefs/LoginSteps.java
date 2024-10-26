@@ -69,7 +69,7 @@ public class LoginSteps {
 
     @Then("I see \"Failed to login\"")
     public void iSeeFailedToLogin() {
-
+        loginActions.assertFailedLoginAlertMessageAppears();
     }
 
     private String generateRandomUsername(){
