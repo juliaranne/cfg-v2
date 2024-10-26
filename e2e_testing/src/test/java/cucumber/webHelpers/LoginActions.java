@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginActions extends WebActions{
@@ -22,5 +23,14 @@ public class LoginActions extends WebActions{
 
     public void logout() {
         clickOnButtonByPath(LOGOUT_XPATH);
+    }
+
+    public void assertFailedLoginAlertMessageAppears() {
+        String message = "Failed to login";
+        WebElement alertElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[@role='alert' and contains(@class, 'alert-danger')]")));
+
+        assertEquals(message, alertElement.getText(),
+                String.format("Expected alert message: '%s', but found: '%s'", message, alertElement.getText()));
     }
 }

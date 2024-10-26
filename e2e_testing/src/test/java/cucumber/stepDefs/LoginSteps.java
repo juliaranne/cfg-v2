@@ -4,6 +4,7 @@ import cucumber.util.Context;
 import cucumber.webHelpers.LoginActions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,20 +20,13 @@ public class LoginSteps {
 
     @Given("I create account")
     public void iCreateAccount() {
-        String username = randomUUID().toString();
-        String password = randomUUID().toString();
-
-        Context.set(Context.KEY_USERNAME, username);
-        Context.set(Context.KEY_PASSWORD, password);
-
         loginActions.clickOnButtonByLinkText("Sign up");
-        loginActions.populateField("formBasicEmail", username);
-        loginActions.populateField("formBasicPassword", password);
+        loginActions.populateField("formBasicEmail", generateRandomUsername());
+        loginActions.populateField("formBasicPassword", generateRandomPassword());
         loginActions.clickOnButtonByPath("//button[@type='submit']");
 
         log.info("Test account created and logged in");
     }
-
 
     @And("I am logged in")
     public void iAmLoggedIn() {
@@ -60,10 +54,33 @@ public class LoginSteps {
         assertTrue(loginActions.assertOnPage("/login"));
     }
 
-    @When("I login")
-    public void iLogin() {
+    @When("I login with these details")
+    public void iLoginWithTheseDetails() {
         loginActions.populateField("formUsername", Context.get(Context.KEY_USERNAME).toString());
         loginActions.populateField("formPassword", Context.get(Context.KEY_PASSWORD).toString());
         loginActions.clickOnButtonByPath("//button[@type='submit']");
+    }
+
+    @Given("I make up some new credentials that are not yet registered")
+    public void iMakeUpSomeNewCredentialsThatAreNotYetRegistered() {
+        generateRandomUsername();
+        generateRandomPassword();
+    }
+
+    @Then("I see \"Failed to login\"")
+    public void iSeeFailedToLogin() {
+
+    }
+
+    private String generateRandomUsername(){
+        String username = randomUUID().toString();
+        Context.set(Context.KEY_USERNAME, username);
+        return username;
+    }
+
+    private String generateRandomPassword(){
+        String password = randomUUID().toString();
+        Context.set(Context.KEY_PASSWORD, password);
+        return password;
     }
 }
