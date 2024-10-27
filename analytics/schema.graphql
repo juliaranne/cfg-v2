@@ -1,14 +1,8 @@
-type Stats {
-    username: String!
-    exercises: [Exercise]
-}
-
 type Exercise {
+    id: ID
     exerciseType: String
-    totalDuration: Int
 }
 
 type Query {
     exercises: [Exercise]
-    stats: Stats
 }
