@@ -1,0 +1,14 @@
+type Stats {
+    username: String!
+    exercises: [Exercise]
+}
+
+type Exercise {
+    exerciseType: String
+    totalDuration: Int
+}
+
+type Query {
+    exercises: [Exercise]
+    stats: Stats
+}
