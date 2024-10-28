@@ -20,6 +20,8 @@ public class LoginSteps {
         String username1 = randomUUID().toString();
         String password1 = randomUUID().toString();
 
+        Context.set(Context.KEY_USERNAME, username1);
+
         loginActions.clickOnButtonByLinkText("Sign up");
         loginActions.populateField("formBasicEmail", username1);
         loginActions.populateField("formBasicPassword", password1);
