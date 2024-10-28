@@ -9,7 +9,6 @@ const Journal = ({ currentUser }) => {
   const [endDate, setEndDate] = useState(moment().endOf('week').toDate());
   const [exercises, setExercises] = useState([]);
 
-  // Define the query as a string
   const query = `
   query GetExercises {
       exercises {

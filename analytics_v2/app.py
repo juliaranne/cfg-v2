@@ -14,12 +14,8 @@ explorer_html = ExplorerGraphiQL().html(None)
 @app.route("/graphql", methods=["GET"])
 def graphql_explorer():
     # On GET request serve the GraphQL explorer.
-    # You don't have to provide the explorer if you don't want to
-    # but keep on mind this will not prohibit clients from
-    # exploring your API using desktop GraphQL explorer app.
     return explorer_html, 200
 
-# Create a GraphQL endpoint for executing GraphQL queries
 @app.route("/graphql", methods=["POST"])
 def graphql_server():
    data = request.get_json()

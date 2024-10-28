@@ -1,12 +1,17 @@
-type Exercise {
-    id: ID
-    exerciseType: String
+schema {
+    query: Query
 }
 
-type Query {
+type Exercise {
+    exerciseType: String
+    totalDuration: Int
+}
+
+type Stats {
+    username: String!
     exercises: [Exercise]
 }
 
-schema {
-    query: Query
+type Query {
+    stats: Stats 
 }
