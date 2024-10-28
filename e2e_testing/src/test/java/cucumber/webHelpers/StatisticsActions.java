@@ -29,12 +29,26 @@ public class StatisticsActions extends WebActions {
     public void assertNoDataAvailableMessagePresent() {
         WebElement statsContainer = findByClassName("stats-container");
 
-        List<WebElement> exerciseDataList = statsContainer.findElements(By.className("exercise-data"));
+        List<WebElement> exerciseDataList = getExerciseDataList();
 
         assertTrue(exerciseDataList.isEmpty(), "Exercise data not empty: " + exerciseDataList);
         WebElement noDataMessage = statsContainer.findElement(By.tagName("p"));
 
         assertEquals("No data available", noDataMessage.getText(), "Unexpected message: " + noDataMessage);
+    }
+
+    public void assertCorrectSingleExercisePresent(String exerciseType, String contents){
+        List<WebElement> exerciseDataList = getExerciseDataList();
+        WebElement singleExercise = exerciseDataList.getFirst();
+
+        assertEquals(exerciseType, singleExercise.findElement(By.tagName("strong")).getText());
+        assertEquals(contents, singleExercise.findElement(By.xpath("./div[2]")).getText());
+    }
+
+    private List<WebElement> getExerciseDataList(){
+        WebElement statsContainer = findByClassName("stats-container");
+
+        return statsContainer.findElements(By.className("exercise-data"));
     }
 
 }
