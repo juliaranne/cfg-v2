@@ -20,6 +20,6 @@ public class StatisticsSteps {
 
     @And("there is no data available")
     public void thereIsNoDataAvailable() {
-
+        statisticsActions.assertNoDataAvailableMessagePresent();
     }
 }
