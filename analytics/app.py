@@ -21,6 +21,7 @@ mongo_db = os.getenv('MONGO_DB')
 client = MongoClient(mongo_uri)
 db = client[mongo_db]
 
+
 @app.route('/')
 def index():
     exercises = db.exercises.find()
