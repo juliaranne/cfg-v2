@@ -9,8 +9,26 @@ const Journal = ({ currentUser }) => {
   const [endDate, setEndDate] = useState(moment().endOf('week').toDate());
   const [exercises, setExercises] = useState([]);
 
-  const fetchExercises = async () => {
+  // Define the query as a string
+  const query = `
+  query GetExercises {
+      exercises {
+          id
+          exerciseType
+      }
+  }
+  `;
 
+  const fetchExercises = async () => {
+    fetch('https://localhost:5051/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query }),
+    })
+      .then((res) => res.json())
+      .then((result) => console.log(result.data));
 
     try {
       const url = `http://localhost:5050/stats/weekly/?user=${currentUser}&start=${moment(startDate).format('YYYY-MM-DD')}&end=${moment(endDate).format('YYYY-MM-DD')}`;

@@ -6,3 +6,7 @@ type Exercise {
 type Query {
     exercises: [Exercise]
 }
+
+schema {
+    query: Query
+}
