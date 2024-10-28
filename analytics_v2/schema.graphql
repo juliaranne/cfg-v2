@@ -12,6 +12,12 @@ type Stats {
     exercises: [Exercise]
 }
 
+type StatsResult {
+    success: Boolean!
+    errors: [String]
+    results: Stats
+}
+
 type Query {
-    stats: Stats 
+    stats(username: username!): StatsResult! 
 }
