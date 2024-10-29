@@ -83,4 +83,8 @@ public class LoginSteps {
         Context.set(Context.KEY_PASSWORD, password);
         return password;
     }
+
+    @Then("I am on the login page")
+    public void iAmOnTheLoginPage() {
+    }
 }
