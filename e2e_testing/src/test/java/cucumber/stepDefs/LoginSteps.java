@@ -86,5 +86,6 @@ public class LoginSteps {
 
     @Then("I am on the login page")
     public void iAmOnTheLoginPage() {
+        loginActions.assertOnPage("/login");
     }
 }
