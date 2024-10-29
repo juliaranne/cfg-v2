@@ -11,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.Arrays;
 import java.util.Map;
 
-@Slf4j
 public class StatisticsSteps {
 
     private final ChromeDriver chromeDriver = Context.get(Context.KEY_CHROME_DRIVER, ChromeDriver.class);
