@@ -14,6 +14,7 @@ public class Context {
      */
     private static final Duration waitDuration = Duration.ofSeconds(10);
 
+    public static String KEY_USERNAME = "username";
     public static String KEY_EXERCISE_TYPE = "exercise_type";
     public static String KEY_EXERCISE_DURATION = "exercise_duration";
     public static String KEY_EXERCISE_DESCRIPTION = "exercise_description";
