@@ -46,6 +46,10 @@ public class WebActions {
         assertEquals(contents, header.getText(), String.format("Header does not contain: %s", contents));
     }
 
+    protected WebElement findByClassName(String classname){
+        return chromeDriver.findElement(By.className(classname));
+    }
+
     public Boolean assertOnPage(String expectedUrl) {
         try {
             return wait.until(driver -> chromeDriver.getCurrentUrl().equals(BASE_URL + expectedUrl));
