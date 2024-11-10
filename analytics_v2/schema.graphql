@@ -19,5 +19,5 @@ type StatsResult {
 }
 
 type Query {
-    stats(username: username!): StatsResult! 
+    stats(username: String): StatsResult! 
 }
