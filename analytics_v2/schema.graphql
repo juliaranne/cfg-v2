@@ -4,7 +4,6 @@ schema {
 
 type Exercise {
     exerciseType: String
-    totalDuration: Int
 }
 
 type Stats {
@@ -19,5 +18,5 @@ type StatsResult {
 }
 
 type Query {
-    stats(username: String): StatsResult! 
+    exercises: [Exercise]
 }

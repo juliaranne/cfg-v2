@@ -12,13 +12,13 @@ const Journal = ({ currentUser }) => {
   const query = `
   query GetExercises {
       exercises {
-          id
           exerciseType
       }
   }
   `;
 
   const fetchExercises = async () => {
+    try {
     fetch('http://localhost:5051/graphql', {
       method: 'POST',
       headers: {
@@ -29,16 +29,16 @@ const Journal = ({ currentUser }) => {
       .then((res) => res.json())
       .then((result) => console.log(result.data));
 
-    try {
-      const url = `http://localhost:5050/stats/weekly/?user=${currentUser}&start=${moment(startDate).format('YYYY-MM-DD')}&end=${moment(endDate).format('YYYY-MM-DD')}`;
-      const response = await axios.get(url);
-      console.log('API Response:', response.data);
-      if (response.data.stats && Array.isArray(response.data.stats)) {
-        setExercises(response.data.stats);
-      } else {
-        console.error('Unexpected response structure:', response.data);
-        setExercises([]);
-      }
+    
+      // const url = `http://localhost:5050/stats/weekly/?user=${currentUser}&start=${moment(startDate).format('YYYY-MM-DD')}&end=${moment(endDate).format('YYYY-MM-DD')}`;
+      // const response = await axios.get(url);
+      // console.log('API Response:', response.data);
+      // if (response.data.stats && Array.isArray(response.data.stats)) {
+      //   setExercises(response.data.stats);
+      // } else {
+      //   console.error('Unexpected response structure:', response.data);
+      //   setExercises([]);
+      // }
     } catch (error) {
       console.error('Failed to fetch exercises', error);
     }
