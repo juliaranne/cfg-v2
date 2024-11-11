@@ -19,7 +19,7 @@ const Journal = ({ currentUser }) => {
   `;
 
   const fetchExercises = async () => {
-    fetch('https://localhost:5051/graphql', {
+    fetch('http://localhost:5051/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
