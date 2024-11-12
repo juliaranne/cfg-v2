@@ -6,6 +6,8 @@ from flask_cors import CORS
 from ariadne import QueryType, gql, make_executable_schema, graphql_sync, load_schema_from_path
 from ariadne.explorer import ExplorerGraphiQL
 import os
+import logging
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}},
@@ -46,6 +48,48 @@ def resolve_exercises(*_):
     exercises = db.exercises.find()
     exercises_list = list(exercises)
     return exercises_list
+
+@query.field("get_stats")
+def resolve_stats(obj, info, start, end):
+    date_format = "%Y-%m-%d"
+    try:
+        start_date = datetime.strptime(start, date_format)
+        end_date = datetime.strptime(end, date_format) + timedelta(days=1)  # Include the whole end day
+
+        logging.info(f"Fetching weekly stats for user from {start_date} to {end_date}")
+    except Exception as e:
+        logging.error(f"Error parsing dates: {e}")
+        return "Invalid date format"
+
+    pipeline = [
+        {
+            "$match": {
+                "date": {
+                    "$gte": start_date,
+                    "$lt": end_date
+                }
+            }
+        },
+        {
+            "$group": {
+                "_id": {
+                    "exerciseType": "$exerciseType",
+                },
+            }
+        },
+        {
+            "$project": {
+                "exerciseType": "$_id.exerciseType",
+                "_id": 0
+            }
+        }
+    ]
+
+    try:
+        stats = list(db.exercises.aggregate(pipeline))
+        return stats
+    except Exception as e:
+        return "An internal error occurred"
 
 # The following needs to come after all resolver functions
 schema = make_executable_schema(type_defs, query)

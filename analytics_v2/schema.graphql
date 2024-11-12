@@ -19,4 +19,5 @@ type StatsResult {
 
 type Query {
     exercises: [Exercise]
+    get_stats(start: String!, end: String!): [Exercise]
 }

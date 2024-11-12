@@ -11,7 +11,7 @@ const Journal = ({ currentUser }) => {
 
   const query = `
   query GetExercises {
-      exercises {
+      get_exercise(type: "Cycling") {
           exerciseType
       }
   }
