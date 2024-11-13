@@ -4,6 +4,7 @@ schema {
 
 type Exercise {
     exerciseType: String
+    description: String
 }
 
 type Stats {
@@ -18,6 +19,5 @@ type StatsResult {
 }
 
 type Query {
-    exercises: [Exercise]
-    get_stats(start: String!, end: String!): [Exercise]
+    stats(start: String, end: String, username: String!): StatsResult
 }
