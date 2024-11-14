@@ -24,6 +24,21 @@ services:
     networks:
       - app-network
 
+  analytics:
+    build:
+      context: ./analytics
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://root:cfgmla23@mongodb:27017
+      - MONGO_DB=activity
+    ports:
+      - "5050:5050"
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
   analytics_v2:
     build:
       context: ./analytics_v2
