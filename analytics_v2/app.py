@@ -42,13 +42,6 @@ def graphql_server():
 def home():
     return "Welcome to analytics V2"
 
-# Exercises resolver
-@query.field("exercises")
-def resolve_exercises(*_):
-    exercises = db.exercises.find()
-    exercises_list = list(exercises)
-    return exercises_list
-
 @query.field("weekly_stats")
 def resolve_stats(obj, info, start, end, username):
     date_format = "%Y-%m-%d"
@@ -77,12 +70,14 @@ def resolve_stats(obj, info, start, end, username):
                     "exerciseType": "$exerciseType",
                     "description": "$description"
                 },
+                "totalDuration": {"$sum": "$duration"}
             }
         },
         {
             "$project": {
                 "exerciseType": "$_id.exerciseType",
                 "description": "$_id.description",
+                "totalDuration": "$totalDuration",
                 "_id": 0
             }
         }

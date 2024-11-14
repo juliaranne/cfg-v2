@@ -15,5 +15,4 @@ type Stats {
 
 type Query {
     weekly_stats(start: String, end: String, username: String): Stats
-    exercises: [Exercise]
 }
