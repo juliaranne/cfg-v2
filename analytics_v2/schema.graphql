@@ -5,6 +5,7 @@ schema {
 type Exercise {
     exerciseType: String
     description: String
+    totalDuration: Int
 }
 
 type Stats {
