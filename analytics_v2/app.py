@@ -85,10 +85,7 @@ def resolve_stats(obj, info, start, end, username):
 
     try:
         stats = list(db.exercises.aggregate(pipeline))
-        return {
-            "username": username,
-            "exercises": stats
-        }
+        return { "exercises": stats }
     except Exception as e:
         return "An internal error occurred"
 
