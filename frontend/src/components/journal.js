@@ -9,36 +9,17 @@ const Journal = ({ currentUser }) => {
   const [endDate, setEndDate] = useState(moment().endOf('week').toDate());
   const [exercises, setExercises] = useState([]);
 
-  const query = `
-  query GetExercises {
-      get_exercise(type: "Cycling") {
-          exerciseType
-      }
-  }
-  `;
-
   const fetchExercises = async () => {
     try {
-    fetch('http://localhost:5051/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query }),
-    })
-      .then((res) => res.json())
-      .then((result) => console.log(result.data));
-
-    
-      // const url = `http://localhost:5050/stats/weekly/?user=${currentUser}&start=${moment(startDate).format('YYYY-MM-DD')}&end=${moment(endDate).format('YYYY-MM-DD')}`;
-      // const response = await axios.get(url);
-      // console.log('API Response:', response.data);
-      // if (response.data.stats && Array.isArray(response.data.stats)) {
-      //   setExercises(response.data.stats);
-      // } else {
-      //   console.error('Unexpected response structure:', response.data);
-      //   setExercises([]);
-      // }
+      const url = `http://localhost:5050/stats/weekly/?user=${currentUser}&start=${moment(startDate).format('YYYY-MM-DD')}&end=${moment(endDate).format('YYYY-MM-DD')}`;
+      const response = await axios.get(url);
+      console.log('API Response:', response.data);
+      if (response.data.stats && Array.isArray(response.data.stats)) {
+        setExercises(response.data.stats);
+      } else {
+        console.error('Unexpected response structure:', response.data);
+        setExercises([]);
+      }
     } catch (error) {
       console.error('Failed to fetch exercises', error);
     }
