@@ -7,13 +7,13 @@ Feature: Statistics Page
     And I am on the track exercise page
 
   Scenario: No exercises entered shows an empty statistics page
-    Given I go to the "Statistics" page
+    Given I click on "Statistics"
     Then I see "Well done, <username>! This is your overall effort:"
     And there is no data available
 
   Scenario: Entering a new exercise shows in the statistics page
     Given I have entered a completed workout
-    When I go to the "Statistics" page
+    When I click on "Statistics"
     Then I see "Well done, <username>! This is your overall effort:"
     And the workout data is visible in the format:
       | header         | contents                |
