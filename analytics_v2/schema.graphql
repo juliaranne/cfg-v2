@@ -8,16 +8,11 @@ type Exercise {
 }
 
 type Stats {
-    username: String!
+    username: String
     exercises: [Exercise]
 }
 
-type StatsResult {
-    success: Boolean!
-    errors: [String]
-    results: Stats
-}
-
 type Query {
-    stats(start: String, end: String, username: String!): StatsResult
+    weekly_stats(start: String, end: String, username: String): Stats
+    exercises: [Exercise]
 }

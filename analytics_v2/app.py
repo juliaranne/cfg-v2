@@ -49,8 +49,8 @@ def resolve_exercises(*_):
     exercises_list = list(exercises)
     return exercises_list
 
-@query.field("get_stats")
-def resolve_stats(obj, info, start, end):
+@query.field("weekly_stats")
+def resolve_stats(obj, info, start, end, username):
     date_format = "%Y-%m-%d"
     try:
         start_date = datetime.strptime(start, date_format)
@@ -64,6 +64,7 @@ def resolve_stats(obj, info, start, end):
     pipeline = [
         {
             "$match": {
+                "username": username,
                 "date": {
                     "$gte": start_date,
                     "$lt": end_date
@@ -74,12 +75,14 @@ def resolve_stats(obj, info, start, end):
             "$group": {
                 "_id": {
                     "exerciseType": "$exerciseType",
+                    "description": "$description"
                 },
             }
         },
         {
             "$project": {
                 "exerciseType": "$_id.exerciseType",
+                "description": "$_id.description",
                 "_id": 0
             }
         }
@@ -87,7 +90,10 @@ def resolve_stats(obj, info, start, end):
 
     try:
         stats = list(db.exercises.aggregate(pipeline))
-        return stats
+        return {
+            "username": username,
+            "exercises": stats
+        }
     except Exception as e:
         return "An internal error occurred"
 
