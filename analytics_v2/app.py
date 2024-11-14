@@ -42,8 +42,52 @@ def graphql_server():
 def home():
     return "Welcome to analytics V2"
 
-@query.field("weekly_stats")
-def resolve_stats(obj, info, start, end, username):
+@query.field("stats")
+def resolve_stats(obj, info, username):
+    pipeline = [
+        {
+            "$match": {"username": username}
+        },
+        {
+            "$group": {
+                "_id": {
+                    "username": "$username",
+                    "exerciseType": "$exerciseType",
+                    "description": "$description"
+                },
+                "totalDuration": {"$sum": "$duration"}
+            }
+        },
+        {
+            "$group": {
+                "_id": "$_id.username",
+                "exercises": {
+                    "$push": {
+                        "exerciseType": "$_id.exerciseType",
+                        "description": "$_id.description",
+                        "totalDuration": "$totalDuration"
+                    }
+                }
+            }
+        },
+        {
+            "$project": {
+                "username": "$_id",
+                "exercises": 1,
+                "_id": 0
+            }
+        }
+    ]
+
+    try:
+        stats = list(db.exercises.aggregate(pipeline))
+        return stats[0] 
+
+    except Exception as e:
+        return "An internal error occurred"
+
+@query.field("stats_by_week")
+def resolve_stats_by_week(obj, info, start, end, username):
     date_format = "%Y-%m-%d"
     try:
         start_date = datetime.strptime(start, date_format)
