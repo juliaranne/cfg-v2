@@ -12,8 +12,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Build all containers
-        run: docker-compose up --build
+
+      - name: Run docker-compose
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: "./docker-compose.yml"
 
       - name: Run tests
         run: |
