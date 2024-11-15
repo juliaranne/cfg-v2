@@ -17,20 +17,6 @@ jobs:
         with:
           compose-file: "./docker-compose.yml"
 
-#      - name: Run tests
-#        run: |
-#          cd e2e_testing
-#          mvn test -e
-#
-#      - name: Stop and clean up containers
-#        run: docker-compose down
-
-  selenium-tests:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
       - name: Install Chrome
         run: |
           sudo apt-get update
@@ -50,13 +36,6 @@ jobs:
         env:
           CHROMEDRIVER_PATH: ${{ env.CHROMEDRIVER_PATH }}
         run: mvn test -e
-
-
-  teardown:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
 
       - name: Stop and clean up containers
         run: docker-compose down    # check this?
