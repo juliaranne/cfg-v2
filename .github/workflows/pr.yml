@@ -21,7 +21,7 @@ jobs:
       - name: Run tests
         run: |
           cd e2e_testing
-          mvn test
+          mvn test -e
 
       - name: Stop and clean up containers
         run: docker-compose down
