@@ -1,0 +1,22 @@
+name: Pull Request build and test
+
+on:
+#  push:
+#    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build all containers
+        run: docker-compose up --build
+
+      - uses: actions/checkout@v4
+      - name: Run tests
+        run: mvn test -Pe2eTests # to sort
+
