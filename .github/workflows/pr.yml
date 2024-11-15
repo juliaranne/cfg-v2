@@ -16,6 +16,16 @@ jobs:
         uses: hoverkraft-tech/compose-action@v2.0.1
         with:
           compose-file: "./docker-compose.yml"
+          detached: true  # This will keep the services running in the background
+
+      - name: Wait for service to be ready
+        run: |
+            # Example: Wait for a specific port to be open (adjust based on your service)
+            until curl --silent --fail http://localhost:80; do
+              echo "Waiting for the service to be ready..."
+              sleep 5
+            done
+            echo "Service is ready!"    
 
   selenium-tests:
     runs-on: ubuntu-latest
@@ -35,7 +45,9 @@ jobs:
           echo "WebDriverManager will handle the ChromeDriver setup."
 
       - name: Run Selenium Tests
-        run: mvn test -e
+        run: |
+          cd e2e_testing
+          mvn test -e
 
   teardown:
     runs-on: ubuntu-latest
