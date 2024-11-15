@@ -16,7 +16,8 @@ jobs:
         uses: hoverkraft-tech/compose-action@v2.0.1
         with:
           compose-file: "./docker-compose.yml"
-          detached: true  # This will keep the services running in the background
+          up-flags: "-d"  # This will run docker-compose in detached mode
+
 
       - name: Wait for service to be ready
         run: |
