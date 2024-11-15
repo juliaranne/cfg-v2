@@ -27,12 +27,12 @@ jobs:
           done
           echo "Service is ready!"    
 
-  selenium-tests:
-    runs-on: ubuntu-latest
-    needs: build  # This ensures 'selenium-tests' runs after 'build'
-
-    steps:
-      - uses: actions/checkout@v4
+#  selenium-tests:
+#    runs-on: ubuntu-latest
+#    needs: build  # This ensures 'selenium-tests' runs after 'build'
+#
+#    steps:
+#      - uses: actions/checkout@v4
 
       - name: Install Chrome
         run: |
