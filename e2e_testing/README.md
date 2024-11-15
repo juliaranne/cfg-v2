@@ -2,8 +2,10 @@
 An app to test the MLA fitness app in a black box manner, from a user's perspective.
 
 ## How to use 
+1. Install Java (21+)
+2. Install the relevant plugins for your IDE for Cucumber & Java 
 1. Follow the instructions in the MLA-app README to run the application 
-2. Install the Cucumber plugin for IntelliJ
+2. Install the Cucumber plugin for IntelliJ EDIT ME - not all using 
 3. Download & setup ChromeDriver (for selenium, follow below steps)
 4. Set the environment variable `CHROME_DRIVER_PATH` on your device, with the path to the chrome driver executable 
 4. Run CucumberTest class
@@ -18,3 +20,9 @@ An app to test the MLA fitness app in a black box manner, from a user's perspect
 ### Cucumber Tags
 Add tags in `src/test/resources/junit-platform.properties`
 * Currently, have `@ignore` configured to not run a test 
+
+Visual Studio plugins 
+* redhat language support for java 
+* Cucumber 
+* requires version 21+ 
+* test runner for java 
