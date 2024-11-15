@@ -17,25 +17,32 @@ jobs:
         with:
           compose-file: "./docker-compose.yml"
 
+  selenium-tests:
+    runs-on: ubuntu-latest
+    needs: build  # This ensures 'selenium-tests' runs after 'build'
+
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Install Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Install ChromeDriver
+      - name: Set up WebDriver Manager
         run: |
-          sudo apt-get install -y chromedriver
-
-      - name: Set ChromeDriver Path
-        run: echo "CHROMEDRIVER_PATH=/usr/bin/chromedriver" >> $GITHUB_ENV
-
-      - name: Verify ChromeDriver Installation
-        run: which chromedriver
+          # WebDriverManager will handle the chromedriver download and setup in the tests
+          echo "WebDriverManager will handle the ChromeDriver setup."
 
       - name: Run Selenium Tests
-        env:
-          CHROMEDRIVER_PATH: ${{ env.CHROMEDRIVER_PATH }}
         run: mvn test -e
 
+  teardown:
+    runs-on: ubuntu-latest
+    needs: selenium-tests  # This ensures 'teardown' runs after 'selenium-tests'
+
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Stop and clean up containers
-        run: docker-compose down    # check this?
+        run: docker-compose down
