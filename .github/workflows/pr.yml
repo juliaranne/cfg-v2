@@ -16,7 +16,7 @@ jobs:
         uses: hoverkraft-tech/compose-action@v2.0.1
         with:
           compose-file: "./docker-compose.yml"
-          up-flags: "-d"  # This will run docker-compose in detached mode
+          up-flags: "-d"
 
       - name: Wait for service to be ready
         run: |
@@ -26,13 +26,6 @@ jobs:
             sleep 5
           done
           echo "Service is ready!"    
-
-#  selenium-tests:
-#    runs-on: ubuntu-latest
-#    needs: build  # This ensures 'selenium-tests' runs after 'build'
-#
-#    steps:
-#      - uses: actions/checkout@v4
 
       - name: Install Chrome
         run: |
@@ -64,17 +57,13 @@ jobs:
           echo "JAVA_HOME is set to $JAVA_HOME"
           export PATH=$JAVA_HOME/bin:$PATH   
 
-      - name: Run Maven build
-        run: |
-          cd e2e_testing
-          mvn clean install
+#      - name: Run Maven build
+#        run: |
+#          cd e2e_testing
+#          mvn clean install
 
       - name: Run Selenium Tests
         run: |
           cd e2e_testing
           mvn test -e
-
-      # Stop and clean up containers after tests
-      - name: Stop and clean up containers
-        run: docker-compose down
 
