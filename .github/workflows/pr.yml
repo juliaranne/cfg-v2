@@ -18,5 +18,7 @@ jobs:
 
       - uses: actions/checkout@v4
       - name: Run tests
-        run: mvn test -Pe2eTests # to sort
+        run: |
+          cd e2e_testing
+          mvn test
 
