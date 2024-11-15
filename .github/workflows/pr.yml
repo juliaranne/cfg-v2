@@ -6,7 +6,6 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
 
@@ -18,11 +17,46 @@ jobs:
         with:
           compose-file: "./docker-compose.yml"
 
-      - name: Run tests
+#      - name: Run tests
+#        run: |
+#          cd e2e_testing
+#          mvn test -e
+#
+#      - name: Stop and clean up containers
+#        run: docker-compose down
+
+  selenium-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Chrome
         run: |
-          cd e2e_testing
-          mvn test -e
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install ChromeDriver
+        run: |
+          sudo apt-get install -y chromedriver
+
+      - name: Set ChromeDriver Path
+        run: echo "CHROMEDRIVER_PATH=/usr/bin/chromedriver" >> $GITHUB_ENV
+
+      - name: Verify ChromeDriver Installation
+        run: which chromedriver
+
+      - name: Run Selenium Tests
+        env:
+          CHROMEDRIVER_PATH: ${{ env.CHROMEDRIVER_PATH }}
+        run: mvn test -e
+
+
+  teardown:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Stop and clean up containers
-        run: docker-compose down
-
+        run: docker-compose down    # check this?
