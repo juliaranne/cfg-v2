@@ -59,7 +59,9 @@ jobs:
 #          java-version: '21'
 
       - name: Run Maven build
-        run: mvn clean install
+        run: |
+          cd e2e_testing
+          mvn clean install
 
       - name: Run Selenium Tests
         run: |
