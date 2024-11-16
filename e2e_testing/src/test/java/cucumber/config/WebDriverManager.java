@@ -1,5 +1,6 @@
-package cucumber.config; // move?
+package cucumber.config;
 
+import cucumber.util.Context;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,8 +23,7 @@ public class WebDriverManager {
             System.setProperty("DISPLAY", ":99");
             driver = new ChromeDriver(options);
 
-            String baseUrl = "http://localhost"; // move this
-            driver.get(baseUrl);
+            driver.get(Context.BASE_URL);
         }
 
         return driver;
