@@ -14,6 +14,7 @@ Add tags in `src/test/resources/junit-platform.properties`
 
 
 ### Plugins 
+_Some useful plugins for different IDEs_
 
 **Visual Studio** 
 * redhat language support for java 
