@@ -70,7 +70,7 @@
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
-			<version>5.6.2</version> <!-- use the latest version -->
+			<version>5.6.2</version>
 		</dependency>
 
 		<dependency>
@@ -101,23 +101,6 @@
                     <target>21</target>
                 </configuration>
             </plugin>
-<!--			<plugin>-->
-<!--				<groupId>io.cucumber</groupId>-->
-<!--				<artifactId>cucumber-maven-plugin</artifactId>-->
-<!--				<version>7.13.0</version> &lt;!&ndash; Ensure compatibility with the version you are using &ndash;&gt;-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>execute-tests</id>-->
-<!--						<goals>-->
-<!--							<goal>test</goal>-->
-<!--						</goals>-->
-<!--						<configuration>-->
-<!--							<jsonReport>cucumber-report.json</jsonReport> &lt;!&ndash; Report file name &ndash;&gt;-->
-<!--							<reportsDirectory>${project.build.directory}/cucumber-reports</reportsDirectory> &lt;!&ndash; Output directory &ndash;&gt;-->
-<!--						</configuration>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
 		</plugins>
 	</build>
 

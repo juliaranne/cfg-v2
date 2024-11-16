@@ -13,15 +13,13 @@ public class WebDriverManager {
             io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
 
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--no-sandbox"); // Required for CI
-            options.addArguments("--disable-dev-shm-usage"); // Handle limited memory
-            options.addArguments("--headless"); // Ensure headless mode
-            options.addArguments("--disable-gpu"); // Disable GPU for headless stability
-            options.addArguments("window-size=1920,1080"); // Match xvfb screen size
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("window-size=1920,1080");
 
-// Set DISPLAY for virtual framebuffer
             System.setProperty("DISPLAY", ":99");
-            // Initialize the driver with the Chrome options
             driver = new ChromeDriver(options);
 
             String baseUrl = "http://localhost"; // move this
