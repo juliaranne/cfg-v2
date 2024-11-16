@@ -39,6 +39,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+          wget -N https://chromedriver.storage.googleapis.com/${CHROME_VERSION}/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+          chmod +x /usr/local/bin/chromedriver
+      
+
       - name: Set up WebDriver Manager
         run: |
           # WebDriverManager will handle the chromedriver download and setup in the tests
@@ -49,6 +58,12 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y google-chrome-stable xvfb
             google-chrome --version
+          
+      - name: Verify Chrome and ChromeDriver Versions
+        run: |
+          google-chrome --version
+          chromedriver --version
+      
 
       - name: Start xvfb
         run: |
@@ -92,3 +107,4 @@ jobs:
           mvn test -e
         env:
           DISPLAY: :99
+          PATH: $PATH:/usr/local/bin
