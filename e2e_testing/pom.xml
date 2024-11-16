@@ -101,6 +101,23 @@
                     <target>21</target>
                 </configuration>
             </plugin>
+			<plugin>
+				<groupId>io.cucumber</groupId>
+				<artifactId>cucumber-maven-plugin</artifactId>
+				<version>7.13.0</version> <!-- Ensure compatibility with the version you are using -->
+				<executions>
+					<execution>
+						<id>execute-tests</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<jsonReport>cucumber-report.json</jsonReport> <!-- Report file name -->
+							<reportsDirectory>${project.build.directory}/cucumber-reports</reportsDirectory> <!-- Output directory -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
