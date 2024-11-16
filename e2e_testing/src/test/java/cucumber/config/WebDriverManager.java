@@ -20,7 +20,6 @@ public class WebDriverManager {
             options.addArguments("window-size=1920,1080"); // Match xvfb screen size
 
 // Set DISPLAY for virtual framebuffer
-            System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver"); // Or use WebDriverManager
             System.setProperty("DISPLAY", ":99");
             // Initialize the driver with the Chrome options
             driver = new ChromeDriver(options);
