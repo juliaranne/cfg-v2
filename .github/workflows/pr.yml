@@ -88,4 +88,3 @@ jobs:
           mvn test -e
         env:
           DISPLAY: :99
-          PATH: $PATH:/usr/local/bin
