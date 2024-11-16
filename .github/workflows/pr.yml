@@ -20,12 +20,19 @@ jobs:
 
       - name: Wait for service to be ready
         run: |
-          # Example: Wait for a specific port to be open (adjust based on your service)
-          until curl --silent --fail http://localhost:80; do
-            echo "Waiting for the service to be ready..."
-            sleep 5
-          done
-          echo "Service is ready!"    
+            echo "Checking if service is ready..."
+            RETRIES=12  # Wait for up to 60 seconds (12 * 5 seconds)
+            URL="http://localhost:80"
+            while ! curl --silent --fail --max-time 2 $URL; do
+              RETRIES=$((RETRIES-1))
+              if [ $RETRIES -le 0 ]; then
+                echo "Service did not become ready in time. Exiting..."
+                exit 1
+              fi
+              echo "Waiting for the service to be ready..."
+              sleep 5
+            done
+            echo "Service is ready!"  
 
       - name: Install Chrome
         run: |
@@ -55,7 +62,18 @@ jobs:
         run: |
           export JAVA_HOME=$HOME/.sdkman/candidates/java/21-open
           echo "JAVA_HOME is set to $JAVA_HOME"
-          export PATH=$JAVA_HOME/bin:$PATH   
+          export PATH=$JAVA_HOME/bin:$PATH  
+
+      - name: Install xvfb and Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable xvfb
+          google-chrome --version
+
+      - name: Start xvfb
+        run: |
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1920x1080x24 &    
 
 #      - name: Run Maven build
 #        run: |

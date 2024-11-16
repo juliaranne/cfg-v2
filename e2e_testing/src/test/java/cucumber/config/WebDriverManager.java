@@ -13,7 +13,8 @@ public class WebDriverManager {
             io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
 
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless"); // Run in headless mode
+            options.addArguments("window-size=1920,1080");
+//            options.addArguments("--headless"); // Run in headless mode
             options.addArguments("--no-sandbox"); // Disable sandboxing
             options.addArguments("--disable-dev-shm-usage"); // Disable /dev/shm usage
             options.addArguments("--remote-debugging-port=9222"); // Necessary for debugging in CI environments
