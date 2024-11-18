@@ -6,27 +6,21 @@
 
 name: Deploy Analytics Service to Docker Hub
 
-# on:
-#   pull_request:
-#     types:
-#       - closed
-#     branches:
-#       - main
-#     paths:
-#       - "analytics/**"
-#       - "analtyics_v2/**"
-#   workflow_dispatch: # Enables manual trigger
-
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
-      - separate-pipelines
+      - main
+    paths:
+      - "analytics/**"
+      - "analtyics_v2/**"
   workflow_dispatch: # Enables manual trigger
 
 
 jobs:
   build:
-    # if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - run: |

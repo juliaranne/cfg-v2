@@ -6,26 +6,20 @@
 
 name: Deploy Activity Tracking Service to Docker Hub
 
-# on:
-#   pull_request:
-#     types:
-#       - closed
-#     branches:
-#       - main
-#     paths:
-#       - "activity-tracking/**"
-#   workflow_dispatch: # Enables manual trigger
-
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
-      - separate-pipelines
+      - main
+    paths:
+      - "activity-tracking/**"
   workflow_dispatch: # Enables manual trigger
 
 
 jobs:
   build:
-    # if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - run: |
