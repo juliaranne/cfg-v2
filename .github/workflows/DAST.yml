@@ -21,17 +21,13 @@ jobs:
 
       - name: Wait for App to Start # needed?
         run: sleep 20
+# LOOKING AT ADDING TO THE PIPELINE - BUT LOOKS LIKE WE NEED SOME SETUP FIRST?
+      # https://www.zaproxy.org/docs/automate/automation-framework/
+      # https://www.zaproxy.org/getting-started/
 
-# https://github.com/zaproxy/action-full-scan
+# https://github.com/marketplace/actions/zap-automation-framework-scan
+#      https://github.com/marketplace?query=zap&verification=verified_creator
       - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.11.0
+        uses: zaproxy/action-af@v0.1.0
         with:
-            target: 'https://www.zaproxy.org/'
-            fail_if_severe: true
-
-#      - name: Upload ZAP Report
-#        if: always()                      # Ensure the report is always uploaded
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: zap-report
-#          path: /zap/wrk/*.html           # Adjust to match where the report is saved
+          plan: '.github/workflows/zap/plan.yml'
