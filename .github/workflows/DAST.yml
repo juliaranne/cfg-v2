@@ -1,0 +1,39 @@
+name: ZAP Scan
+
+on:
+  pull_request: # discuss where we actually want this running
+    branches: [ "main" ]
+    types: [ opened, synchronize ]
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run docker-compose
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: "./docker-compose.yml"
+          up-flags: "-d"
+
+      - name: Wait for App to Start # needed?
+        run: sleep 20
+
+      - name: Run OWASP ZAP Baseline Scan
+        uses: zapbot/zap-action@v0.5.0    # Official ZAP GitHub Action
+        with:
+          target: "http://localhost:8080" # Target your running app
+          fail_if_severe: true            # Fail the job if high-risk vulnerabilities are found
+          zap-options: "-config api.disablekey=true" # Optional: Configure ZAP settings
+        env:
+          JAVA_TOOL_OPTIONS: "-Xmx512m"   # Allocate memory for the scan
+
+      - name: Upload ZAP Report
+        if: always()                      # Ensure the report is always uploaded
+        uses: actions/upload-artifact@v3
+        with:
+          name: zap-report
+          path: /zap/wrk/*.html           # Adjust to match where the report is saved
