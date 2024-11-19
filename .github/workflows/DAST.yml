@@ -24,9 +24,10 @@ jobs:
 
 # https://github.com/zaproxy/action-full-scan
       - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.11.0
+        uses: zaproxy/action-baseline@v0.11.0
         with:
             target: 'https://www.zaproxy.org/'
+            fail_if_severe: true
 
 #      - name: Upload ZAP Report
 #        if: always()                      # Ensure the report is always uploaded
