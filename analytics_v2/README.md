@@ -54,7 +54,8 @@ You may then access at http://localhost:5051/
 Access at http://localhost:5051/graphql
 
 ## Example queries
-`query {
+```
+query {
 	stats(username: "<user email>") {
     	username
 			exercises {
@@ -63,9 +64,11 @@ Access at http://localhost:5051/graphql
                 totalDuration
             }
         }
-}`
+}
+```
 
-`query {
+```
+query {
 	stats_by_week(start: "2024-11-09", end: "2024-11-17", username: "<user email>") {
 			exercises {
                 exerciseType
@@ -73,7 +76,8 @@ Access at http://localhost:5051/graphql
                 totalDuration
             }
     }
-}`
+}
+```
 
 
 
