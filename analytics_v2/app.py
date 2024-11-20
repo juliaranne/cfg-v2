@@ -43,7 +43,7 @@ def home():
     return "Welcome to analytics V2"
 
 @query.field("stats")
-def resolve_stats(obj, info, username):
+def resolve_stats(*_, username):
     pipeline = [
         {
             "$match": {"username": username}
@@ -87,7 +87,7 @@ def resolve_stats(obj, info, username):
         return "An internal error occurred"
 
 @query.field("stats_by_week")
-def resolve_stats_by_week(obj, info, start, end, username):
+def resolve_stats_by_week(*_, start, end, username):
     date_format = "%Y-%m-%d"
     try:
         start_date = datetime.strptime(start, date_format)
