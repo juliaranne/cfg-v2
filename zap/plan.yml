@@ -4,7 +4,7 @@ parameters:
 #    - "http://localhost:5300"
 #    - "http://localhost:5050"
 #    - "http://localhost:8080"
-  zap_proxy_port: 8081
+  proxy_port: 8081
   recurse: true                  # Crawl links recursively
   max_depth: 2                   # Set how deep the scan should go
   max_duration: 15               # Max duration for the scan (in minutes)

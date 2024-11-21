@@ -32,5 +32,6 @@ jobs:
         uses: zaproxy/action-af@v0.1.0
         with:
           plan: '.zap/plan.yml'
+          cmd_options: "-config proxy.port=8081"
         env:
           ZAP_PORT: 8081  # Custom port for ZAP
