@@ -1,7 +1,9 @@
 name: ZAP Scan
 
 on:
-  pull_request: # discuss where we actually want this running
+  push:
+    branches: [ main ]
+  pull_request: # REMOVE THE PR BIT
     branches: [ "main" ]
     types: [ opened, synchronize ]
 
@@ -10,8 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Run docker-compose
         uses: hoverkraft-tech/compose-action@v2.0.1
@@ -30,4 +31,4 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-af@v0.1.0
         with:
-          plan: '.github/workflows/zap/plan.yml'
+          plan: '.zap/plan.yml'

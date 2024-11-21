@@ -1,0 +1,26 @@
+parameters:
+  targets:
+    - "http://localhost:80"
+#    - "http://localhost:5300"
+#    - "http://localhost:5050"
+#    - "http://localhost:8080"
+  recurse: true                  # Crawl links recursively
+  max_depth: 2                   # Set how deep the scan should go
+  max_duration: 15               # Max duration for the scan (in minutes)
+
+actions:
+  # 1. Spider: Crawl the apps to discover links
+  - spider:
+      forEach: "{{ parameters.targets }}" # Loop through all targets
+      recurse: "{{ parameters.recurse }}"
+      maxDepth: "{{ parameters.max_depth }}"
+
+  # 2. Active Scan: Perform a security scan
+  - activeScan:
+      forEach: "{{ parameters.targets }}"
+      recurse: "{{ parameters.recurse }}"
+      maxDuration: "{{ parameters.max_duration }}"
+
+  # 3. (Optional) Generate Reports
+  - generateReport:
+      formats: [HTML, JSON]       # Create both HTML and JSON reports
