@@ -1,3 +1,0 @@
-webdriver:
-  chromeDriverPath: ${CHROME_DRIVER_PATH}
-  baseUrl: "http://localhost"
