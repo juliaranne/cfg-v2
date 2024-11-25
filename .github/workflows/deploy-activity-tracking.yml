@@ -1,8 +1,11 @@
-# ––––––––––––––––––––––––––––––––
-# Alternative to ECR deployment.
-# Ensure DOCKER_USERNAME, DOCKER_PASSWORD and your username to Github secrets
-# before attempting to run the pipeline.
-# ––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# GitHub Actions workflow for deploying the Activity Tracking 
+# Service to Docker Hub.
+#
+# Prerequisites:
+# - Add DOCKER_USERNAME and DOCKER_PASSWORD to GitHub Secrets.
+# - Ensure the workflow is triggered by merging a PR or manually.
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 name: Deploy Activity Tracking Service to Docker Hub
 
@@ -14,7 +17,7 @@ on:
       - main
     paths:
       - "activity-tracking/**"
-  workflow_dispatch: # Enables manual trigger
+  workflow_dispatch: # Enables manual trigger for this workflow.
 
 
 jobs:
@@ -23,7 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo The PR was merged
+          echo The PR was merged # Log a message indicating a merged PR.
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -36,6 +40,8 @@ jobs:
       - name: Build, tag, and push image to Docker Hub (Activity Tracking)
         run: |
           cd activity-tracking
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-activity:latest -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-activity:${{ github.sha }} -f Dockerfile .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-activity:latest \
+                       -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-activity:${{ github.sha }} \
+                       -f Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-activity:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-activity:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-activity:${{ github.sha }} # Push both tags.

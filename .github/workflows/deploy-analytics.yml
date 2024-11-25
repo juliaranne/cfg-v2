@@ -1,8 +1,11 @@
-# ––––––––––––––––––––––––––––––––
-# Alternative to ECR deployment.
-# Ensure DOCKER_USERNAME, DOCKER_PASSWORD and your username to Github secrets
-# before attempting to run the pipeline.
-# ––––––––––––––––––––––––––––––––
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+# GitHub Actions workflow for deploying the Analytics Service 
+# to Docker Hub.
+#
+# Prerequisites:
+# - Add DOCKER_USERNAME and DOCKER_PASSWORD to GitHub Secrets.
+# - Ensure the workflow is triggered by merging a PR or manually.
+# ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 name: Deploy Analytics Service to Docker Hub
 
@@ -15,7 +18,7 @@ on:
     paths:
       - "analytics/**"
       - "analtyics_v2/**"
-  workflow_dispatch: # Enables manual trigger
+  workflow_dispatch: # Enables manual trigger for this workflow.
 
 
 jobs:
@@ -37,7 +40,9 @@ jobs:
       - name: Build, tag, and push image to Docker Hub (Analytics)
         run: |
           cd analytics
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:latest -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:${{ github.sha }} -f Dockerfile .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:latest \
+                       -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:${{ github.sha }} \
+                       -f Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:${{ github.sha }}
         
