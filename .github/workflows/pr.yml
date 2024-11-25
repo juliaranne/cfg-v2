@@ -1,4 +1,4 @@
-name: Pull Request build and test
+name: BDD Tests
 
 on:
   pull_request:
