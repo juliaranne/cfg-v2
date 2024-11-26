@@ -8,6 +8,10 @@ services:
       - "80:80"
     networks:
       - app-network
+    environment:
+      - DD_AGENT_HOST=datadog-agent
+      - DD_APM_ENABLED=true
+      - DD_LOGS_ENABLED=true
 
   activity-tracking:
     build:
@@ -73,6 +77,18 @@ services:
       - mongodbdata:/data/db
     networks:
       - app-network
+
+  datadog-agent:
+    image: datadog/agent:latest
+    environment:
+      - DD_API_KEY=
+      - DD_SITE=datadoghq.eu         # Or datadoghq.eu depending on your region
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8125:8125/udp"   # For DogStatsD metrics collection
+    networks:
+      - default
 
 networks:
   app-network:
