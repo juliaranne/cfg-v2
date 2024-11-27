@@ -8,10 +8,6 @@ services:
       - "80:80"
     networks:
       - app-network
-    environment:
-      - DD_AGENT_HOST=datadog-agent
-      - DD_APM_ENABLED=true
-      - DD_LOGS_ENABLED=true
 
   activity-tracking:
     build:
@@ -21,12 +17,6 @@ services:
       - NODE_ENV=development
       - MONGO_URI=mongodb://root:cfgmla23@mongodb:27017
       - MONGO_DB=activity
-      - DD_AGENT_HOST=datadog-agent
-      - DD_APM_ENABLED=true
-      - DD_LOGS_ENABLED=true
-      - DD_SITE="datadoghq.eu"
-      - DD_CONTAINER_EXCLUDE_LOGS="name:datadog-agent"
-      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
     ports:
       - "5300:5300"
     depends_on:
@@ -42,12 +32,6 @@ services:
       - NODE_ENV=development
       - MONGO_URI=mongodb://root:cfgmla23@mongodb:27017
       - MONGO_DB=activity
-      - DD_AGENT_HOST=datadog-agent
-      - DD_APM_ENABLED=true
-      - DD_LOGS_ENABLED=true
-      - DD_SITE="datadoghq.eu"
-      - DD_CONTAINER_EXCLUDE_LOGS="name:datadog-agent"
-      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
     ports:
       - "5050:5050"
     depends_on:
@@ -71,12 +55,6 @@ services:
     environment:
       - SPRING_DATA_MONGODB_DATABASE=authservice
       - SPRING_DATA_MONGODB_URI=mongodb://root:cfgmla23@mongodb:27017
-      - DD_AGENT_HOST=datadog-agent
-      - DD_APM_ENABLED=true
-      - DD_LOGS_ENABLED=true
-      - DD_SITE="datadoghq.eu"
-      - DD_CONTAINER_EXCLUDE_LOGS="name:datadog-agent"
-      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
     ports:
       - "8080:8080"
     depends_on:
@@ -89,12 +67,6 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=cfgmla23
-      - DD_AGENT_HOST=datadog-agent
-      - DD_APM_ENABLED=true
-      - DD_LOGS_ENABLED=true
-      - DD_SITE="datadoghq.eu"
-      - DD_CONTAINER_EXCLUDE_LOGS="name:datadog-agent"
-      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
     ports:
       - "27017:27017"
     volumes:
@@ -105,7 +77,7 @@ services:
   datadog-agent:
     image: datadog/agent:latest
     environment:
-      - DD_API_KEY=
+      - DD_API_KEY=${DD_API_KEY}
       - DD_SITE=datadoghq.eu
       - DD_LOGS_ENABLED=true
       - DD_CONTAINER_EXCLUDE_LOGS=name:datadog-agent
