@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Exercise = require('../models/exercise.model');
 
-
 // GET: Retrieve all exercises
 router.get('/', async (req, res) => {
   console.log('RETRIEVING ALL EXERCISES');
@@ -11,14 +10,14 @@ router.get('/', async (req, res) => {
     console.log(`RETRIEVED ${exercises.length} EXERCISES`);
     res.json(exercises);
   } catch (error) {
-    console.error('ERROR RETRIEVING ALL EXERCISES');
+    console.error('ERROR RETRIEVING ALL EXERCISES:', error.message);
     res.status(400).json({ error: 'Error: ' + error.message });
   }
 });
 
 // POST: Add a new exercise
 router.post('/add', async (req, res) => {
-  console.log('ADDING NEW EXERCISE');
+  console.log('ADDING NEW EXERCISE:', req.body);
   try {
     const { username, exerciseType, description, duration, date } = req.body;
 
@@ -31,10 +30,10 @@ router.post('/add', async (req, res) => {
     });
 
     await newExercise.save();
-    console.log('NEW EXERCISE ADDED');
+    console.log('NEW EXERCISE ADDED:', newExercise);
     res.json({ message: 'Exercise added!' });
   } catch (error) {
-    console.error('ERROR ADDING EXERCISE');
+    console.error('ERROR ADDING EXERCISE:', error.message);
     res.status(400).json({ error: 'Error: ' + error.message });
   }
 });
@@ -49,10 +48,10 @@ router.get('/:id', async (req, res) => {
       res.status(404).json({ error: 'Exercise not found' });
       return;
     }
-    console.log('EXERCISE RETRIEVED');
+    console.log('EXERCISE RETRIEVED:', exercise);
     res.json(exercise);
   } catch (error) {
-    console.error(`ERROR RETRIEVING EXERCISE WITH ID ${req.params.id}`);
+    console.error(`ERROR RETRIEVING EXERCISE WITH ID ${req.params.id}:`, error.message);
     res.status(400).json({ error: 'Error: ' + error.message });
   }
 });
@@ -67,10 +66,10 @@ router.delete('/:id', async (req, res) => {
       res.status(404).json({ error: 'Exercise not found' });
       return;
     }
-    console.log('EXERCISE DELETED');
+    console.log('EXERCISE DELETED:', deletedExercise);
     res.json({ message: 'Exercise deleted.' });
   } catch (error) {
-    console.error(`ERROR DELETING EXERCISE WITH ID ${req.params.id}`);
+    console.error(`ERROR DELETING EXERCISE WITH ID ${req.params.id}:`, error.message);
     res.status(400).json({ error: 'Error: ' + error.message });
   }
 });
@@ -82,7 +81,7 @@ router.put('/update/:id', async (req, res) => {
     const { username, description, duration, date, exerciseType } = req.body;
 
     if (!username || !description || !duration || !date) {
-      console.log('MISSING FIELDS IN UPDATE REQUEST');
+      console.log('MISSING FIELDS IN UPDATE REQUEST:', req.body);
       res.status(400).json({ error: 'All fields are required' });
       return;
     }
@@ -101,10 +100,10 @@ router.put('/update/:id', async (req, res) => {
     exercise.date = new Date(date);
 
     await exercise.save();
-    console.log('EXERCISE UPDATED');
+    console.log('EXERCISE UPDATED:', exercise);
     res.json({ message: 'Exercise updated!', exercise });
   } catch (error) {
-    console.error(`ERROR UPDATING EXERCISE WITH ID ${req.params.id}`);
+    console.error(`ERROR UPDATING EXERCISE WITH ID ${req.params.id}:`, error.message);
     res.status(500).json({ error: 'An error occurred while updating the exercise' });
   }
 });
