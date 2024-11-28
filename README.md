@@ -148,3 +148,20 @@ db.users.find()
 
 ## Deployment
 The application is containerized using Docker and can be deployed on any platform that supports Docker containers. For AWS deployment, a GitHub Actions pipeline is configured for CI/CD.
+
+## Monitoring and Alerting
+We have made use of Datadog, which uses an api key to push logs from your local containers to datadog. To use this, you need to: 
+* Create a datadog account - https://app.datadoghq.eu/help/quick_start 
+* Obtain an API key 
+* Add this to the .env file 
+* Rebuild your docker containers 
+
+You will then be able to see the logs in Datadog, and create dashboards. 
+
+The following dashboard has been exported and can be found at `resources/datadog/ExerciseFrequencyPastMonth--2024-11-28T15_41_02.json` 
+
+<details>
+  <summary>Expand to see dashboard screenshot</summary>
+![img.png](img.png) 
+
+</details>
