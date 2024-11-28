@@ -151,7 +151,7 @@ The application is containerized using Docker and can be deployed on any platfor
 
 ## Monitoring and Alerting
 We have made use of Datadog, which uses an api key to push logs from your local containers to datadog. To use this, you need to: 
-* Create a datadog account
+* Create a datadog account - https://app.datadoghq.eu/help/quick_start 
 * Obtain an API key 
 * Add this to the .env file 
 * Rebuild your docker containers 
