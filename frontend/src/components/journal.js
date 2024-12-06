@@ -25,10 +25,6 @@ const Journal = ({ currentUser }) => {
   const [endDate, setEndDate] = useState(moment().endOf('week').toDate());
   const {data, error} = useFetch(getQuery(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), currentUser));
 
-  useEffect(() => {
-    getQuery();
-  }, [currentUser, startDate, endDate]);
-
   const goToPreviousWeek = () => {
     setStartDate(moment(startDate).subtract(1, 'weeks').startOf('week').toDate());
     setEndDate(moment(endDate).subtract(1, 'weeks').endOf('week').toDate());
