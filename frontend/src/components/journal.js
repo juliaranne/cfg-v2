@@ -7,7 +7,8 @@ import './journal.css';
 const getQuery = (start, end, user) => {
   return `
     query {
-      stats_by_week(start: "${start}", end: "${end}", username: "${user}") {
+      weekly_stats(start: "${start}", end: "${end}", username: "${user}") {
+        results {
           exercises {
             exerciseType
             description
@@ -15,7 +16,8 @@ const getQuery = (start, end, user) => {
           }
         }
       }
-    `;
+    }
+  `;
 }
 
 const Journal = ({ currentUser }) => {
@@ -37,6 +39,8 @@ const Journal = ({ currentUser }) => {
     setEndDate(moment(endDate).add(1, 'weeks').endOf('week').toDate());
   };
 
+  const exercises = data?.weekly_stats?.results?.exercises;
+
   return (
     <div className="journal-container">
       <h4>Weekly Exercise Journal</h4>
@@ -47,8 +51,8 @@ const Journal = ({ currentUser }) => {
         <Button className="button-small" onClick={goToNextWeek}>Next &rarr;</Button>
         </div>
       <ul>
-        {data.stats_by_week?.exercises && data.stats_by_week?.exercises?.length > 0 ? (
-          data.stats_by_week?.exercises.map((exercise, index) => (
+        {exercises && exercises.length > 0 ? (
+          exercises.map((exercise, index) => (
             <li key={index} className="exercise-journal-data">
               {exercise.exerciseType} - {exercise.totalDuration} minutes<br />
               {exercise.description}
@@ -58,6 +62,7 @@ const Journal = ({ currentUser }) => {
           <li>No exercises found for this period.</li>
         )}
       </ul>
+      {error ? <p>Unable to load weekly stats</p> : ''}
     </div>
   );
 };
