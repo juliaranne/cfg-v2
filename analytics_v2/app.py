@@ -81,7 +81,14 @@ def resolve_stats(*_, username):
 
     try:
         stats = list(db.exercises.aggregate(pipeline))
-        return stats[0] 
+        logging.info(stats)
+        print(stats)
+        app.logger.info(stats)
+        return {
+            "results": stats[0],
+            "success": True
+        }
+        # return stats[0] 
 
     except Exception as e:
         return "An internal error occurred"
