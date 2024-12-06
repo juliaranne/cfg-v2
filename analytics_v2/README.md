@@ -71,11 +71,12 @@ query {
 
 ```
 query {
-	stats_by_week(start: "2024-12-04", end: "2024-12-09", username: <username>) {
+	weekly_stats(start: "2024-12-04", end: "2024-12-09", username: <username>) {
 		results {
 			exercises {
                 description
                 exerciseType
+                totalDuration
             }
         }
     }
