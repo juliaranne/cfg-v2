@@ -81,20 +81,16 @@ def resolve_stats(*_, username):
 
     try:
         stats = list(db.exercises.aggregate(pipeline))
-        logging.info(stats)
-        print(stats)
-        app.logger.info(stats)
         return {
             "results": stats[0],
             "success": True
         }
-        # return stats[0] 
 
     except Exception as e:
         return "An internal error occurred"
 
-@query.field("stats_by_week")
-def resolve_stats_by_week(*_, start, end, username):
+@query.field("weekly_stats")
+def resolve_weekly_stats(*_, start, end, username):
     date_format = "%Y-%m-%d"
     try:
         start_date = datetime.strptime(start, date_format)
@@ -136,7 +132,10 @@ def resolve_stats_by_week(*_, start, end, username):
 
     try:
         stats = list(db.exercises.aggregate(pipeline))
-        return { "exercises": stats }
+        return { 
+            "results": { "exercises": stats },
+            "success": True
+        }
     except Exception as e:
         return "An internal error occurred"
 

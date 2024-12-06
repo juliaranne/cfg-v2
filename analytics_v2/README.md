@@ -56,25 +56,28 @@ Access at http://localhost:5051/graphql
 ## Example queries
 ```
 query {
-	stats(username: "<user email>") {
-    	username
-			exercises {
+	stats(username: <username>) {
+    	results {
+            exercises {
                 exerciseType
                 description
                 totalDuration
-            }
         }
-}
+        username
+      }
+  	}
+  }
 ```
 
 ```
 query {
-	stats_by_week(start: "2024-11-09", end: "2024-11-17", username: "<user email>") {
+	stats_by_week(start: "2024-12-04", end: "2024-12-09", username: <username>) {
+		results {
 			exercises {
-                exerciseType
                 description
-                totalDuration
+                exerciseType
             }
+        }
     }
 }
 ```
