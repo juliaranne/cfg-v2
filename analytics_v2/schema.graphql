@@ -13,7 +13,7 @@ type WeeklyStats {
 }
 
 type Results {
-    results: [Exercise]
+    results: Stats
     success: Boolean
 }
 

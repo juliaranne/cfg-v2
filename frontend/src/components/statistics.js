@@ -5,14 +5,16 @@ import './statistics.css';
 const query = `
   query {
     stats(username: "juliar") {
+      results {
+        username
         exercises {
           exerciseType
           description
           totalDuration
         }
-        username
       }
     }
+  }
   `;
 
 const Statistics = ({ currentUser }) => {
