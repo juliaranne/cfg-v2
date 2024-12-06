@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import { Button } from 'react-bootstrap';
 import moment from 'moment';
