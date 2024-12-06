@@ -1,55 +1,30 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import useFetch from '../hooks/useFetch';
 import { Button } from 'react-bootstrap';
 import moment from 'moment';
 import './journal.css';
 
-const query = `
-  query {
-    stats_by_week(username: "juliar", start: "2024-12-04", end: "2024-12-09") {
-        exercises {
-          exerciseType
-          description
-          totalDuration
+const getQuery = (start, end, user) => {
+  return `
+    query {
+      stats_by_week(start: "${start}", end: "${end}", username: "${user}") {
+          exercises {
+            exerciseType
+            description
+            totalDuration
+          }
         }
       }
-    }
-  `;
+    `;
+}
 
 const Journal = ({ currentUser }) => {
   const [startDate, setStartDate] = useState(moment().startOf('week').toDate());
   const [endDate, setEndDate] = useState(moment().endOf('week').toDate());
-  const [exercises, setExercises] = useState([]);
-
-  const fetchExercises = async () => {
-    try {
-      fetch(`http://localhost:5051/graphql`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query }),
-      })
-        .then((res) => res.json())
-        .then((result) => console.log(result.data));
-    
-    // try {
-      // const url = `http://localhost:5050/stats/weekly/?user=${currentUser}&start=${moment(startDate).format('YYYY-MM-DD')}&end=${moment(endDate).format('YYYY-MM-DD')}`;
-      // const response = await axios.get(url);
-      // console.log('API Response:', response.data);
-      // if (response.data.stats && Array.isArray(response.data.stats)) {
-      //   setExercises(response.data.stats);
-      // } else {
-      //   console.error('Unexpected response structure:', response.data);
-      //   setExercises([]);
-      // }
-    } catch (error) {
-      console.error('Failed to fetch exercises', error);
-    }
-  };
+  const {data, error} = useFetch(getQuery(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), currentUser));
 
   useEffect(() => {
-    fetchExercises();
+    getQuery();
   }, [currentUser, startDate, endDate]);
 
   const goToPreviousWeek = () => {
@@ -72,8 +47,8 @@ const Journal = ({ currentUser }) => {
         <Button className="button-small" onClick={goToNextWeek}>Next &rarr;</Button>
         </div>
       <ul>
-        {exercises && exercises.length > 0 ? (
-          exercises.map((exercise, index) => (
+        {data.stats_by_week?.exercises && data.stats_by_week?.exercises?.length > 0 ? (
+          data.stats_by_week?.exercises.map((exercise, index) => (
             <li key={index} className="exercise-journal-data">
               {exercise.exerciseType} - {exercise.totalDuration} minutes<br />
               {exercise.description}
