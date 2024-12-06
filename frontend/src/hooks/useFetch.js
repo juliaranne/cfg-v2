@@ -2,7 +2,6 @@
 import { useEffect, useState, useCallback } from 'react';
 
 const useFetch = (query) => {
-    console.log(query)
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
