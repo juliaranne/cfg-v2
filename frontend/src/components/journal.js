@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import moment from 'moment';
 import './journal.css';
+
+const query = `
+  query {
+    stats(username: "juliar") {
+        exercises {
+          exerciseType
+          description
+          totalDuration
+        }
+      }
+    }
+  `;
 
 const Journal = ({ currentUser }) => {
   const [startDate, setStartDate] = useState(moment().startOf('week').toDate());
@@ -11,15 +23,26 @@ const Journal = ({ currentUser }) => {
 
   const fetchExercises = async () => {
     try {
-      const url = `http://localhost:5050/stats/weekly/?user=${currentUser}&start=${moment(startDate).format('YYYY-MM-DD')}&end=${moment(endDate).format('YYYY-MM-DD')}`;
-      const response = await axios.get(url);
-      console.log('API Response:', response.data);
-      if (response.data.stats && Array.isArray(response.data.stats)) {
-        setExercises(response.data.stats);
-      } else {
-        console.error('Unexpected response structure:', response.data);
-        setExercises([]);
-      }
+      fetch(`http://localhost:5051/graphql`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }),
+      })
+        .then((res) => res.json())
+        .then((result) => console.log(result.data));
+    
+    // try {
+      // const url = `http://localhost:5050/stats/weekly/?user=${currentUser}&start=${moment(startDate).format('YYYY-MM-DD')}&end=${moment(endDate).format('YYYY-MM-DD')}`;
+      // const response = await axios.get(url);
+      // console.log('API Response:', response.data);
+      // if (response.data.stats && Array.isArray(response.data.stats)) {
+      //   setExercises(response.data.stats);
+      // } else {
+      //   console.error('Unexpected response structure:', response.data);
+      //   setExercises([]);
+      // }
     } catch (error) {
       console.error('Failed to fetch exercises', error);
     }
