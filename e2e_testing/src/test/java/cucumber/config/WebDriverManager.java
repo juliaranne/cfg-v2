@@ -1,39 +1,31 @@
 package cucumber.config;
 
+import cucumber.util.Context;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.yaml.snakeyaml.Yaml;
-
-import java.io.InputStream;
-import java.util.Map;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class WebDriverManager {
+
     private static WebDriver driver;
-    private static Config config;
-
-    // Todo use springboot to load the config
-    static {
-        try (InputStream in = WebDriverManager.class.getClassLoader().getResourceAsStream("application.yaml")) {
-            if (in == null) {
-                throw new RuntimeException("application.yaml file not found in resources");
-            }
-            Yaml yaml = new Yaml();
-            config = yaml.loadAs(in, Config.class);
-
-            String chromeDriverPath = resolveEnvVars(config.getWebdriver().getChromeDriverPath());
-            config.getWebdriver().setChromeDriverPath(chromeDriverPath);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Error loading configuration", e);
-        }
-    }
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", config.getWebdriver().getChromeDriverPath());
-            driver = new ChromeDriver();
-            driver.get(config.getWebdriver().getBaseUrl());
+            io.github.bonigarcia.wdm.WebDriverManager.chromedriver().setup();
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("window-size=1920,1080");
+
+            System.setProperty("DISPLAY", ":99");
+            driver = new ChromeDriver(options);
+
+            driver.get(Context.BASE_URL);
         }
+
         return driver;
     }
 
@@ -42,14 +34,5 @@ public class WebDriverManager {
             driver.quit();
             driver = null;
         }
-    }
-
-    private static String resolveEnvVars(String path) {
-        if (path != null && path.contains("${")) {
-            for (Map.Entry<String, String> env : System.getenv().entrySet()) {
-                path = path.replace("${" + env.getKey() + "}", env.getValue());
-            }
-        }
-        return path;
     }
 }
