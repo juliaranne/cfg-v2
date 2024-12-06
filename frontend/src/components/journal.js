@@ -6,7 +6,7 @@ import './journal.css';
 
 const query = `
   query {
-    stats(username: "juliar") {
+    stats_by_week(username: "juliar", start: "2024-12-04", end: "2024-12-09") {
         exercises {
           exerciseType
           description

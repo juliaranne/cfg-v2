@@ -1,21 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './statistics.css';
+
+const query = `
+  query {
+    stats(username: "juliar") {
+        exercises {
+          exerciseType
+          description
+          totalDuration
+        }
+        username
+      }
+    }
+  `;
 
 const Statistics = ({ currentUser }) => {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const url = `http://localhost:5050/stats/${currentUser}`;
-
-    axios.get(url)
-      .then(response => {
-        setData(response.data.stats);
+  const fetchExercises = async () => {
+    try {
+      fetch(`http://localhost:5051/graphql`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }),
       })
-      .catch(error => {
-        console.error('There was an error fetching the data!', error);
-      });
-  }, [currentUser]);
+        .then((res) => res.json())
+        .then((result) => console.log(result.data));
+    } catch (e) {
+      console.log('error')
+      }
+    }
+
+    useEffect(() => {
+      fetchExercises();
+    }, []);
+
+  // useEffect(() => {
+  //   const url = `http://localhost:5050/stats/${currentUser}`;
+
+  //   axios.get(url)
+  //     .then(response => {
+  //       setData(response.data.stats);
+  //     })
+  //     .catch(error => {
+  //       console.error('There was an error fetching the data!', error);
+  //     });
+  // }, [currentUser]);
 
   const currentUserData = data.find(item => item.username === currentUser);
 
