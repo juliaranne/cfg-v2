@@ -8,21 +8,18 @@ type Exercise {
     totalDuration: Int
 }
 
-type WeeklyStats {
-    exercises: [Exercise]
-}
-
-type Results {
-    results: Stats
-    success: Boolean
-}
-
 type Stats {
     username: String
     exercises: [Exercise]
 }
 
+type Results {
+    results: Stats
+    success: Boolean!
+    error: String
+}
+
 type Query {
-    stats_by_week(start: String!, end: String!, username: String!): WeeklyStats
+    weekly_stats(start: String!, end: String!, username: String!): Results
     stats(username: String!): Results
 }
