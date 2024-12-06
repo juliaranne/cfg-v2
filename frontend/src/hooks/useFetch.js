@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { useEffect, useState, useCallback } from 'react';
 
 const useFetch = (query) => {
