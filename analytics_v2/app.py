@@ -87,7 +87,10 @@ def resolve_stats(*_, username):
         }
 
     except Exception as e:
-        return "An internal error occurred"
+        return {
+            "error": "An internal error occurred",
+            "success": False
+        }
 
 @query.field("weekly_stats")
 def resolve_weekly_stats(*_, start, end, username):
@@ -137,7 +140,10 @@ def resolve_weekly_stats(*_, start, end, username):
             "success": True
         }
     except Exception as e:
-        return "An internal error occurred"
+        return {
+            "error": "An internal error occurred",
+            "success": False
+        }
 
 # The following needs to come after all resolver functions
 schema = make_executable_schema(type_defs, query)
