@@ -68,7 +68,7 @@ def stats():
 
 @app.route('/stats/<username>', methods=['GET'])
 def user_stats(username):
-    if not isinstance(username, str) or not username.isalnum():
+    if not isinstance(username, str):
         return jsonify(error="Invalid username"), 400
 
     pipeline = [
@@ -114,7 +114,7 @@ def weekly_user_stats():
     start_date_str = request.args.get('start')
     end_date_str = request.args.get('end')
 
-    if not isinstance(username, str) or not username.isalnum():
+    if not isinstance(username, str):
         return jsonify(error="Invalid username"), 400
 
     date_format = "%Y-%m-%d"
