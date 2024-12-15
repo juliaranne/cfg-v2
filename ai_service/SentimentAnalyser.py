@@ -23,15 +23,28 @@ def analyze_description(sentence):
     else:
         return 'Neutral'
 
+def get_motivational_message(sentiment):
+    if sentiment == 'Positive':
+        return "Nice work on an amazing workout!"
+    elif sentiment == 'Negative':
+        return "Next time will be better!"
+    else:
+        return "Don't lose your spark!"
 
 def generate_motivational_message(sentiment):
     if sentiment == 'Positive':
-        prompt = "You're doing great with your workout! Keep it up! Here's a motivational quote to fuel your progress: "
+        prompt = "Generate a short motivational message to congratulate someone who is happy with their workout. For example: 'Great job on the workout! Keep up the amazing work!'"
     elif sentiment == 'Negative':
-        prompt = "You're feeling down about your workout. Don't give up! Here's a motivational quote to keep you going: "
-    else:
-        prompt = "You're staying steady with your workout. Let's keep that momentum! Here's a quote to keep you on track: "
+        prompt = "Generate a short motivational message to encourage someone who is feeling down about their workout. For example: 'Don't give up! Every workout gets you closer to your goals. You've got this!'"
+    else:  # Neutral
+        prompt = "Generate a short motivational message to keep someone motivated who is feeling neutral about their workout. For example: 'Good job today! Stay consistent, and you'll see great results!'"
 
-    generated_text = generator(prompt, max_length=100, num_return_sequences=1)[0][
-        'generated_text']  #using gpt-2 to generate a motivational message
+    # Generate the message
+    generated_text = generator(prompt, max_length=100, num_return_sequences=1)[0]['generated_text']
+
+    # Remove the prompt from the generated text
+    if generated_text.startswith(prompt):
+        generated_text = generated_text[len(prompt):].strip()
+
     return generated_text
+

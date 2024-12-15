@@ -1,4 +1,4 @@
-from SentimentAnalyser import analyze_description
+from SentimentAnalyser import analyze_description, get_motivational_message
 import unittest
 from unittest.mock import MagicMock
 import nltk
@@ -29,7 +29,7 @@ class TestAnalyzeDescription(unittest.TestCase):
     def tearDown(self):
         self.patcher.stop()
 
-    def test_positive_sentiment_returns_posititve(self):
+    def test_positive_sentiment_returns_positive(self):
         self.mock_sia.polarity_scores.return_value = {'compound': 0.8}
 
         result = analyze_description("I love this new phone!")
@@ -59,6 +59,22 @@ class TestAnalyzeDescription(unittest.TestCase):
         result = analyze_description("This is not bad.")
         self.assertEqual(result, 'Neutral')
 
+class TestGetMotivationalMessage(unittest.TestCase):
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_positive_sentiment_returns_positive_message(self):
+        sentiment = 'Positive'
+        expected_message = "Nice work on an amazing workout!"
+        result = get_motivational_message(sentiment)
+        self.assertEqual(result, expected_message)
+
+    def test_negative_sentiment_returns_negative_message(self):
+        sentiment = 'Negative'
+        expected_message = "Next time will be better!"
+        result = get_motivational_message(sentiment)
+        self.assertEqual(result, expected_message)
+
+    def test_neutral_sentiment_returns_neutral_message(self):
+        sentiment = 'Neutral'
+        expected_message = "Don't lose your spark!"
+        result = get_motivational_message(sentiment)
+        self.assertEqual(result, expected_message)
