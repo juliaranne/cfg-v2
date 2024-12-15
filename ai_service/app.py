@@ -12,7 +12,7 @@ def home():
 def get_sentiment_message():
     description = request.json
     sentiment = SentimentAnalyser.analyze_description(description["sentence"])
-    motivational_message = SentimentAnalyser.generate_motivational_message(sentiment)
+    motivational_message = SentimentAnalyser.get_motivational_message(sentiment)
     return jsonify({"sentiment": sentiment}, {"motivational_message": motivational_message})
 
 
