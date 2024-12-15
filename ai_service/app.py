@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request
-from SentimentAnalyser import analyze_description
+import SentimentAnalyser
 
 app = Flask(__name__)
 
@@ -11,8 +11,9 @@ def home():
 @app.route('/get_sentiment_message', methods=['POST'])
 def get_sentiment_message():
     description = request.json
-    sentiment = analyze_description(description["sentence"])
-    return jsonify({"sentiment": sentiment})
+    sentiment = SentimentAnalyser.analyze_description(description["sentence"])
+    motivational_message = SentimentAnalyser.generate_motivational_message(sentiment)
+    return jsonify({"sentiment": sentiment}, {"motivational_message": motivational_message})
 
 
 
