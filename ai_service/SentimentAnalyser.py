@@ -1,7 +1,7 @@
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 import spacy
-from transformers import pipeline
+# from transformers import pipeline
 
 # Download NLTK resources
 nltk.download('punkt_tab')
