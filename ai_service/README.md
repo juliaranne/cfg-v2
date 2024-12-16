@@ -17,7 +17,7 @@ A python app to utilise AI, such as LLMs, to assist in the frontend.
 - `docker-compose up analytics_v2 -d`
 </details>
 
-You may then access at http://localhost:5051/ 
+You may then access at http://localhost:5052/ 
 
 ## Development Notes 
 * This app will be running on 5052, so take note to specify this during development 
