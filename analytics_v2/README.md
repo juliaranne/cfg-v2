@@ -50,4 +50,39 @@ You may then access at http://localhost:5051/
 ## Development Notes 
 * This app will be running on 5051, so take note to specify this during development 
 
+## GraphQL query ExplorerGraphiQL
+Access at http://localhost:5051/graphql
+
+## Example queries
+```
+query {
+	stats(username: <username>) {
+    	results {
+            exercises {
+                exerciseType
+                description
+                totalDuration
+        }
+        username
+      }
+  	}
+  }
+```
+
+```
+query {
+	weekly_stats(start: "2024-12-04", end: "2024-12-09", username: <username>) {
+		results {
+			exercises {
+                description
+                exerciseType
+                totalDuration
+            }
+        }
+    }
+}
+```
+
+
+
 [//]: # (Todo add these instructions  )
