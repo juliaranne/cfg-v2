@@ -76,6 +76,7 @@ query {
 			exercises {
                 description
                 exerciseType
+                totalDuration
             }
         }
     }
