@@ -13,8 +13,8 @@ A python app to utilise AI, such as LLMs, to assist in the frontend.
 <details>
     <summary>Using docker </summary>
 
-- `docker-compose build analytics_v2`
-- `docker-compose up analytics_v2 -d`
+- `docker-compose build ai_service`
+- `docker-compose up ai_service -d`
 </details>
 
 You may then access at http://localhost:5052/ 
