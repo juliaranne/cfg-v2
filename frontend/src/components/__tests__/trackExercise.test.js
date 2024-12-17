@@ -3,7 +3,7 @@ import TrackExercise from '../trackExercise';
 import { trackExercise } from '../../api';
 
 jest.mock('../../api', () => ({
-    trackExercise: jest.fn(),
+  trackExercise: jest.fn(),
 }));
 
 beforeEach(() => {
@@ -12,11 +12,11 @@ beforeEach(() => {
 
 test('should successfully save an exercise', async () => {
     trackExercise.mockResolvedValue(Promise.resolve(
-        {
-            response: {
-                data: {"message":"Exercise added!"}
-            }
+      {
+        response: {
+          data: {"message":"Exercise added!"}
         }
+      }
     ));
 
     render(<TrackExercise />);
