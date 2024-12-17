@@ -10,6 +10,7 @@ import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import OtherIcon from '@material-ui/icons/HelpOutline';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
 
 const TrackExercise = ({ currentUser }) => {
   const [state, setState] = useState({
@@ -18,9 +19,13 @@ const TrackExercise = ({ currentUser }) => {
     duration: 0,
     date: new Date(),
   });
-  const [message, setMessage] = useState(''); 
+  const [message, setMessage] = useState('');
 
-  const onSubmit = async (e) => {
+  const handleDescriptionChange = (e) => {
+    setState({ ...state, description: e.target.value });
+  };
+
+  const handleTrackExercise = async (e) => {
     e.preventDefault();
 
     const dataToSubmit = {
@@ -47,19 +52,41 @@ const TrackExercise = ({ currentUser }) => {
     }
   };
 
+  const showDescriptionAlert = () => {
+    if (state.description) {
+      window.alert(`You entered: "${state.description}"`);
+        axios.post('http://127.0.0.1:5052/get_sentiment_message', {
+            sentence: state.description
+        })
+            .then(function(response) {
+                const motivationalObject = response.data.find(item => item.motivational_message);
+                if (motivationalObject) {
+                    // Show the motivational message in the alert
+                    alert(motivationalObject.motivational_message);
+                }
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+
+
+    } else {
+      window.alert('Please enter a description for your activity.');
+    }
+  };
+
   return (
     <div>
-      <h3>Track exercise</h3>
-      <Form onSubmit={onSubmit} style={{ maxWidth: '400px', margin: 'auto' }}>
-        
-        <Form.Group controlId="formDate" className="form-margin">
-          <Form.Label>Date:</Form.Label>
-          <DatePicker 
-            selected={state.date}
-            onChange={(date) => setState({ ...state, date })}
-            dateFormat="yyyy/MM/dd"
-          />
-        </Form.Group>
+      <h3>Track exercise HEYO</h3>
+        <Form onSubmit={handleTrackExercise} style={{ maxWidth: '400px', margin: 'auto' }}>
+            <Form.Group controlId="formDate" className="form-margin">
+                <Form.Label>Date:</Form.Label>
+                <DatePicker
+                    selected={state.date}
+                    onChange={(date) => setState({ ...state, date })}
+                    dateFormat="yyyy/MM/dd"
+                />
+            </Form.Group>
         <div style={{ marginBottom: '20px' }}>
           <IconButton  id="runningButton"  color={state.exerciseType === 'Running' ? "primary" : "default"} onClick={() => setState({ ...state, exerciseType: 'Running' })}>
             <DirectionsRunIcon fontSize="large" />
@@ -74,33 +101,36 @@ const TrackExercise = ({ currentUser }) => {
             <FitnessCenterIcon fontSize="large" />
           </IconButton>
           <IconButton id="otherButton" color={state.exerciseType === 'Other' ? "primary" : "default"} onClick={() => setState({ ...state, exerciseType: 'Other' })}>
-            <OtherIcon fontSize="large" /> 
+            <OtherIcon fontSize="large" />
           </IconButton>
         </div>
-        <Form.Group controlId="description" style={{ marginBottom: '20px' }}>
-          <Form.Label>Description:</Form.Label>
-          <Form.Control 
-            as="textarea"
-            rows={3}
-            required 
-            value={state.description} 
-            onChange={(e) => setState({ ...state, description: e.target.value })}
-          />
-        </Form.Group>
-        <Form.Group controlId="duration" style={{ marginBottom: '40px' }}>
-          <Form.Label>Duration (in minutes):</Form.Label>
-          <Form.Control 
-            type="number" 
-            required 
-            value={state.duration} 
-            onChange={(e) => setState({ ...state, duration: e.target.value })}
-          />
-        </Form.Group>
-        <Button variant="success" type="submit">
-          Save activity
-        </Button>
-      </Form>
-      {message && <p style={{color: 'green'}}>{message}</p>}
+            <Form.Group controlId="description" style={{ marginBottom: '20px' }}>
+                <Form.Label>Description:</Form.Label>
+                <Form.Control
+                    as="textarea"
+                    rows={3}
+                    required
+                    value={state.description}
+                    onChange={handleDescriptionChange}
+                />
+            </Form.Group>
+            <Form.Group controlId="duration" style={{ marginBottom: '40px' }}>
+                <Form.Label>Duration (in minutes):</Form.Label>
+                <Form.Control
+                    type="number"
+                    required
+                    value={state.duration}
+                    onChange={(e) => setState({ ...state, duration: e.target.value })}
+                />
+            </Form.Group>
+            <Button variant="success" type="submit">
+                Save activity
+            </Button>
+            <Button variant="info" onClick={showDescriptionAlert}>
+                Show Description
+            </Button>
+        </Form>
+        {message && <p style={{ color: 'green' }}>{message}</p>}
     </div>
   );
 };
