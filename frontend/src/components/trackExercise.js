@@ -52,32 +52,28 @@ const TrackExercise = ({ currentUser }) => {
     }
   };
 
-  const showDescriptionAlert = () => {
-    if (state.description) {
-      window.alert(`You entered: "${state.description}"`);
-        axios.post('http://127.0.0.1:5052/get_sentiment_message', {
-            sentence: state.description
-        })
-            .then(function(response) {
-                const motivationalObject = response.data.find(item => item.motivational_message);
-                if (motivationalObject) {
-                    // Show the motivational message in the alert
-                    alert(motivationalObject.motivational_message);
-                }
+    const showDescriptionAlert = () => {
+        if (state.description) {
+            axios.post('http://127.0.0.1:5052/get_sentiment_message', {
+                sentence: state.description
             })
-            .catch(function(error) {
-                console.error(error);
-            });
-
-
-    } else {
-      window.alert('Please enter a description for your activity.');
-    }
-  };
-
+                .then(function(response) {
+                    const motivationalObject = response.data.find(item => item.motivational_message);
+                    if (motivationalObject) {
+                        // Show the motivational message in the alert
+                        alert(motivationalObject.motivational_message);
+                    }
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        } else {
+            window.alert('Please enter a description for your activity.');
+        }
+    };
   return (
     <div>
-      <h3>Track exercise HEYO</h3>
+      <h3>Track exercise</h3>
         <Form onSubmit={handleTrackExercise} style={{ maxWidth: '400px', margin: 'auto' }}>
             <Form.Group controlId="formDate" className="form-margin">
                 <Form.Label>Date:</Form.Label>
@@ -123,11 +119,8 @@ const TrackExercise = ({ currentUser }) => {
                     onChange={(e) => setState({ ...state, duration: e.target.value })}
                 />
             </Form.Group>
-            <Button variant="success" type="submit">
+            <Button variant="success" type="submit" onClick={showDescriptionAlert}>
                 Save activity
-            </Button>
-            <Button variant="info" onClick={showDescriptionAlert}>
-                Show Description
             </Button>
         </Form>
         {message && <p style={{ color: 'green' }}>{message}</p>}
