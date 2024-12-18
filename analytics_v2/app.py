@@ -53,7 +53,6 @@ def resolve_stats(*_, username):
                 "_id": {
                     "username": "$username",
                     "exerciseType": "$exerciseType",
-                    "description": "$description"
                 },
                 "totalDuration": {"$sum": "$duration"}
             }
