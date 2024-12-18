@@ -1,4 +1,4 @@
-import {fireEvent, render, screen, waitFor, act} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Statistics from '../statistics';
 import * as useFetch from '../../hooks/useFetch';
 
@@ -31,11 +31,26 @@ beforeEach(() => {
   jest.clearAllMocks();
 })
 
-test('should display list of exercises', () => {
-  render(<Statistics />)
+test('should display title with username', () => {
+  render(<Statistics currentUser="Julia" />)
 
-  const entries = screen.getByTestId('journalList').childNodes;
-  expect(entries.length).toBe(2);
+  expect(screen.getByText('Well done, Julia! This is your overall effort:')).toBeInTheDocument()
 })
+
+test('should display list of stats', () => {
+    render(<Statistics currentUser="Julia" />)
+  
+    expect(screen.getByTestId('stats').childNodes.length).toBe(4)
+})
+
+test('should show error if returned', () => {
+    jest
+      .spyOn(useFetch, 'default')
+      .mockImplementation(() => ({error: 'Internal server error'}));
+  
+    render(<Statistics />)
+  
+    expect(screen.getByText(/Unable to load user statistics/)).toBeInTheDocument();
+  })
 
 

@@ -23,7 +23,7 @@ const Statistics = ({ currentUser }) => {
   const userData = data?.stats?.results;
 
   return (
-    <div className="stats-container">
+    <div data-testid="stats" className="stats-container">
       <h4>Well done, {currentUser}! This is your overall effort:</h4>
       {userData ? (
         userData.exercises.map((item, index) => (
