@@ -1,4 +1,4 @@
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import {fireEvent, render, screen, waitFor, act} from '@testing-library/react';
 import Journal from '../journal';
 import * as useFetch from '../../hooks/useFetch';
 
@@ -56,14 +56,6 @@ test('should be able to navigate backwards by week', () => {
   jest
     .spyOn(useFetch, 'default')
     .mockImplementation(() => ({data:{weekly_stats:{results:{exercises:[{
-      description: "Long bike ride",
-      exerciseType: "Cycling",
-      totalDuration: 120
-    },{
-      description: "Park run personal best",
-      exerciseType: "Running",
-      totalDuration: 22
-    },{
       description: "20 laps triathlon training",
       exerciseType: "Swimming",
       totalDuration: 45
@@ -74,5 +66,16 @@ render(<Journal />)
 fireEvent.click(screen.getByText('← Previous'))
 
 const entries = screen.getByTestId('journalList').childNodes;
-expect(entries.length).toBe(3);
+expect(entries.length).toBe(1);
+expect(screen.getByText(/20 laps triathlon training/)).toBeInTheDocument();
+});
+
+test('should show error if returned', () => {
+  jest
+    .spyOn(useFetch, 'default')
+    .mockImplementation(() => ({error: 'Internal server error'}));
+
+  render(<Journal />)
+
+  expect(screen.getByText(/Unable to load weekly stats/)).toBeInTheDocument();
 })
