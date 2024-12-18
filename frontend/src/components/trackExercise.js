@@ -44,6 +44,7 @@ const TrackExercise = ({ currentUser }) => {
       
     } catch (error) {
       console.error('There was an error logging your activity!', error);
+      setMessage('Sorry, there was an error logging your activity');
     }
   };
 

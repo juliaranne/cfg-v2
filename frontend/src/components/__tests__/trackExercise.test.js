@@ -64,6 +64,6 @@ test('should display error for unsuccessful response', async () => {
     // Assert
     expect(trackExercise).toBeCalledTimes(1)
     await waitFor(() => {
-        expect(screen.queryByText('There was an error logging your activity!')).not.toBeInTheDocument();   
+        expect(screen.getByText('Sorry, there was an error logging your activity')).toBeInTheDocument();   
     });      
 })
