@@ -13,49 +13,102 @@ test('should render fitness app login page', () => {
   expect(siteTitle).toBeInTheDocument();
 });
 
-test('should log existing user in', async () => {
-  axios.post.mockResolvedValue({
-    data: 'User authenticated',
-    status: 200
-  })
-
-  render(<App />);
-
-  fireEvent.change(screen.getByLabelText('Username'), {
-    target: { value: 'cfg_student' },
-  });
-  fireEvent.change(screen.getByLabelText('Password'), {
-    target: { value: '12345678' },
-  });
+describe('login', () => {
+  test('should log existing user in', async () => {
+    axios.post.mockResolvedValue({
+      data: 'User authenticated',
+      status: 200
+    })
   
-  fireEvent.click(screen.getByText('Login'));
+    render(<App />);
   
-  await waitFor(() => {
-    expect(screen.getByText('Track exercise')).toBeInTheDocument();
-  })
-});
-
-test('should sign in new user', async () => {
-  axios.post.mockResolvedValue({
-    data: "User registered successfully!",
-    status: 200
-  })
-
-  render(<App />);
-
-  fireEvent.click(screen.getByText('Sign up'));
-  expect(screen.getByText('Already have an account?')).toBeInTheDocument()
-
-  fireEvent.change(screen.getByLabelText('Username'), {
-    target: { value: 'new_cfg_student' },
+    fireEvent.change(screen.getByLabelText('Username'), {
+      target: { value: 'cfg_student' },
+    });
+    fireEvent.change(screen.getByLabelText('Password'), {
+      target: { value: '12345678' },
+    });
+    
+    fireEvent.click(screen.getByText('Login'));
+    
+    await waitFor(() => {
+      expect(screen.getByText('Track exercise')).toBeInTheDocument();
+    })
   });
-  fireEvent.change(screen.getByLabelText('Password'), {
-    target: { value: '12345678' },
+
+  test('should show error if user not recognised', async () => {
+    axios.post.mockRejectedValue({
+      data: 'Invalid credentials',
+      status: 401
+    })
+  
+    render(<App />);
+  
+    fireEvent.change(screen.getByLabelText('Username'), {
+      target: { value: 'cfg_student' },
+    });
+    fireEvent.change(screen.getByLabelText('Password'), {
+      target: { value: '12345678' },
+    });
+    
+    fireEvent.click(screen.getByText('Login'));
+    
+    await waitFor(() => {
+      expect(screen.getByText('Failed to login')).toBeInTheDocument();
+    })
   });
+})
+
+describe('sign up', () => {
+  test('should sign in new user', async () => {
+    axios.post.mockResolvedValue({
+      data: "User registered successfully!",
+      status: 200
+    })
   
-  fireEvent.click(screen.getByText('Signup'));
+    render(<App />);
   
-  await waitFor(() => {
-    expect(screen.getByText('Track exercise')).toBeInTheDocument();
-  })
-});
+    fireEvent.click(screen.getByText('Sign up'));
+    expect(screen.getByText('Already have an account?')).toBeInTheDocument()
+  
+    fireEvent.change(screen.getByLabelText('Username'), {
+      target: { value: 'new_cfg_student' },
+    });
+    fireEvent.change(screen.getByLabelText('Password'), {
+      target: { value: '12345678' },
+    });
+    
+    fireEvent.click(screen.getByText('Signup'));
+    
+    await waitFor(() => {
+      expect(screen.getByText('Track exercise')).toBeInTheDocument();
+    })
+  });
+
+  test('should not register a user that already exists', async () => {
+    axios.post.mockRejectedValue({
+      response: {
+        data: "User already exists - please log in",
+        status: 400
+      }
+    })
+  
+    render(<App />);
+  
+    fireEvent.click(screen.getByText('Sign up'));
+    expect(screen.getByText('Already have an account?')).toBeInTheDocument()
+  
+    fireEvent.change(screen.getByLabelText('Username'), {
+      target: { value: 'new_cfg_student' },
+    });
+    fireEvent.change(screen.getByLabelText('Password'), {
+      target: { value: '12345678' },
+    });
+    
+    fireEvent.click(screen.getByText('Signup'));
+    
+    await waitFor(() => {
+      expect(screen.getByText(/User already exists - please log in/)).toBeInTheDocument();
+    })
+  });
+})
