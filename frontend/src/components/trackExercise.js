@@ -3,6 +3,7 @@ import {Button, Form} from 'react-bootstrap';
 import {trackExercise} from '../api';
 import {getSentimentMessage} from '../api';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './sentiment_message.css';
 import IconButton from '@material-ui/core/IconButton';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import BikeIcon from '@material-ui/icons/DirectionsBike';
@@ -20,10 +21,7 @@ const TrackExercise = ({currentUser}) => {
         date: new Date(),
     });
     const [message, setMessage] = useState('');
-
-    const handleDescriptionChange = (e) => {
-        setState({...state, description: e.target.value});
-    };
+    const [sentiment, setSentiment] = useState('');
 
     const handleTrackExercise = async (e) => {
         e.preventDefault();
@@ -36,6 +34,7 @@ const TrackExercise = ({currentUser}) => {
         try {
             const response = await trackExercise(dataToSubmit);
             console.log(response.data);
+            showDescriptionAlert(state.description);
 
             setState({
                 exerciseType: '',
@@ -57,10 +56,9 @@ const TrackExercise = ({currentUser}) => {
         if (state.description) {
             const message = await getSentimentMessage(state.description);
             if (message) {
-                window.alert(message);
+                setSentiment(message);
+                setTimeout(() => setSentiment(''), 5000);
             }
-        } else {
-            window.alert('Please enter a description for your activity.');
         }
     };
 
@@ -105,7 +103,7 @@ const TrackExercise = ({currentUser}) => {
                         rows={3}
                         required
                         value={state.description}
-                        onChange={handleDescriptionChange}
+                        onChange={(e) => setState({...state, description: e.target.value})}
                     />
                 </Form.Group>
                 <Form.Group controlId="duration" style={{marginBottom: '40px'}}>
@@ -114,14 +112,16 @@ const TrackExercise = ({currentUser}) => {
                         type="number"
                         required
                         value={state.duration}
+                        min={1}
                         onChange={(e) => setState({...state, duration: e.target.value})}
                     />
                 </Form.Group>
-                <Button variant="success" type="submit" onClick={showDescriptionAlert}>
+                <Button variant="success" type="submit">
                     Save activity
                 </Button>
             </Form>
             {message && <p style={{color: 'green'}}>{message}</p>}
+            <div className={`sentiment ${sentiment ? ' active' : '' }`} aria-live="polite" id="sentimentMessage">{sentiment && <p className="sentiment__message">{sentiment}</p>}</div>
         </div>
     );
 };

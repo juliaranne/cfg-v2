@@ -1,0 +1,25 @@
+.sentiment {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    left: 0;
+    z-index: -1;
+}
+
+.sentiment.active {
+    z-index: 1;
+}
+
+.sentiment__message {
+    bottom: 100px;
+    position: absolute;
+    transition: all 1s ease;
+    opacity: 0;
+    background-color: green;
+    transition: all 1s ease;
+}
+
+.sentiment.active .sentiment__message {
+    bottom: 150px;
+    opacity: 1;
+}
