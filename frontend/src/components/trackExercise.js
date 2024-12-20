@@ -121,7 +121,7 @@ const TrackExercise = ({currentUser}) => {
                 </Button>
             </Form>
             {message && <p style={{color: 'green'}}>{message}</p>}
-            <div className={`sentiment ${sentiment ? ' active' : '' }`} aria-live="polite" id="sentimentMessage">{sentiment && <p className="sentiment__message">{sentiment}</p>}</div>
+            <div className={`sentiment active ${sentiment ? 'active' : ''}`} aria-live="polite" id="sentimentMessage"><p className="sentiment__message">Test goes here</p></div>
         </div>
     );
 };
