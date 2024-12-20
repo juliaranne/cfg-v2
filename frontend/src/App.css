@@ -124,3 +124,15 @@ input#duration {
 .signup {
   margin: 20px;
 }
+
+.response-message {
+  margin: 10px 0;
+  color: green;
+  min-height: 24px;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.response-message.fade-in {
+  opacity: 1;
+}
