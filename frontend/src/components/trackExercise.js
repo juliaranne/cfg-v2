@@ -11,6 +11,7 @@ import PoolIcon from '@material-ui/icons/Pool';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import OtherIcon from '@material-ui/icons/HelpOutline';
 import DatePicker from 'react-datepicker';
+import AlertMessage from './alert_message';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const TrackExercise = ({currentUser}) => {
@@ -121,7 +122,7 @@ const TrackExercise = ({currentUser}) => {
                 </Button>
             </Form>
             {message && <p style={{color: 'green'}}>{message}</p>}
-            <div className={`sentiment active ${sentiment ? 'active' : ''}`} aria-live="polite" id="sentimentMessage"><p className="sentiment__message">Test goes here</p></div>
+            <AlertMessage message={sentiment} />
         </div>
     );
 };

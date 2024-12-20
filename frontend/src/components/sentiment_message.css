@@ -1,10 +1,10 @@
 .sentiment {
     position: fixed;
-    bottom: 150px;
+    bottom: -10px;
     width: 100%;
     left: 0;
     transition: all 1s ease;
-    /* opacity: 0; */
+    opacity: 0;
 }
 
 .sentiment__message {
