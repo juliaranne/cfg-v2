@@ -39,7 +39,6 @@ test('should successfully save an exercise', async () => {
     });
     fireEvent.click(submitBtn);
 
-    // Assert
     expect(trackExercise).toBeCalledTimes(1)
     await waitFor(() => {
         expect(screen.getByText('Activity logged successfully! Well done!')).toBeInTheDocument();   
