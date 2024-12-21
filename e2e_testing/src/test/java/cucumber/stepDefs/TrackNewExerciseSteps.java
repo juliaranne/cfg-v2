@@ -4,7 +4,10 @@ import cucumber.util.Context;
 import cucumber.webHelpers.TrackExerciseActions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TrackNewExerciseSteps {
 
@@ -25,6 +28,7 @@ public class TrackNewExerciseSteps {
         trackExerciseActions.populateField("description", exerciseDescription);
         trackExerciseActions.populateField("duration", exerciseDuration);
         trackExerciseActions.clickSubmit();
+        trackExerciseActions.assertAnyMotivationalAlertShows();
         trackExerciseActions.assertMessageAppears("Activity logged successfully! Well done!");
     }
 

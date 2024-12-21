@@ -54,6 +54,15 @@ services:
     networks:
       - app-network
 
+  ai_service:
+    build:
+      context: ./ai_service
+      dockerfile: Dockerfile
+    ports:
+      - "5052:5052"
+    networks:
+      - app-network
+
   authservice:
     build:
       context: ./authservice
