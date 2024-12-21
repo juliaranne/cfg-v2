@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-RUN pip install --no-cache-dir --upgrade pip setuptools wheel
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel # above is needd to ensure latest versions of key tools and improve the package installation.
 
 WORKDIR /app
 
