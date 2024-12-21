@@ -19,6 +19,9 @@ test('should successfully save an exercise', async () => {
         }
       }
     ));
+    getSentimentMessage.mockResolvedValue(Promise.resolve('Well done'));
+
+    const alertMock = jest.spyOn(window,'alert').mockImplementation();
 
     render(<TrackExercise />);
 
@@ -40,11 +43,15 @@ test('should successfully save an exercise', async () => {
     expect(trackExercise).toBeCalledTimes(1)
     await waitFor(() => {
         expect(screen.getByText('Activity logged successfully! Well done!')).toBeInTheDocument();   
-    });      
+    });
+    expect(alertMock).toHaveBeenCalledTimes(1)      
 })
 
 test('should display error for unsuccessful response', async () => {
     trackExercise.mockRejectedValue(new Error('Internal server error'));
+    getSentimentMessage.mockResolvedValue(Promise.resolve('Well done'));
+
+    const alertMock = jest.spyOn(window,'alert').mockImplementation();
 
     render(<TrackExercise />);
 
@@ -62,9 +69,9 @@ test('should display error for unsuccessful response', async () => {
     });
     fireEvent.click(submitBtn);
 
-    // Assert
     expect(trackExercise).toBeCalledTimes(1)
     await waitFor(() => {
-        expect(screen.getByText('Sorry, there was an error logging your activity')).toBeInTheDocument();   
-    });      
+        expect(screen.getByText(/Sorry, there was an error logging your activity/)).toBeInTheDocument();   
+    });
+    expect(alertMock).toHaveBeenCalledTimes(1)      
 })
