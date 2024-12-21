@@ -77,7 +77,7 @@ const TrackExercise = ({currentUser}) => {
                     />
                 </Form.Group>
                 <div style={{marginBottom: '20px'}}>
-                    <IconButton id="runningButton" color={state.exerciseType === 'Running' ? "primary" : "default"}
+                    <IconButton data-testid="RunningBtn" id="runningButton" color={state.exerciseType === 'Running' ? "primary" : "default"}
                                 onClick={() => setState({...state, exerciseType: 'Running'})}>
                         <DirectionsRunIcon fontSize="large"/>
                     </IconButton>
