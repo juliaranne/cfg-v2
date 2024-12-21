@@ -1,9 +1,10 @@
 import {render, screen, fireEvent, waitFor} from '@testing-library/react';
 import TrackExercise from '../trackExercise';
-import { trackExercise } from '../../api';
+import { trackExercise, getSentimentMessage } from '../../api';
 
 jest.mock('../../api', () => ({
   trackExercise: jest.fn(),
+  getSentimentMessage: jest.fn()
 }));
 
 beforeEach(() => {
