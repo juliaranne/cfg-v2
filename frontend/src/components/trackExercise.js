@@ -58,7 +58,6 @@ const TrackExercise = ({currentUser}) => {
             const message = await getSentimentMessage(state.description);
             if (message) {
                 setSentiment(message);
-                setTimeout(() => setSentiment(''), 5000);
             }
         }
     };

@@ -1,23 +1,33 @@
 .sentiment {
     position: fixed;
-    bottom: -10px;
+    top: -10px;
     width: 100%;
     left: 0;
     transition: all 1s ease;
     opacity: 0;
 }
 
-.sentiment__message {
+.sentiment__wrapper {
     margin: 0 auto;
     max-width: 600px;
-    background-color: #EBFAFD;
-    padding: 5px;
-    border: 1px solid #3480DB;
+    background-color: #feecf4;
+    padding: 5px 10px;
+    border: 1px solid #F54996;
     border-radius: 3px;
     text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sentiment__wrapper button {
+    background-color: transparent;
+}
+
+.sentiment__message {
+    margin: 0;
 }
 
 .sentiment.active {
-    bottom: 150px;
+    top: 80px;
     opacity: 1;
 }
