@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 
+// const AlertMessageWrapper = ({message}) => {
+
+// }
+
 const AlertMessage = ({message}) => {
     const [show, setShow] = useState(false);
 
@@ -9,8 +13,9 @@ const AlertMessage = ({message}) => {
     }
 
     useEffect(() => {
-        setShow(!!message)
-    },[message])
+        setTimeout(() => setShow(true), 100);
+        setTimeout(() => dismissAlert(), 4000);
+    },[])
 
     return (
         <div className={`sentiment ${show ? 'active' : ''}`} aria-live="polite" id="sentimentMessage">

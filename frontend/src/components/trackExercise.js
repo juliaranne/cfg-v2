@@ -54,12 +54,10 @@ const TrackExercise = ({currentUser}) => {
         }
     };
 
-
     const showDescriptionAlert = async () => {
         if (state.description) {
             const message = await getSentimentMessage(state.description);
             if (message) {
-                // triggerAlert(message);
                 const alertRoot = ReactDOM.createRoot(document.getElementById('alertMessage'));
                 alertRoot.render(
                     <AlertMessage message={message} />
@@ -127,7 +125,6 @@ const TrackExercise = ({currentUser}) => {
                 </Button>
             </Form>
             <p className={`${message ? 'fade-in' : ''} response-message`}>{message}</p>
-            {/* <AlertMessage message={sentiment} /> */}
             <div id="alertMessage"></div>
         </div>
     );

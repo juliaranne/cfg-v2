@@ -1,10 +1,13 @@
 .sentiment {
-    position: fixed;
-    top: -10px;
-    width: 100%;
-    left: 0;
-    transition: all 1s ease;
-    opacity: 0;
+  transition: all 0.3s linear;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transform: translateY(-100%);
+  padding-top: 70px;
+  display: flex;
 }
 
 .sentiment__wrapper {
@@ -17,6 +20,7 @@
     text-align: left;
     display: flex;
     justify-content: space-between;
+    flex-grow: 1;
 }
 
 .sentiment__wrapper button {
@@ -28,6 +32,5 @@
 }
 
 .sentiment.active {
-    top: 80px;
-    opacity: 1;
+    transform: translateY(0);
 }
