@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import ReactDOM from 'react-dom/client';
 import {Button, Form} from 'react-bootstrap';
 import {trackExercise} from '../api';
 import {getSentimentMessage} from '../api';
@@ -13,6 +14,7 @@ import OtherIcon from '@material-ui/icons/HelpOutline';
 import DatePicker from 'react-datepicker';
 import AlertMessage from './alert_message';
 import 'react-datepicker/dist/react-datepicker.css';
+
 
 const TrackExercise = ({currentUser}) => {
     const [state, setState] = useState({
@@ -57,7 +59,11 @@ const TrackExercise = ({currentUser}) => {
         if (state.description) {
             const message = await getSentimentMessage(state.description);
             if (message) {
-                setSentiment(message);
+                // triggerAlert(message);
+                const alertRoot = ReactDOM.createRoot(document.getElementById('alertMessage'));
+                alertRoot.render(
+                    <AlertMessage message={message} />
+                )
             }
         }
     };
@@ -121,7 +127,8 @@ const TrackExercise = ({currentUser}) => {
                 </Button>
             </Form>
             <p className={`${message ? 'fade-in' : ''} response-message`}>{message}</p>
-            <AlertMessage message={sentiment} />
+            {/* <AlertMessage message={sentiment} /> */}
+            <div id="alertMessage"></div>
         </div>
     );
 };
