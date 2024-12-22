@@ -46,7 +46,7 @@ const TrackExercise = ({currentUser}) => {
             });
 
             setMessage('Activity logged successfully! Well done!');
-            setTimeout(() => setMessage(''), 2000);
+            setTimeout(() => setMessage(''), 5000);
 
         } catch (error) {
             console.error('There was an error logging your activity!', error);
