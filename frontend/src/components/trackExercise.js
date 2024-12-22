@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import {Button, Form} from 'react-bootstrap';
-import {trackExercise} from '../api';
-import {getSentimentMessage} from '../api';
+import {trackExercise, getSentimentMessage} from '../api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './alert_message.css';
 import IconButton from '@material-ui/core/IconButton';
