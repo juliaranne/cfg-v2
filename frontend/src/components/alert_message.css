@@ -1,5 +1,5 @@
 .sentiment {
-  transition: all 0.3s linear;
+  transition: all 0.3s ease-in-out;
   width: 100%;
   position: fixed;
   top: 0;

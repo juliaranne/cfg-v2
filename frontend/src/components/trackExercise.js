@@ -54,13 +54,17 @@ const TrackExercise = ({currentUser}) => {
         }
     };
 
+    const closeAlert = (mount) => {
+        setTimeout(() => mount.unmount(), 1000);
+    } 
+
     const showDescriptionAlert = async () => {
         if (state.description) {
             const message = await getSentimentMessage(state.description);
             if (message) {
                 const alertRoot = ReactDOM.createRoot(document.getElementById('alertMessage'));
                 alertRoot.render(
-                    <AlertMessage message={message} />
+                    <AlertMessage message={message} mountEl={alertRoot} unmount={() => closeAlert(alertRoot)} />
                 )
             }
         }
