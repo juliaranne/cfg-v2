@@ -23,7 +23,6 @@ const TrackExercise = ({currentUser}) => {
         date: new Date(),
     });
     const [message, setMessage] = useState('');
-    const [sentiment, setSentiment] = useState('');
 
     const handleTrackExercise = async (e) => {
         e.preventDefault();
