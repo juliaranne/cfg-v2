@@ -8,7 +8,7 @@ const AlertMessage = ({message, handleUnmount}) => {
 
     const dismissAlert = useCallback(() => {
         setShow(false);
-        alertElRef?.current.addEventListener('transitionend', () => {
+        alertElRef?.current?.addEventListener('transitionend', () => {
             handleUnmount();
         })
     }, [handleUnmount])
