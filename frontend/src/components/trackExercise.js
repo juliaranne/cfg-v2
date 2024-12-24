@@ -52,9 +52,9 @@ const TrackExercise = ({currentUser}) => {
         }
     };
 
-    const closeAlert = (mount, activeEl) => {
+    const closeAlert = (mount, elementHasFocus) => {
         mount.unmount();
-        activeEl.focus();
+        elementHasFocus.focus();
     } 
 
     const showDescriptionAlert = async () => {
@@ -62,9 +62,9 @@ const TrackExercise = ({currentUser}) => {
             const message = await getSentimentMessage(state.description);
             if (message) {
                 const alertRoot = ReactDOM.createRoot(document.getElementById('alertMessage'));
-                const activeEl = document.activeElement;
+                const elementHasFocus = document.activeElement;
                 alertRoot.render(
-                    <AlertMessage message={message} mountEl={alertRoot} unmount={() => closeAlert(alertRoot, activeEl)} />
+                    <AlertMessage message={message} handleUnmount={() => closeAlert(alertRoot, elementHasFocus)} />
                 )
             }
         }
