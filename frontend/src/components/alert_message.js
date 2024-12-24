@@ -14,7 +14,6 @@ const AlertMessage = ({ message, handleUnmount }) => {
   }, [handleUnmount]);
 
   useEffect(() => {
-    closeBtnRef.current.focus();
     setShow(true);
     setTimeout(() => dismissAlert(), 4000);
   }, [dismissAlert]);
@@ -23,7 +22,6 @@ const AlertMessage = ({ message, handleUnmount }) => {
     <div
       ref={alertElRef}
       className={`sentiment ${show ? "active" : ""}`}
-      aria-live="polite"
       id="sentimentMessage"
     >
       <div className="sentiment__wrapper">

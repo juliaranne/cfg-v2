@@ -50,9 +50,8 @@ const TrackExercise = ({ currentUser }) => {
     }
   };
 
-  const closeAlert = (mount, elementHasFocus) => {
+  const closeAlert = (mount) => {
     mount.unmount();
-    elementHasFocus.focus();
   };
 
   const showDescriptionAlert = async () => {
@@ -62,11 +61,10 @@ const TrackExercise = ({ currentUser }) => {
         const alertRoot = ReactDOM.createRoot(
           document.getElementById("alertMessage")
         );
-        const elementHasFocus = document.activeElement;
         alertRoot.render(
           <AlertMessage
             message={message}
-            handleUnmount={() => closeAlert(alertRoot, elementHasFocus)}
+            handleUnmount={() => closeAlert(alertRoot)}
           />
         );
       }
@@ -151,7 +149,10 @@ const TrackExercise = ({ currentUser }) => {
           Save activity
         </Button>
       </Form>
-      <p className={`${message ? "fade-in" : ""} response-message`}>
+      <p
+        aria-live="assertive"
+        className={`${message ? "fade-in" : ""} response-message`}
+      >
         {message}
       </p>
       <div id="alertMessage"></div>
