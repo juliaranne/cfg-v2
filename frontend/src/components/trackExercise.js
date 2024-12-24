@@ -53,7 +53,7 @@ const TrackExercise = ({currentUser}) => {
     };
 
     const closeAlert = (mount, activeEl) => {
-        setTimeout(() => mount.unmount(), 1000);
+        mount.unmount();
         activeEl.focus();
     } 
 
