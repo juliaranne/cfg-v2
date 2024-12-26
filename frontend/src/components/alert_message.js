@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import CloseIcon from "@material-ui/icons/Close";
 
-const AlertMessage = ({ message, handleUnmount }) => {
+const AlertMessage = ({ message, handleClose }) => {
   const [show, setShow] = useState(false);
   const closeBtnRef = useRef();
   const alertElRef = useRef();
@@ -9,12 +9,12 @@ const AlertMessage = ({ message, handleUnmount }) => {
   const dismissAlert = useCallback(() => {
     setShow(false);
     alertElRef?.current?.addEventListener("transitionend", () => {
-      handleUnmount();
+      handleClose();
     });
-  }, [handleUnmount]);
+  }, [handleClose]);
 
   useEffect(() => {
-    setShow(true);
+    setTimeout(() => setShow(true), 100);
     setTimeout(() => dismissAlert(), 4000);
   }, [dismissAlert]);
 

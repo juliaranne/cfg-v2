@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
 import { Button, Form } from "react-bootstrap";
 import { trackExercise, getSentimentMessage } from "../api";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,6 +21,7 @@ const TrackExercise = ({ currentUser }) => {
     date: new Date(),
   });
   const [message, setMessage] = useState("");
+  const [sentiment, setSentiment] = useState("");
 
   const handleTrackExercise = async (e) => {
     e.preventDefault();
@@ -50,23 +50,15 @@ const TrackExercise = ({ currentUser }) => {
     }
   };
 
-  const closeAlert = (mount) => {
-    mount.unmount();
+  const closeAlert = () => {
+    setSentiment("");
   };
 
   const showDescriptionAlert = async () => {
     if (state.description) {
       const message = await getSentimentMessage(state.description);
       if (message) {
-        const alertRoot = ReactDOM.createRoot(
-          document.getElementById("alertMessage")
-        );
-        alertRoot.render(
-          <AlertMessage
-            message={message}
-            handleUnmount={() => closeAlert(alertRoot)}
-          />
-        );
+        setSentiment(message);
       }
     }
   };
@@ -155,7 +147,9 @@ const TrackExercise = ({ currentUser }) => {
       >
         {message}
       </p>
-      <div id="alertMessage"></div>
+      {sentiment && (
+        <AlertMessage message={sentiment} handleClose={closeAlert} />
+      )}
     </div>
   );
 };
