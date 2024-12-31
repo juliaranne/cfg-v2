@@ -1,0 +1,39 @@
+name: Unit tests
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened, synchronize]
+
+jobs:
+  buildAndTest:
+    # Set up the environment
+    name: Compile bundles and run tests
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./frontend
+      node-version: 16.14.0
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        name: Cache NPM packages
+        id: cache-npm
+        with:
+          path: |
+            ~/.npm
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{env.node-version}}
+      - run: node --version
+      - run: npm i -g npm@8.3.1 --registry=https://registry.npmjs.org
+      - run: npm --version
+      - name: Set up node CI environment
+        run: npm ci
+        working-directory: ${{env.working-directory}}
+
+      # Run the unit tests
+      - name: Jest Test Suite
+        run: npm run test
+        working-directory: ${{env.working-directory}}
