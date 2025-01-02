@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { trackExercise } from "../api";
 import { getSentimentMessage } from "../api";
 import "bootstrap/dist/css/bootstrap.min.css";
-import IconButton from "@mui/icons-material/IconButton";
+import IconButton from "@mui/material/IconButton";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import BikeIcon from "@mui/icons-material/DirectionsBike";
 import PoolIcon from "@mui/icons-material/Pool";
