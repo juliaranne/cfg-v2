@@ -88,7 +88,7 @@ const TrackExercise = ({ currentUser }) => {
             }
           >
             <FormControlLabel
-              value="running"
+              value="Running"
               control={
                 <Radio
                   checkedIcon={<DirectionsRunIcon fontSize="large" />}
@@ -100,7 +100,7 @@ const TrackExercise = ({ currentUser }) => {
               label="Select running"
             />
             <FormControlLabel
-              value="cycling"
+              value="Cycling"
               control={
                 <Radio
                   checkedIcon={<BikeIcon fontSize="large" />}
@@ -111,7 +111,7 @@ const TrackExercise = ({ currentUser }) => {
               label="Select cycling"
             />
             <FormControlLabel
-              value="swimming"
+              value="Swimming"
               control={
                 <Radio
                   checkedIcon={<PoolIcon fontSize="large" />}
@@ -122,7 +122,7 @@ const TrackExercise = ({ currentUser }) => {
               label="Select swimming"
             />
             <FormControlLabel
-              value="gym"
+              value="Gym"
               control={
                 <Radio
                   checkedIcon={<FitnessCenterIcon fontSize="large" />}
@@ -133,7 +133,7 @@ const TrackExercise = ({ currentUser }) => {
               label="Record a gym session"
             />
             <FormControlLabel
-              value="other"
+              value="Other"
               control={
                 <Radio
                   checkedIcon={<OtherIcon fontSize="large" />}
