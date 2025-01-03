@@ -80,7 +80,6 @@ const TrackExercise = ({ currentUser }) => {
         <Form.Group>
           <Form.Label>Select exercise type</Form.Label>
           <RadioGroup
-            style={{ margin: 0, justifyContent: "center" }}
             row
             className="exercise-type"
             onChange={(e) =>

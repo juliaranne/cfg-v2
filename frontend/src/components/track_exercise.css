@@ -1,3 +1,12 @@
+.exercise-type {
+  margin-bottom: "20px";
+  justify-content: "center";
+}
+
+.exercise-type label {
+  margin: 0;
+}
+
 /* Screen reader only. Visually hidden */
 .exercise-type .MuiFormControlLabel-label {
   border: 0;
