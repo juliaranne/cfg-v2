@@ -88,13 +88,13 @@ const TrackExercise = ({ currentUser }) => {
           >
             <FormControlLabel
               value="Running"
+              id="runningButton"
               control={
                 <Radio
                   checkedIcon={<DirectionsRunIcon fontSize="large" />}
                   icon={<DirectionsRunIcon fontSize="large" />}
                   required={true}
                   name="exercise_type"
-                  id="runningButton"
                 />
               }
               label="Select running"
