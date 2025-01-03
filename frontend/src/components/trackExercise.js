@@ -95,6 +95,7 @@ const TrackExercise = ({ currentUser }) => {
                   icon={<DirectionsRunIcon fontSize="large" />}
                   required={true}
                   name="exercise_type"
+                  id="runningButton"
                 />
               }
               label="Select running"
@@ -106,6 +107,7 @@ const TrackExercise = ({ currentUser }) => {
                   checkedIcon={<BikeIcon fontSize="large" />}
                   icon={<BikeIcon fontSize="large" />}
                   name="exercise_type"
+                  id="cyclingButton"
                 />
               }
               label="Select cycling"
@@ -117,6 +119,7 @@ const TrackExercise = ({ currentUser }) => {
                   checkedIcon={<PoolIcon fontSize="large" />}
                   icon={<PoolIcon fontSize="large" />}
                   name="exercise_type"
+                  id="swimmingButton"
                 />
               }
               label="Select swimming"
@@ -128,6 +131,7 @@ const TrackExercise = ({ currentUser }) => {
                   checkedIcon={<FitnessCenterIcon fontSize="large" />}
                   icon={<FitnessCenterIcon fontSize="large" />}
                   name="exercise_type"
+                  id="gymButton"
                 />
               }
               label="Record a gym session"
@@ -139,6 +143,7 @@ const TrackExercise = ({ currentUser }) => {
                   checkedIcon={<OtherIcon fontSize="large" />}
                   icon={<OtherIcon fontSize="large" />}
                   name="exercise_type"
+                  id="otherButton"
                 />
               }
               label="Record a different exercise"
