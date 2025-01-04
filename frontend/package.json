@@ -25,7 +25,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "test-pa11y-ci": "./node_modules/.bin/pa11y-ci --config .pa11yci"
   },
   "eslintConfig": {
     "extends": [
@@ -50,8 +51,8 @@
     "pa11y-ci": "^3.1.0"
   },
   "jest": {
-  "moduleNameMapper": {
-    "^axios$": "axios/dist/node/axios.cjs"
+    "moduleNameMapper": {
+      "^axios$": "axios/dist/node/axios.cjs"
     }
   }
 }

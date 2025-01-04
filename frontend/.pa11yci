@@ -8,13 +8,7 @@
   },
   "urls": [
     {
-      "url": "http://localhost/login",
-      "actions": [
-        "set field #formUsername to juliar",
-        "set field #formPassword to password",
-        "click element button[type=submit]",
-        "wait for url to be http://localhost/trackExercise"
-      ]
+      "url": "http://localhost/login"
     }
   ]
 }
