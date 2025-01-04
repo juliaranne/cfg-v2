@@ -144,6 +144,37 @@ def resolve_weekly_stats(*_, start, end, username):
             "success": False
         }
 
+@query.field("all_exercises")
+def resolve_all_exercises(*_, username):
+    pipeline = [
+        {"$match": {"username": username}},
+        {"$group": {
+            "_id": {
+                "exerciseType": "$exerciseType",
+                "description": "$description"
+            },
+            "totalDuration": {"$sum": "$duration"}
+        }},
+        {"$project": {
+            "exerciseType": "$_id.exerciseType",
+            "description": "$_id.description",
+            "totalDuration": "$totalDuration",
+            "_id": 0
+        }}
+    ]
+    try:
+        exercises = list(db.exercises.aggregate(pipeline))
+        return {
+            "results": {"exercises": exercises},
+            "success": True
+        }
+    except Exception as e:
+        return {
+            "error": str(e),
+            "success": False
+        }
+
+
 # The following needs to come after all resolver functions
 schema = make_executable_schema(type_defs, query)
 
