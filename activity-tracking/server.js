@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const config = require('./config.json');
 require('dotenv').config();
 
+// Prevent NoSQL injection
+const mongoSanitize = require('express-mongo-sanitize');
+
 const app = express();
 const port = process.env.PORT || 5300;
 const mongoUri = process.env.MONGODB_URI || config.mongoUri;
@@ -12,6 +15,7 @@ const mongoDb = process.env.MONGODB_DB || config.mongoDB;
 // Middleware setup
 app.use(cors());
 app.use(express.json());
+app.use(mongoSanitize());
 
 // MongoDB connection
 mongoose
