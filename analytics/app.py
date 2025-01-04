@@ -8,6 +8,7 @@ from bson import json_util
 import traceback
 import logging
 import os
+import re
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
@@ -67,6 +68,9 @@ def stats():
 
 @app.route('/stats/<username>', methods=['GET'])
 def user_stats(username):
+    if not isinstance(username, str):
+        return jsonify(error="Invalid username"), 400
+
     pipeline = [
         {
             "$match": {"username": username}
@@ -110,8 +114,14 @@ def weekly_user_stats():
     start_date_str = request.args.get('start')
     end_date_str = request.args.get('end')
 
+    if not isinstance(username, str):
+        return jsonify(error="Invalid username"), 400
+
     date_format = "%Y-%m-%d"
     try:
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", start_date_str) or not re.match(r"^\d{4}-\d{2}-\d{2}$", end_date_str):
+            raise ValueError("Invalid date format")
+        
         start_date = datetime.strptime(start_date_str, date_format)
         end_date = datetime.strptime(end_date_str, date_format) + timedelta(days=1)  # Include the whole end day
 
