@@ -48,6 +48,8 @@ const TrackExercise = ({ currentUser }) => {
       setTimeout(() => setMessage(""), 2000);
     } catch (error) {
       console.error("There was an error logging your activity!", error);
+      setMessage("Sorry, there was an error logging your activity");
+      setTimeout(() => setMessage(""), 2000);
     }
   };
 
@@ -82,6 +84,7 @@ const TrackExercise = ({ currentUser }) => {
             id="runningButton"
             color={state.exerciseType === "Running" ? "primary" : "default"}
             onClick={() => setState({ ...state, exerciseType: "Running" })}
+            data-testid="RunningBtn"
           >
             <DirectionsRunIcon fontSize="large" />
           </IconButton>
