@@ -83,6 +83,7 @@ const TrackExercise = ({ currentUser }) => {
             id="runningButton"
             color={state.exerciseType === "Running" ? "primary" : "default"}
             onClick={() => setState({ ...state, exerciseType: "Running" })}
+            data-testid="runningBtn"
           >
             <DirectionsRunIcon fontSize="large" />
           </IconButton>
