@@ -8,13 +8,16 @@
   },
   "urls": [
     {
-      "url": "localhost:3000/login"
+      "url": "localhost:80"
     },
     {
-      "url": "localhost:3000"
+      "url": "localhost"
     },
     {
-      "url": "http://localhost:3000"
+      "url": "http://localhost:80"
+    },
+    {
+      "url": "http://localhost"
     }
   ]
 }
