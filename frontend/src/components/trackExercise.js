@@ -47,6 +47,8 @@ const TrackExercise = ({ currentUser }) => {
       setTimeout(() => setMessage(""), 2000);
     } catch (error) {
       console.error("There was an error logging your activity!", error);
+      setMessage("Sorry, there was an error logging your activity");
+      setTimeout(() => setMessage(""), 2000);
     }
   };
 
@@ -95,6 +97,7 @@ const TrackExercise = ({ currentUser }) => {
                   icon={<DirectionsRunIcon fontSize="large" />}
                   required={true}
                   name="exercise_type"
+                  data-testid="RunningBtn"
                 />
               }
               label="Select running"
