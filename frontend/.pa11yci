@@ -8,16 +8,23 @@
   },
   "urls": [
     {
-      "url": "localhost:80"
+      "url": "http://localhost/login"
     },
     {
-      "url": "localhost"
+      "actions": [
+        "click element .mt-3 a",
+        "set field #formBasicEmail to juliarr",
+        "set field #formBasicPassword to password",
+        "click element button[type=submit]",
+        "wait for url to be http://localhost/trackExercise"
+      ],
+      "url": "http://localhost/trackExercise"
     },
     {
-      "url": "http://localhost:80"
-    },
-    {
-      "url": "http://localhost"
+      "actions": [
+        "click element #basic-navbar-nav > div > div > a:nth-child(2)"
+      ],
+      "url": "http://localhost/statistics"
     }
   ]
 }
