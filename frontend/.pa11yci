@@ -13,7 +13,7 @@
     {
       "actions": [
         "click element .mt-3 a",
-        "set field #formBasicEmail to juliarr",
+        "set field #formBasicEmail to juliar",
         "set field #formBasicPassword to password",
         "click element button[type=submit]",
         "wait for url to be http://localhost/trackExercise"
