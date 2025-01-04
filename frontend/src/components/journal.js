@@ -46,11 +46,10 @@ const Journal = ({ currentUser }) => {
         <span>{moment(startDate).format('YYYY-MM-DD')} to {moment(endDate).format('YYYY-MM-DD')}</span>
         <Button className="button-small" onClick={goToNextWeek}>Next &rarr;</Button>
         </div>
-      <ul>
+      <ul data-testid="journalList">
         {exercises && exercises.length > 0 ? (
           exercises.map((exercise, index) => (
-            <li key={index} className="exercise-journal-data">
-              {exercise.exerciseType} - {exercise.totalDuration} minutes<br />
+            <li key={index} className="exercise-journal-data">{exercise.exerciseType} - {exercise.totalDuration} minutes<br />
               {exercise.description}
             </li>
           ))
