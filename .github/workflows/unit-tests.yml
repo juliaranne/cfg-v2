@@ -17,3 +17,4 @@ jobs:
           node-version: 18
       - run: npm ci --legacy-peer-deps
       - run: npm run test
+      - run: npm run test-pa11y-ci
