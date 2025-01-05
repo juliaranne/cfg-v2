@@ -44,7 +44,6 @@ describe("Exercise API", () => {
       url: `http://localhost:5300/exercises/wrongId`,
       failOnStatusCode: false,
     }).then((response) => {
-      console.log(response);
       expect(response.status).to.eq(400);
     });
   });
