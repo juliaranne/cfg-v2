@@ -6,6 +6,7 @@ type Exercise {
   exerciseType: String
   description: String
   totalDuration: Int
+  date: String
 }
 
 type Stats {
@@ -23,4 +24,11 @@ type Query {
   weekly_stats(start: String!, end: String!, username: String!): Results
   stats(username: String!): Results
   all_exercises(username: String!): Results
+  exercise(id: String!): ExerciseResult
+}
+
+type ExerciseResult {
+  exercise: Exercise
+  success: Boolean!
+  error: String
 }

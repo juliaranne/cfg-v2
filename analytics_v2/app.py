@@ -144,35 +144,42 @@ def resolve_weekly_stats(*_, start, end, username):
             "success": False
         }
 
+
 @query.field("all_exercises")
 def resolve_all_exercises(*_, username):
-    pipeline = [
-        {"$match": {"username": username}},
-        {"$group": {
-            "_id": {
-                "exerciseType": "$exerciseType",
-                "description": "$description"
-            },
-            "totalDuration": {"$sum": "$duration"}
-        }},
-        {"$project": {
-            "exerciseType": "$_id.exerciseType",
-            "description": "$_id.description",
-            "totalDuration": "$totalDuration",
-            "_id": 0
-        }}
-    ]
     try:
-        exercises = list(db.exercises.aggregate(pipeline))
+        # Fetch all exercises for the given user
+        exercises = list(db.exercises.find({"username": username}))
+
+        if not exercises:
+            return {
+                "error": "No exercises found for this user",
+                "success": False
+            }
+
+        # Format the result with exercise details (exerciseType, description, totalDuration, and date)
+        exercises_data = [
+            {
+                "exerciseType": exercise.get("exerciseType"),
+                "description": exercise.get("description"),
+                "totalDuration": exercise.get("duration"),
+                "date": exercise.get("date")
+            }
+            for exercise in exercises
+        ]
+
         return {
-            "results": {"exercises": exercises},
+            "results": {"exercises": exercises_data},
             "success": True
         }
+
     except Exception as e:
+        logging.error(f"Error fetching exercises for user {username}: {e}")
         return {
-            "error": str(e),
+            "error": "An internal error occurred",
             "success": False
         }
+
 
 
 # The following needs to come after all resolver functions
