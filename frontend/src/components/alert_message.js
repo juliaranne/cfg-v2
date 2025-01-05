@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from "react";
-import CloseIcon from "@material-ui/icons/Close";
+import CloseIcon from "@mui/icons-material/Close";
 
 const AlertMessage = ({ message, handleClose }) => {
   const [show, setShow] = useState(false);
