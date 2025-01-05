@@ -25,7 +25,7 @@ jobs:
         working-directory: ./activity-tracking
     # Docker image with Cypress pre-installed
     # https://github.com/cypress-io/cypress-docker-images/tree/master/included
-    container: cypress/included:3.8.3
+    container: cypress/included:13.17.0
     steps:
       - uses: actions/checkout@v1
       - run: cypress run
