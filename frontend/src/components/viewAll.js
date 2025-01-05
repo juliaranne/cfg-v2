@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 import { Button } from 'react-bootstrap';
+import moment from 'moment';  // Make sure moment is imported
 import './viewAll.css';  // Ensure this CSS exists to style the page properly
 
 // Reuse the query you provided for all exercises
@@ -13,6 +14,7 @@ const getAllExercisesQuery = (user) => {
             exerciseType
             description
             totalDuration
+            date
           }
         }
         success
@@ -51,6 +53,11 @@ const ViewAll = ({ currentUser }) => {
                 <strong>{exercise.exerciseType}</strong> - {exercise.totalDuration} minutes
                 <br />
                 {exercise.description}
+                <br />
+                <small>
+                  {/* Format the date using moment */}
+                  {moment(exercise.date).format('YYYY-MM-DD HH:mm:ss')}
+                </small>
               </li>
             ))
           ) : (
