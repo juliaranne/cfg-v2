@@ -1,0 +1,56 @@
+name: Unit tests
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened, synchronize]
+
+jobs:
+  accessibility:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Step 3: Install Puppeteer dependencies
+      - name: Install Chromium dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 \
+            libxss1 \
+            libasound2 \
+            fonts-liberation \
+            libappindicator3-1 \
+            libatk-bridge2.0-0 \
+            libatk1.0-0 \
+            libatspi2.0-0 \
+            libgtk-3-0 \
+            libx11-xcb1 \
+            libgbm1 \
+            libxcomposite1 \
+            libxrandr2 \
+            libxdamage1 \
+            libnss3-tools \
+            xdg-utils
+
+      # Step 4: Install dependencies
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      # - name: Build
+      #   run: npm run build
+
+      # Step 5: Run pa11y-ci tests
+      - name: Run pa11y-ci
+        run: npm run test-pa11y-ci
