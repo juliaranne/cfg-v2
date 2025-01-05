@@ -21,7 +21,7 @@ public class StatisticsActions extends WebActions {
     public void assertWellDoneHeaderPresent(String username) {
         WebElement statsContainer = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("stats-container")));
 
-        WebElement header = statsContainer.findElement(By.tagName("h4"));
+        WebElement header = wait.until(ExpectedConditions.visibilityOf(statsContainer.findElement(By.tagName("h4"))));
 
         assertTrue(header.getText().contains("Well done, " + username + "! This is your overall effort:"));
     }
@@ -38,7 +38,8 @@ public class StatisticsActions extends WebActions {
     }
 
     public void assertCorrectSingleExercisePresent(String exerciseType, String contents){
-        List<WebElement> exerciseDataList = getExerciseDataList();
+        List<WebElement> exerciseDataList = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("exercise-data")));
+
         WebElement singleExercise = exerciseDataList.getFirst();
 
         assertEquals(exerciseType, singleExercise.findElement(By.tagName("strong")).getText());
@@ -46,9 +47,8 @@ public class StatisticsActions extends WebActions {
     }
 
     private List<WebElement> getExerciseDataList(){
-        WebElement statsContainer = findByClassName("stats-container");
+        WebElement statsContainer = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("stats-container")));
 
-        return statsContainer.findElements(By.className("exercise-data"));
+        return wait.until(ExpectedConditions.visibilityOfAllElements(statsContainer.findElements(By.className("exercise-data"))));
     }
-
 }

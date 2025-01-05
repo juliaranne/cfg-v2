@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @Slf4j
-public class TrackExerciseActions extends WebActions{
+public class TrackExerciseActions extends WebActions {
 
     public TrackExerciseActions(WebDriver chromeDriver) {
         super(chromeDriver);
@@ -21,12 +21,13 @@ public class TrackExerciseActions extends WebActions{
         clickElement(By.xpath("//button[@type='submit' and contains(text(), 'Save activity')]"), "Save activity button");
     }
 
-    public void assertAnyMotivationalAlertShows(){
+    public void assertAnyMotivationalAlertShows() {
         try {
-            Alert alert =  wait.until(ExpectedConditions.alertIsPresent());
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.dismiss();
+            log.info("Motivational alert dismissed");
         } catch (Exception e) {
-            log.warn("no motivational alert shown");
+            log.warn("No motivational alert shown");
         }
     }
 

@@ -22,7 +22,7 @@ public class WeeklyJournalActions extends WebActions {
 
     public void assertExerciseRecordContainsDescription(String expectedDescription) {
         boolean recordFound = getListFromPage().stream().anyMatch(exercise -> exercise.getText().contains(expectedDescription));
-        assertTrue(recordFound, String.format("Description wasn't found: ", expectedDescription));
+        assertTrue(recordFound, String.format("Description wasn't found: %s", expectedDescription));
     }
 
     private List<WebElement> getListFromPage() {

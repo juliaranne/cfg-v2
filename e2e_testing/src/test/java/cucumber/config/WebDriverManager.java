@@ -16,11 +16,12 @@ public class WebDriverManager {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--headless");
-            options.addArguments("--disable-gpu");
-            options.addArguments("window-size=1920,1080");
+            // Remove the headless argument to make the browser visible
+            // options.addArguments("--headless"); // Comment or remove this line
+//            options.addArguments("--disable-gpu");
+//            options.addArguments("window-size=1920,1080");
 
-            System.setProperty("DISPLAY", ":99");
+//            System.setProperty("DISPLAY", ":99"); // If you're on a headless server, keep this line, but otherwise, you can remove it
             driver = new ChromeDriver(options);
 
             driver.get(Context.BASE_URL);
