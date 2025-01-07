@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { trackExercise } from "../api";
-import { getSentimentMessage } from "../api";
+import { trackExercise, getSentimentMessage } from "../api";
 import "bootstrap/dist/css/bootstrap.min.css";
-import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
-import BikeIcon from "@material-ui/icons/DirectionsBike";
-import PoolIcon from "@material-ui/icons/Pool";
-import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
-import OtherIcon from "@material-ui/icons/HelpOutline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import BikeIcon from "@mui/icons-material/DirectionsBike";
+import PoolIcon from "@mui/icons-material/Pool";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import OtherIcon from "@mui/icons-material/HelpOutline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 import DatePicker from "react-datepicker";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
 import "react-datepicker/dist/react-datepicker.css";
 import "./track_exercise.css";
 
