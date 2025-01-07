@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { trackExercise } from "../api";
-import { getSentimentMessage } from "../api";
+import { trackExercise, getSentimentMessage } from "../api";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./alert_message.css";
 import IconButton from "@mui/material/IconButton";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import BikeIcon from "@mui/icons-material/DirectionsBike";
@@ -10,6 +10,7 @@ import PoolIcon from "@mui/icons-material/Pool";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import OtherIcon from "@mui/icons-material/HelpOutline";
 import DatePicker from "react-datepicker";
+import AlertMessage from "./alert_message";
 import "react-datepicker/dist/react-datepicker.css";
 
 const TrackExercise = ({ currentUser }) => {
@@ -20,10 +21,7 @@ const TrackExercise = ({ currentUser }) => {
     date: new Date(),
   });
   const [message, setMessage] = useState("");
-
-  const handleDescriptionChange = (e) => {
-    setState({ ...state, description: e.target.value });
-  };
+  const [sentiment, setSentiment] = useState("");
 
   const handleTrackExercise = async (e) => {
     e.preventDefault();
@@ -36,6 +34,7 @@ const TrackExercise = ({ currentUser }) => {
     try {
       const response = await trackExercise(dataToSubmit);
       console.log(response.data);
+      showDescriptionAlert(state.description);
 
       setState({
         exerciseType: "",
@@ -45,22 +44,24 @@ const TrackExercise = ({ currentUser }) => {
       });
 
       setMessage("Activity logged successfully! Well done!");
-      setTimeout(() => setMessage(""), 2000);
+      setTimeout(() => setMessage(""), 5000);
     } catch (error) {
       console.error("There was an error logging your activity!", error);
       setMessage("Sorry, there was an error logging your activity");
-      setTimeout(() => setMessage(""), 2000);
+      setTimeout(() => setMessage(""), 5000);
     }
+  };
+
+  const closeAlert = () => {
+    setSentiment("");
   };
 
   const showDescriptionAlert = async () => {
     if (state.description) {
       const message = await getSentimentMessage(state.description);
       if (message) {
-        window.alert(message);
+        setSentiment(message);
       }
-    } else {
-      window.alert("Please enter a description for your activity.");
     }
   };
 
@@ -124,7 +125,9 @@ const TrackExercise = ({ currentUser }) => {
             rows={3}
             required
             value={state.description}
-            onChange={handleDescriptionChange}
+            onChange={(e) =>
+              setState({ ...state, description: e.target.value })
+            }
           />
         </Form.Group>
         <Form.Group controlId="duration" style={{ marginBottom: "40px" }}>
@@ -133,14 +136,23 @@ const TrackExercise = ({ currentUser }) => {
             type="number"
             required
             value={state.duration}
+            min={1}
             onChange={(e) => setState({ ...state, duration: e.target.value })}
           />
         </Form.Group>
-        <Button variant="success" type="submit" onClick={showDescriptionAlert}>
+        <Button variant="success" type="submit">
           Save activity
         </Button>
       </Form>
-      {message && <p style={{ color: "green" }}>{message}</p>}
+      <p
+        aria-live="assertive"
+        className={`${message ? "fade-in" : ""} response-message`}
+      >
+        {message}
+      </p>
+      {sentiment && (
+        <AlertMessage message={sentiment} handleClose={closeAlert} />
+      )}
     </div>
   );
 };
