@@ -47,7 +47,7 @@ function App() {
               <Route path="/trackExercise" element={isLoggedIn ? <TrackExercise currentUser={currentUser} /> : <Navigate to="/login" />} />
               <Route path="/statistics" element={isLoggedIn ? <Statistics currentUser={currentUser} /> : <Navigate to="/login" />} />
               <Route path="/journal" element={isLoggedIn ? <Journal currentUser={currentUser} /> : <Navigate to="/login" />} />
-              <Route path="/viewAll" element={isLoggedIn ? <ViewAll currentUser={currentUser} /> : <Navigate to="/login" />} /> {/* New route */}
+              <Route path="/viewAll" element={isLoggedIn ? <ViewAll currentUser={currentUser} /> : <Navigate to="/login" />} />
               <Route path="/" element={isLoggedIn ? <Navigate to="/trackExercise" /> : <Navigate to="/login" />} />
             </Routes>
           </div>

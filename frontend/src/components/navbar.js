@@ -17,7 +17,7 @@ const NavbarComponent = ({ onLogout }) => {
       case 'Journal':
         navigate('/journal');
         break;
-      case 'ViewAll': // Added case for View All
+      case 'ViewAll':
         navigate('/viewAll');
         break;
       default:
@@ -41,7 +41,7 @@ const NavbarComponent = ({ onLogout }) => {
             </Nav.Link>
             <Nav.Link className="custom-nav-link" onClick={() => onNavigate('ViewAll')}>
               View All
-            </Nav.Link> {/* New View All tab */}
+            </Nav.Link>
             <Nav.Link className="custom-nav-link" onClick={onLogout}>
               Logout
             </Nav.Link>
