@@ -3,6 +3,7 @@ schema {
 }
 
 type Exercise {
+  id: ID
   exerciseType: String
   description: String
   totalDuration: Int
