@@ -49,6 +49,7 @@ jobs:
 
       - name: Initalize MongoDB
         run: |
+          systemctl start mongod
           mongosh --host 0.0.0.0:27017 -u admin -p admin --authenticationDatabase admin <<EOF
             db = db.getSiblingDB('APP-DB');
             db.createUser({ user: 'APP-USERNAME', pwd: 'APP-PASSWORD', roles: [{ role: 'readWrite', db: 'APP-DB' }] })
