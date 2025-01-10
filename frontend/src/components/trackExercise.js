@@ -85,7 +85,7 @@ const TrackExercise = ({ currentUser }) => {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Select exercise type</Form.Label>
+          <Form.Label className="sr-only">Select exercise type</Form.Label>
           <RadioGroup
             row
             className="exercise-type"
