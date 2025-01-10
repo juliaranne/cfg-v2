@@ -84,7 +84,7 @@ const TrackExercise = ({ currentUser }) => {
             id="formDate"
           />
         </Form.Group>
-        <Form.Group>
+        <Form.Group style={{ marginBottom: "20px" }}>
           <Form.Label className="sr-only">Select exercise type</Form.Label>
           <RadioGroup
             row
@@ -98,8 +98,8 @@ const TrackExercise = ({ currentUser }) => {
               id="runningButton"
               control={
                 <Radio
-                  checkedIcon={<DirectionsRunIcon fontSize="large" />}
-                  icon={<DirectionsRunIcon fontSize="large" />}
+                  checkedIcon={<DirectionsRunIcon sx={{ fontSize: 35 }} />}
+                  icon={<DirectionsRunIcon sx={{ fontSize: 35 }} />}
                   required={true}
                   name="exercise_type"
                   data-testid="RunningBtn"
@@ -112,8 +112,8 @@ const TrackExercise = ({ currentUser }) => {
               id="cyclingButton"
               control={
                 <Radio
-                  checkedIcon={<BikeIcon fontSize="large" />}
-                  icon={<BikeIcon fontSize="large" />}
+                  checkedIcon={<BikeIcon sx={{ fontSize: 35 }} />}
+                  icon={<BikeIcon sx={{ fontSize: 35 }} />}
                   name="exercise_type"
                 />
               }
@@ -124,8 +124,8 @@ const TrackExercise = ({ currentUser }) => {
               id="swimmingButton"
               control={
                 <Radio
-                  checkedIcon={<PoolIcon fontSize="large" />}
-                  icon={<PoolIcon fontSize="large" />}
+                  checkedIcon={<PoolIcon sx={{ fontSize: 35 }} />}
+                  icon={<PoolIcon sx={{ fontSize: 35 }} />}
                   name="exercise_type"
                 />
               }
@@ -136,8 +136,8 @@ const TrackExercise = ({ currentUser }) => {
               id="gymButton"
               control={
                 <Radio
-                  checkedIcon={<FitnessCenterIcon fontSize="large" />}
-                  icon={<FitnessCenterIcon fontSize="large" />}
+                  checkedIcon={<FitnessCenterIcon sx={{ fontSize: 35 }} />}
+                  icon={<FitnessCenterIcon sx={{ fontSize: 35 }} />}
                   name="exercise_type"
                 />
               }
@@ -148,8 +148,8 @@ const TrackExercise = ({ currentUser }) => {
               id="otherButton"
               control={
                 <Radio
-                  checkedIcon={<OtherIcon fontSize="large" />}
-                  icon={<OtherIcon fontSize="large" />}
+                  checkedIcon={<OtherIcon sx={{ fontSize: 35 }} />}
+                  icon={<OtherIcon sx={{ fontSize: 35 }} />}
                   name="exercise_type"
                 />
               }
