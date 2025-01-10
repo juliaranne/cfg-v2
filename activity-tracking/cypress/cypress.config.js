@@ -3,7 +3,6 @@
 
   module.exports = defineConfig({
     e2e: {
-      baseUrl: "http://localhost",
       supportFile: false,
     },
   });
