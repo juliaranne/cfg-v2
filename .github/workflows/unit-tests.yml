@@ -28,6 +28,7 @@ jobs:
     container: cypress/included:13.17.0
     steps:
       - uses: actions/checkout@v1
+      - run: npm ci
       - name: Start backend server
         run: npm run start:server
         env:
