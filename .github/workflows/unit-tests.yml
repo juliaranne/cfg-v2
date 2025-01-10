@@ -23,6 +23,7 @@ jobs:
     services:
       mongodb:
         image: mongo:4.4.6
+        options: --network-alias=mongodb
         env:
           MONGO_INITDB_ROOT_USERNAME: admin
           MONGO_INITDB_ROOT_PASSWORD: admin
@@ -49,7 +50,7 @@ jobs:
 
       - name: Initalize MongoDB
         run: |
-          mongosh --host 0.0.0.0:27017 -u admin -p admin --authenticationDatabase admin <<EOF
+          mongosh --host mongodb:27017 -u admin -p admin --authenticationDatabase admin <<EOF
             db = db.getSiblingDB('APP-DB');
             db.createUser({ user: 'APP-USERNAME', pwd: 'APP-PASSWORD', roles: [{ role: 'readWrite', db: 'APP-DB' }] })
             db.createCollection('APP-COLLECTION');
