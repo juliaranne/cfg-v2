@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./activity-tracking
+        working-directory: ./activity-tracking/cypress
     # Docker image with Cypress pre-installed
     # https://github.com/cypress-io/cypress-docker-images/tree/master/included
     container: cypress/included:13.17.0
