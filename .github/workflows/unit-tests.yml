@@ -27,5 +27,12 @@ jobs:
     # https://github.com/cypress-io/cypress-docker-images/tree/master/included
     container: cypress/included:13.17.0
     steps:
+      - name: Start backend server
+        run: npm run start:server
+        env:
+          NODE_ENV: test
+
+      - name: Wait for server to be ready
+        run: npx wait-on http://localhost:5300/exercises
       - uses: actions/checkout@v1
       - run: cypress run
