@@ -48,6 +48,9 @@ jobs:
           apt-get install -y mongodb-mongosh
           mongosh --version
 
+      - name: Wait for MongoDB
+        run: npx wait-on tcp:mongodb:27017
+
       - name: Initalize MongoDB
         run: |
           mongosh --host mongodb:27017 -u admin -p admin --authenticationDatabase admin <<EOF
