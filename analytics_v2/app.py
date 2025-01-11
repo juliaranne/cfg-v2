@@ -158,6 +158,7 @@ def resolve_all_exercises(*_, username):
 
         exercises_data = [
             {
+                "id": exercise.get("_id"),
                 "exerciseType": exercise.get("exerciseType"),
                 "description": exercise.get("description"),
                 "totalDuration": exercise.get("duration"),
