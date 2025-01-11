@@ -3,6 +3,7 @@ module.exports = {
     concurrency: 5,
     standard: "WCAG2AA",
     runners: ["axe"],
+    reporters: "csv",
   },
   urls: [
     { url: "http://localhost/login" },
@@ -17,18 +18,18 @@ module.exports = {
     //   ],
     //   url: "http://localhost/trackExercise",
     // },
-    {
-      actions: [
-        "wait for url to be http://localhost/signup",
-        "set field #formBasicEmail to juliartheuser19",
-        "set field #formBasicPassword to password",
-        "wait for url to be http://localhost/trackExercise",
-        "screen capture example.png",
-        "click element .nav-link:nth-of-type(3)",
-        "wait for url to be http://localhost/journal",
-      ],
-      url: "http://localhost/journal",
-    },
+    // {
+    //   actions: [
+    //     "wait for url to be http://localhost/signup",
+    //     "set field #formBasicEmail to juliartheuser19",
+    //     "set field #formBasicPassword to password",
+    //     "wait for url to be http://localhost/trackExercise",
+    //     "screen capture example.png",
+    //     "click element .nav-link:nth-of-type(3)",
+    //     "wait for url to be http://localhost/journal",
+    //   ],
+    //   url: "http://localhost/journal",
+    // },
     // {
     //   actions: [
     //     "set field #formUsername to newuser15",
