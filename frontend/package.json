@@ -2,6 +2,7 @@
   "name": "mla-fitnessapp-fe",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -33,7 +34,7 @@
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "test-pa11y-ci": "./node_modules/.bin/pa11y-ci --config .pa11yci.js"
+    "test-pa11y": "cd pa11y-tests && node pa11y.js && cd ../"
   },
   "eslintConfig": {
     "extends": [
