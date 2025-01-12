@@ -130,8 +130,9 @@ input#duration {
   margin: 0 auto !important;
 }
 
-.custom-nav-link {
-  margin-right: 40px;
+.navbar-expand-lg .navbar-nav {
+  justify-content: space-around;
+  flex-grow: 1;
 }
 
 .signup {
