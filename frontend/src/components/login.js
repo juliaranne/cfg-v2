@@ -53,7 +53,7 @@ const Login = ({ onLogin }) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            autocomplete="password"
+            autocomplete="current-password"
           />
         </Form.Group>
 

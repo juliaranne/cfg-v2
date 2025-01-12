@@ -63,7 +63,7 @@ const Signup = ({ onSignup }) => {
             name="password"
             value={formData.password}
             onChange={handleInputChange}
-            autocomplete="password"
+            autocomplete="new-password"
             required
           />
         </Form.Group>
