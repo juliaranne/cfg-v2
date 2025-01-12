@@ -1,0 +1,24 @@
+.exercise-type {
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.exercise-type label {
+  margin: 0;
+}
+
+/* Screen reader only. Visually hidden */
+.exercise-type .MuiFormControlLabel-label {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.MuiFormControlLabel-asterisk {
+  display: none;
+}
