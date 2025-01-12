@@ -3,15 +3,18 @@ import { Button, Form } from "react-bootstrap";
 import { trackExercise, getSentimentMessage } from "../api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./alert_message.css";
-import IconButton from "@mui/material/IconButton";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import BikeIcon from "@mui/icons-material/DirectionsBike";
 import PoolIcon from "@mui/icons-material/Pool";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import OtherIcon from "@mui/icons-material/HelpOutline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 import DatePicker from "react-datepicker";
 import AlertMessage from "./alert_message";
 import "react-datepicker/dist/react-datepicker.css";
+import "./track_exercise.css";
 
 const TrackExercise = ({ currentUser }) => {
   const [state, setState] = useState({
@@ -78,46 +81,82 @@ const TrackExercise = ({ currentUser }) => {
             selected={state.date}
             onChange={(date) => setState({ ...state, date })}
             dateFormat="yyyy/MM/dd"
+            id="formDate"
           />
         </Form.Group>
-        <div style={{ marginBottom: "20px" }}>
-          <IconButton
-            id="runningButton"
-            color={state.exerciseType === "Running" ? "primary" : "default"}
-            onClick={() => setState({ ...state, exerciseType: "Running" })}
-            data-testid="RunningBtn"
+        <Form.Group style={{ marginBottom: "20px" }}>
+          <Form.Label className="sr-only">Select exercise type</Form.Label>
+          <RadioGroup
+            row
+            className="exercise-type"
+            onChange={(e) =>
+              setState({ ...state, exerciseType: e.target.value })
+            }
           >
-            <DirectionsRunIcon fontSize="large" />
-          </IconButton>
-          <IconButton
-            id="cyclingButton"
-            color={state.exerciseType === "Cycling" ? "primary" : "default"}
-            onClick={() => setState({ ...state, exerciseType: "Cycling" })}
-          >
-            <BikeIcon fontSize="large" />
-          </IconButton>
-          <IconButton
-            id="swimmingButton"
-            color={state.exerciseType === "Swimming" ? "primary" : "default"}
-            onClick={() => setState({ ...state, exerciseType: "Swimming" })}
-          >
-            <PoolIcon fontSize="large" />
-          </IconButton>
-          <IconButton
-            id="gymButton"
-            color={state.exerciseType === "Gym" ? "primary" : "default"}
-            onClick={() => setState({ ...state, exerciseType: "Gym" })}
-          >
-            <FitnessCenterIcon fontSize="large" />
-          </IconButton>
-          <IconButton
-            id="otherButton"
-            color={state.exerciseType === "Other" ? "primary" : "default"}
-            onClick={() => setState({ ...state, exerciseType: "Other" })}
-          >
-            <OtherIcon fontSize="large" />
-          </IconButton>
-        </div>
+            <FormControlLabel
+              value="Running"
+              id="runningButton"
+              control={
+                <Radio
+                  checkedIcon={<DirectionsRunIcon sx={{ fontSize: 35 }} />}
+                  icon={<DirectionsRunIcon sx={{ fontSize: 35 }} />}
+                  required={true}
+                  name="exercise_type"
+                  data-testid="RunningBtn"
+                />
+              }
+              label="Select running"
+            />
+            <FormControlLabel
+              value="Cycling"
+              id="cyclingButton"
+              control={
+                <Radio
+                  checkedIcon={<BikeIcon sx={{ fontSize: 35 }} />}
+                  icon={<BikeIcon sx={{ fontSize: 35 }} />}
+                  name="exercise_type"
+                />
+              }
+              label="Select cycling"
+            />
+            <FormControlLabel
+              value="Swimming"
+              id="swimmingButton"
+              control={
+                <Radio
+                  checkedIcon={<PoolIcon sx={{ fontSize: 35 }} />}
+                  icon={<PoolIcon sx={{ fontSize: 35 }} />}
+                  name="exercise_type"
+                />
+              }
+              label="Select swimming"
+            />
+            <FormControlLabel
+              value="Gym"
+              id="gymButton"
+              control={
+                <Radio
+                  checkedIcon={<FitnessCenterIcon sx={{ fontSize: 35 }} />}
+                  icon={<FitnessCenterIcon sx={{ fontSize: 35 }} />}
+                  name="exercise_type"
+                />
+              }
+              label="Record a gym session"
+            />
+            <FormControlLabel
+              value="Other"
+              id="otherButton"
+              control={
+                <Radio
+                  checkedIcon={<OtherIcon sx={{ fontSize: 35 }} />}
+                  icon={<OtherIcon sx={{ fontSize: 35 }} />}
+                  name="exercise_type"
+                />
+              }
+              label="Record a different exercise"
+            />
+          </RadioGroup>
+        </Form.Group>
         <Form.Group controlId="description" style={{ marginBottom: "20px" }}>
           <Form.Label>Description:</Form.Label>
           <Form.Control
