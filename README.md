@@ -196,6 +196,19 @@ npm i
 npm run cy:run
 ```
 
+## Pa11y accessibility report
+
+Create a report of possible a11y issues using pa11y.
+More urls can be added in the pa11y.js file
+
+```
+cd frontend
+```
+
+```
+npm run test-pa11y
+```
+
 <details>
   <summary>Expand to see dashboard screenshot</summary>
 ![img.png](img.png)
