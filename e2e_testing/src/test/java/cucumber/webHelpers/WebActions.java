@@ -46,6 +46,10 @@ public class WebActions {
         assertEquals(contents, header.getText(), String.format("Header does not contain: %s", contents));
     }
 
+    public WebElement findElementByCssSelector(String cssSelector){
+        return chromeDriver.findElement(By.cssSelector(cssSelector));
+    }
+
     protected WebElement findByClassName(String classname) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(classname)));
     }
