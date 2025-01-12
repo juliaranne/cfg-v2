@@ -4,7 +4,7 @@ A simple and interactive fitness tracking application built with multiple micros
 
 The Activity Tracking functionality uses the MERN stack (MongoDB, Express.js, React, Node.js), the Analytics service uses Python/Flask and the Authentication Microservice using Java.
 
-![Screenshot](screenshots/frontpage.png)  
+![Screenshot](screenshots/frontpage.png)
 
 ### Current Features
 
@@ -21,8 +21,7 @@ The Activity Tracking functionality uses the MERN stack (MongoDB, Express.js, Re
 - npm or yarn
 - Python Flask
 - Java 8
-(all already installed in the devcontainer)
-
+  (all already installed in the devcontainer)
 
 ## Development in Github Codespaces
 
@@ -31,21 +30,19 @@ The Activity Tracking functionality uses the MERN stack (MongoDB, Express.js, Re
 1. Click on "Code"
 2. Switch to the "Codespaces" tab
 3. Create new Codespace from main
-<img src="screenshots/codespaces.png" width="300"/>
-
+   <img src="screenshots/codespaces.png" width="300"/>
 
 4. Open Codespace in VS code for best experience:
-<img src="screenshots/codespaces2.png" width="300"/>
-
+   <img src="screenshots/codespaces2.png" width="300"/>
 
 Walktrough:
 
 https://docs.github.com/en/codespaces/developing-in-a-codespace/using-github-codespaces-in-visual-studio-code
 
-
 #### Check needed packages are installed:
+
 ```sh
-sh .devcontainer/check-installation.sh 
+sh .devcontainer/check-installation.sh
 ```
 
 expected output:
@@ -61,7 +58,7 @@ python3 is installed with version: Python 3.9.2
 pip3 is /usr/bin/pip3
 pip3 is installed with version: pip 20.3.4 from /usr/lib/python3/dist-packages/pip (python 3.9)
 gradle is /usr/bin/gradle
-gradle is installed with version: 
+gradle is installed with version:
 ------------------------------------------------------------
 Gradle 4.4.1
 ------------------------------------------------------------
@@ -69,29 +66,31 @@ Gradle 4.4.1
 Done checking installations.
 ```
 
-if you're missing any version, please contact your course administrator. 
-
+if you're missing any version, please contact your course administrator.
 
 ### Building entire project with Docker (+ starting containers up)
+
 ```sh
 docker-compose up --build
 ```
 
 ### Start existing containers (no rebuild of images)
+
 ```sh
 docker-compose up
 ```
 
 #### Spinning up a single service
+
 ```sh
 docker-compose up [servicename]
 ```
 
 #### Shutting down a service
+
 ```sh
 docker-compose down [servicename]
 ```
-
 
 ## Development without using Docker-Compose
 
@@ -104,19 +103,21 @@ nodemon server
 ```
 
 #### Running Flask application
+
 ```sh
 cd analytics
 flask run -h localhost -p 5050
 ```
 
 #### Running Java application
+
 ```sh
 cd authservice
 ./gradlew clean build
 ./gradlew bootRun
 ```
 
-#### Start the Frontend 
+#### Start the Frontend
 
 ```sh
 cd frontend
@@ -125,6 +126,7 @@ npm start
 ```
 
 #### spin up MongoDB without docker-compose:
+
 ```
 docker run --name mongodb -d -p 27017:27017 -v mongodbdata:/data/db mongo:latest
 ```
@@ -136,32 +138,66 @@ mongosh -u root -p cfgmla23 --authenticationDatabase admin --host localhost --po
 ```
 
 show registered activities:
+
 ```
 db.exercises.find()
 ```
 
 show registered users:
+
 ```
 db.users.find()
 ```
 
-
 ## Deployment
+
 The application is containerized using Docker and can be deployed on any platform that supports Docker containers. For AWS deployment, a GitHub Actions pipeline is configured for CI/CD.
 
 ## Monitoring and Alerting
-We have made use of Datadog, which uses an api key to push logs from your local containers to datadog. To use this, you need to: 
-* Create a datadog account - https://app.datadoghq.eu/help/quick_start 
-* Obtain an API key 
-* Add this to the .env file 
-* Rebuild your docker containers 
 
-You will then be able to see the logs in Datadog, and create dashboards. 
+We have made use of Datadog, which uses an api key to push logs from your local containers to datadog. To use this, you need to:
 
-The following dashboard has been exported and can be found at `resources/datadog/ExerciseFrequencyPastMonth--2024-11-28T15_41_02.json` 
+- Create a datadog account - https://app.datadoghq.eu/help/quick_start
+- Obtain an API key
+- Add this to the .env file
+- Rebuild your docker containers
+
+You will then be able to see the logs in Datadog, and create dashboards.
+
+The following dashboard has been exported and can be found at `resources/datadog/ExerciseFrequencyPastMonth--2024-11-28T15_41_02.json`
+
+## Running tests
+
+Frontend
+
+```
+cd frontend
+```
+
+```
+npm i
+```
+
+```
+npm run test
+```
+
+Activity-tracking Cypress tests
+
+```
+cd activity-tracking
+```
+
+```
+npm i
+```
+
+```
+npm run cy:run
+```
 
 <details>
   <summary>Expand to see dashboard screenshot</summary>
-![img.png](img.png) 
+![img.png](img.png)
 
 </details>
