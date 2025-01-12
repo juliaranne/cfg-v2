@@ -1,4 +1,4 @@
-export default function createRandomString(length) {
+module.exports = (length) => {
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
@@ -6,4 +6,4 @@ export default function createRandomString(length) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return result;
-}
+};

@@ -1,7 +1,7 @@
-import pa11y from "pa11y";
-import fs from "fs";
-import { format } from "@fast-csv/format";
-import createRandomString from "./helpers/generateRandomUsername.js";
+const pa11y = require("pa11y");
+const fs = require("fs");
+const { format } = require("@fast-csv/format");
+const createRandomString = require("./helpers/generateRandomUsername");
 
 async function writeResultsToCSV(results, filePath) {
   const csvStream = format({ headers: true });
