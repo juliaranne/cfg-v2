@@ -13,7 +13,7 @@ The Activity Tracking functionality uses the MERN stack (MongoDB, Express.js, Re
 - See weekly and overall statistics
 - Interactive UI with Material-UI components
 - Real-time data persistence with MongoDB
-- AI analysis of exercise descriptions to provide a motivational message 
+- AI analysis of exercise descriptions to provide a motivational message
 
 ### Prerequisites
 
@@ -112,16 +112,17 @@ show registered users:
 ```
 db.users.find()
 ```
+
 </details>
 
-
 ## Deployment
+
 <details>
 <summary>Toggle for commands</summary>
 
 The application is containerized using Docker and can be deployed on any platform that supports Docker containers. For AWS deployment, a GitHub Actions pipeline is configured for CI/CD.
-</details>
 
+</details>
 
 ## Monitoring and Alerting
 
@@ -136,37 +137,34 @@ You will then be able to see the logs in Datadog, and create dashboards.
 
 The following dashboard has been exported and can be found at `resources/datadog/ExerciseFrequencyPastMonth--2024-11-28T15_41_02.json`
 
+<details>
+  <summary>Expand to see dashboard screenshot</summary>
+
+![dd_dash.png](screenshots/dd_dash.png)
+
+</details>
+
 ## Running tests
+
 <details>
 <summary>Toggle for commands</summary>
 
 Frontend
 
-```
+```sh
 cd frontend
-```
-
-```
 npm i
-```
-
-```
 npm run test
 ```
 
 Activity-tracking Cypress tests
 
-```
+```sh
 cd activity-tracking
-```
-
-```
 npm i
-```
-
-```
 npm run cy:run
 ```
+
 </details>
 
 ## Pa11y accessibility report
@@ -174,17 +172,7 @@ npm run cy:run
 Create a report of possible a11y issues using pa11y.
 More urls can be added in the pa11y.js file
 
-```
+```sh
 cd frontend
-```
-
-```
 npm run test-pa11y
 ```
-
-<details>
-  <summary>Expand to see dashboard screenshot</summary>
-
-![dd_dash.png](screenshots/dd_dash.png)
-
-</details>
