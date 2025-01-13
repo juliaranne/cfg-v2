@@ -12,6 +12,9 @@ on:
       - "authservice/**"
       - "frontend/**"
       - "ai_service/**"
+  push:
+    branches:
+      - SCRUM-73
   workflow_dispatch:
 
 jobs:
