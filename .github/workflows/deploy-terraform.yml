@@ -8,9 +8,6 @@ on:
       - main
     paths:
       - "terraform/**"
-  push:
-    branches:
-      - SCRUM-73
   workflow_dispatch:
 
 jobs:
