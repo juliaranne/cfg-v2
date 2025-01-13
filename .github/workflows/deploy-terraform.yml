@@ -52,23 +52,7 @@ jobs:
         run: terraform -chdir=terraform validate
 
       - name: Terraform Plan
-        run: |
-          terraform import aws_ecr_repository.activity_tracking mla-fitness-app-activity-tracking
-          terraform import aws_ecr_repository.analytics_v2 mla-fitness-app-analytics-v2
-          terraform import aws_ecr_repository.authservice mla-fitness-app-authservice
-          terraform import aws_ecr_repository.frontend mla-fitness-app-frontend
-          terraform import aws_ecr_repository.ai_service mla-fitness-app-ai-service
-
-          terraform import aws_ecr_repository_image.activity_tracking.latest mla-fitness-app-activity-tracking:latest
-          terraform import aws_ecr_repository_image.analytics_v2.latest mla-fitness-app-analytics-v2:latest
-          terraform import aws_ecr_repository_image.authservice.latest mla-fitness-app-authservice:latest
-          terraform import aws_ecr_repository_image.frontend.latest mla-fitness-app-frontend:latest
-          terraform import aws_ecr_repository_image.ai_service.latest mla-fitness-app-ai-service:latest
-          
-          terraform -chdir=terraform plan -out=tfplan
+        run: terraform -chdir=terraform plan -out=tfplan
 
       - name: Terraform Apply
         run: terraform -chdir=terraform apply -auto-approve tfplan
-
-
-        
