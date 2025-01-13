@@ -36,7 +36,7 @@ jobs:
 
       - name: Terraform Init
         run: |
-          terraform -chdir=terraform init -backend-config=terraform/backend_config/dev.conf
+          terraform -chdir=terraform init -backend-config=backend_config/dev.conf
 
       - name: Terraform Validate
         run: terraform -chdir=terraform validate
