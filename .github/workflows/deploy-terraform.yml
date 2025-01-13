@@ -33,12 +33,6 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
           echo "AWS credentials are set"
-      
-      # - name: Install AWS CLI
-      #   run: |
-      #     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      #     unzip awscliv2.zip
-      #     sudo ./aws/install
           
       - name: Configure AWS CLI
         run: |
@@ -50,6 +44,7 @@ jobs:
       - name: Terraform Init
         run: |
           terraform -chdir=terraform init -backend-config=backend_config/dev.conf
+          terraform workspace select -or-create dev
 
       - name: Terraform Validate
         run: terraform -chdir=terraform validate
