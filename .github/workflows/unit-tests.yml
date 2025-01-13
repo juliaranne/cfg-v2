@@ -18,6 +18,34 @@ jobs:
       - run: npm ci
       - run: npm run test
 
+  run-backend-unit-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          . venv/bin/activate
+          pip install -r requirements.txt
+          pip install pytest pytest-mock
+      - name: Run unit tests
+        run: |
+          . venv/bin/activate
+          pytest --junitxml=test-results.xml
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-test-results
+          path: test-results.xml
+
   # run-activity-tracking-api-tests:
   #   runs-on: ubuntu-latest
   #   services:
