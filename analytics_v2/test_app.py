@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch, MagicMock
-from app import app, schema
+from app import app
 
 @pytest.fixture
 
