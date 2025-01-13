@@ -39,12 +39,14 @@ jobs:
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set region ${{ secrets.AWS_REGION }}
-
+      
+      - name: Terraform Workspace Select
+        run: |
+          terraform workspace select -or-create dev
 
       - name: Terraform Init
         run: |
           terraform -chdir=terraform init -backend-config=backend_config/dev.conf
-          terraform workspace select -or-create dev
 
       - name: Terraform Validate
         run: terraform -chdir=terraform validate
