@@ -19,7 +19,7 @@ resource "aws_ecs_task_definition" "activity_tracking" {
     environment = [
       {
         name  = "MONGO_URI"
-        value = "mongodb://root:cfgmla23@10.0.3.68:27017"                # The TF project will have been destroyed so exposed IP is of no risk..  
+        value = "mongodb://root:cfgmla23@10.0.3.28:27017"                # The TF project will have been destroyed so exposed IP is of no risk..  
       },
       {
         name  = "MONGO_DB"
@@ -62,7 +62,7 @@ resource "aws_ecs_task_definition" "analytics_v2" {
     environment = [
       {
         name  = "MONGO_URI"
-        value = "mongodb://root:cfgmla23@10.0.3.68:27017"                # The TF project will have been destroyed so exposed IP is of no risk.
+        value = "mongodb://root:cfgmla23@10.0.3.28:27017"                # The TF project will have been destroyed so exposed IP is of no risk.
       },
       {
         name  = "MONGO_DB"
@@ -105,7 +105,7 @@ resource "aws_ecs_task_definition" "ai_service" {
     environment = [
       {
         name  = "MONGO_URI"
-        value = "mongodb://root:cfgmla23@10.0.3.68:27017"                # The TF project will have been destroyed so exposed IP is of no risk.
+        value = "mongodb://root:cfgmla23@10.0.3.28:27017"                # The TF project will have been destroyed so exposed IP is of no risk.
       }
     ]
 
@@ -148,7 +148,7 @@ resource "aws_ecs_task_definition" "authservice" {
       },
       {
         name  = "SPRING_DATA_MONGODB_URI"
-        value = "mongodb://root:cfgmla23@10.0.3.68:27017"             # The TF project will have been destroyed so exposed IP is of no risk..  
+        value = "mongodb://root:cfgmla23@10.0.3.28:27017"             # The TF project will have been destroyed so exposed IP is of no risk..  
       }
     ]
 
