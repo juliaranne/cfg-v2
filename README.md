@@ -2,7 +2,7 @@
 
 A simple and interactive fitness tracking application built with multiple microservices and programming languages. This application allows users to track their exercises and monitor their progress over time.
 
-The Activity Tracking functionality uses the MERN stack (MongoDB, Express.js, React, Node.js), the Analytics service uses Python/Flask and the Authentication Microservice using Java.
+The Activity Tracking functionality uses the MERN stack (MongoDB, Express.js, React, Node.js), the Analytics_v2 service uses Python/Flask and the Authentication Microservice using Java.
 
 ![Screenshot](screenshots/frontpage.png)
 
@@ -69,7 +69,7 @@ nodemon server
 #### Running Flask application
 
 ```sh
-cd analytics
+cd analytics_v2
 flask run -h localhost -p 5050
 ```
 

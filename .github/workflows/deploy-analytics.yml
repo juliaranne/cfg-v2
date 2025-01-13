@@ -16,7 +16,6 @@ on:
     branches:
       - main
     paths:
-      - "analytics/**"
       - "analtyics_v2/**"
   workflow_dispatch: # Enables manual trigger for this workflow.
 
@@ -37,15 +36,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build, tag, and push image to Docker Hub (Analytics)
-        run: |
-          cd analytics
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:latest \
-                       -t ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:${{ github.sha }} \
-                       -f Dockerfile .
-          docker push ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/mla-fitnessapp-analytics:${{ github.sha }}
-        
       - name: Build, tag, and push image to Docker Hub (Analytics)
         run: |
           cd analytics_v2
