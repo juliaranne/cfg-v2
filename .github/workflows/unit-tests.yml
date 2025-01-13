@@ -18,34 +18,36 @@ jobs:
       - run: npm ci
       - run: npm run test
 
-  run-backend-unit-tests:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./analytics_v2
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
-      - name: Install dependencies
-        run: |
-           cd .\analytics_v2\
-          python -m venv venv
-          . venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run unit tests
-        run: |
-          cd .\analytics_v2\
-          pytest test_app.py
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: backend-test-results
-          path: test-results.xml
+# DISABLED THE BELOW DUE TO LIMITED RESOURCES AND FEES INCURRED USING GITHUB ACTIONS, KEEPING THE ABOVE AS A PROOF OF WORKING
+
+#  run-backend-unit-tests:
+#    runs-on: ubuntu-latest
+#    defaults:
+#      run:
+#        working-directory: ./analytics_v2
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Set up Python
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version: 3.9
+#      - name: Install dependencies
+#        run: |
+#           cd .\analytics_v2\
+#          python -m venv venv
+#          . venv/bin/activate
+#          pip install --upgrade pip
+#          pip install -r requirements.txt
+#      - name: Run unit tests
+#        run: |
+#          cd .\analytics_v2\
+#          pytest test_app.py
+#      - name: Upload test results
+#        if: always()
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: backend-test-results
+#          path: test-results.xml
 
   # run-activity-tracking-api-tests:
   #   runs-on: ubuntu-latest
