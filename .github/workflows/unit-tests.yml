@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./backend
+        working-directory: ./analytics_v2
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
