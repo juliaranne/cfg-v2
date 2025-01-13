@@ -144,6 +144,41 @@ def resolve_weekly_stats(*_, start, end, username):
             "success": False
         }
 
+
+@query.field("all_exercises")
+def resolve_all_exercises(*_, username):
+    try:
+        exercises = list(db.exercises.find({"username": username}))
+
+        if not exercises:
+            return {
+                "error": "No exercises found for this user",
+                "success": False
+            }
+
+        exercises_data = [
+            {
+                "id": exercise.get("_id"),
+                "exerciseType": exercise.get("exerciseType"),
+                "description": exercise.get("description"),
+                "totalDuration": exercise.get("duration"),
+                "date": exercise.get("date")
+            }
+            for exercise in exercises
+        ]
+
+        return {
+            "results": {"exercises": exercises_data},
+            "success": True
+        }
+
+    except Exception as e:
+        logging.error(f"Error fetching exercises for user {username}: {e}")
+        return {
+            "error": "An internal error occurred",
+            "success": False
+        }
+
 # The following needs to come after all resolver functions
 schema = make_executable_schema(type_defs, query)
 
