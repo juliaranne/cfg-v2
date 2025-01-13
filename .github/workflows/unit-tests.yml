@@ -15,5 +15,57 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - run: npm run test
+
+  # run-activity-tracking-api-tests:
+  #   runs-on: ubuntu-latest
+  #   services:
+  #     mongodb:
+  #       image: mongo:4.4.6
+  #       options: --network-alias=mongodb
+  #       env:
+  #         MONGO_INITDB_ROOT_USERNAME: admin
+  #         MONGO_INITDB_ROOT_PASSWORD: admin
+  #         MONGO_INITDB_DATABASE: APP-DATABASE
+  #       ports:
+  #         - 27017:27017
+
+  #   defaults:
+  #     run:
+  #       working-directory: ./activity-tracking
+  #   # Docker image with Cypress pre-installed
+  #   # https://github.com/cypress-io/cypress-docker-images/tree/master/included
+  #   container: cypress/included:13.17.0
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Install mongosh
+  #       run: |
+  #         apt-get install gpgv
+  #         wget -qO- https://www.mongodb.org/static/pgp/server-7.0.asc | tee /etc/apt/trusted.gpg.d/server-7.0.asc
+  #         echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/7.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+  #         apt-get update
+  #         apt-get install -y mongodb-mongosh
+  #         mongosh --version
+
+  #     - name: Wait for MongoDB
+  #       run: npx wait-on tcp:mongodb:27017
+
+  #     - name: Initalize MongoDB
+  #       run: |
+  #         mongosh --host mongodb:27017 -u admin -p admin --authenticationDatabase admin <<EOF
+  #           db = db.getSiblingDB('APP-DB');
+  #           db.createUser({ user: 'APP-USERNAME', pwd: 'APP-PASSWORD', roles: [{ role: 'readWrite', db: 'APP-DB' }] })
+  #           db.createCollection('APP-COLLECTION');
+  #         EOF
+
+  #     - run: npm ci
+  #     - name: Start backend server
+  #       run: npm run start:server
+  #       env:
+  #         NODE_ENV: test
+
+  #     - name: Wait for server to be ready
+  #       run: npx wait-on http://localhost:5300/exercises
+
+  #     - run: cypress run
