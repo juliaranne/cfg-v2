@@ -1,3 +1,6 @@
+# This Terraform configuration creates ECR repositories, attaches IAM policies to allow ECS tasks access, and outputs the repository URLs.
+
+# Variable defining the list of ECR repository names
 variable "ecr_repos" {
   description = "List of ECR repository names"
   type        = list(string)
@@ -10,7 +13,7 @@ variable "ecr_repos" {
   ]
 }
 
-# Create the ECR repositories
+# Create the ECR repositories with encryption and mutable tags
 resource "aws_ecr_repository" "image_repos" {
   for_each = toset(var.ecr_repos)
 
@@ -22,7 +25,7 @@ resource "aws_ecr_repository" "image_repos" {
   }
 }
 
-# Define the IAM policy document for each ECR repository
+# Define the IAM policy document for each ECR repository allowing ECS tasks to access them
 data "aws_iam_policy_document" "image_repo_policy" {
   for_each = toset(var.ecr_repos)
 
@@ -44,7 +47,7 @@ data "aws_iam_policy_document" "image_repo_policy" {
   }
 }
 
-# Attach the policy document to each ECR repository
+# Attach the generated IAM policy to each ECR repository
 resource "aws_ecr_repository_policy" "image_repo_policies" {
   for_each = toset(var.ecr_repos)
 
@@ -52,6 +55,7 @@ resource "aws_ecr_repository_policy" "image_repo_policies" {
   policy     = data.aws_iam_policy_document.image_repo_policy[each.key].json
 }
 
+# Output the URLs of the ECR repositories
 output "ecr_repositories" {
   value = [for repo in aws_ecr_repository.image_repos : repo.repository_url]
 }

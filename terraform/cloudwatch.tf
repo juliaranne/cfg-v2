@@ -1,5 +1,9 @@
+# CloudWatch Log Group for the Frontend service
 resource "aws_cloudwatch_log_group" "frontend_log_group" {
+  # The name of the log group, which will be used to store logs for the frontend ECS service
   name              = "/ecs/fitness-app-frontend"
+  
+  # Retention period in days, logs will be deleted after this period
   retention_in_days = 1
 }
 

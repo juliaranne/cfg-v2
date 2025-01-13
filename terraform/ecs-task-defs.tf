@@ -1,5 +1,7 @@
+# Data source to fetch the AWS caller identity (typically used to get the current account details)
 data "aws_caller_identity" "current" {}
 
+# Task definition for the activity tracking service on ECS
 resource "aws_ecs_task_definition" "activity_tracking" {
   family                   = "activity-tracking-task"
   network_mode             = "awsvpc"
@@ -42,6 +44,7 @@ resource "aws_ecs_task_definition" "activity_tracking" {
   }])
 }
 
+# Task definition for the analytics v2 service on ECS
 resource "aws_ecs_task_definition" "analytics_v2" {
   family                   = "analytics-v2-task"
   network_mode             = "awsvpc"
@@ -84,6 +87,7 @@ resource "aws_ecs_task_definition" "analytics_v2" {
   }])
 }
 
+# Task definition for the AI service on ECS
 resource "aws_ecs_task_definition" "ai_service" {
   family                   = "ai-service-task"
   network_mode             = "awsvpc"
@@ -104,13 +108,6 @@ resource "aws_ecs_task_definition" "ai_service" {
         value = "mongodb://root:cfgmla23@10.0.3.68:27017"
       }
     ]
-    portMappings = [
-      {
-        containerPort = 5052
-        hostPort      = 5052
-        protocol      = "tcp"
-      }
-    ]
 
     portMappings = [{
       containerPort = 5052
@@ -129,6 +126,7 @@ resource "aws_ecs_task_definition" "ai_service" {
   }])
 }
 
+# Task definition for the auth service on ECS
 resource "aws_ecs_task_definition" "authservice" {
   family                   = "authservice-task"
   network_mode             = "awsvpc"
@@ -171,6 +169,7 @@ resource "aws_ecs_task_definition" "authservice" {
   }])
 }
 
+# Task definition for the frontend service on ECS
 resource "aws_ecs_task_definition" "frontend" {
   family                   = "frontend-task"
   network_mode             = "awsvpc"
@@ -202,7 +201,7 @@ resource "aws_ecs_task_definition" "frontend" {
   }])
 }
 
-
+# Task definition for the MongoDB container on ECS
 resource "aws_ecs_task_definition" "mongodb_task" {
   family                   = "mongodb-task"
   network_mode             = "awsvpc"
@@ -228,13 +227,11 @@ resource "aws_ecs_task_definition" "mongodb_task" {
       }
     ]
 
-    portMappings = [
-      {
-        containerPort = 27017
-        hostPort      = 27017
-        protocol      = "tcp"
-      }
-    ]
+    portMappings = [{
+      containerPort = 27017
+      hostPort      = 27017
+      protocol      = "tcp"
+    }]
 
     logConfiguration = {
       logDriver = "awslogs"

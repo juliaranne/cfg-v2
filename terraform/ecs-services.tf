@@ -1,3 +1,4 @@
+# ECS service for the activity tracking container
 resource "aws_ecs_service" "activity_tracking_service" {
   name            = "activity-tracking-service"
   cluster         = aws_ecs_cluster.app_cluster.id
@@ -20,6 +21,7 @@ resource "aws_ecs_service" "activity_tracking_service" {
   depends_on = [aws_lb.app_lb, aws_lb_target_group.activity_tracking_target_group]
 }
 
+# ECS service for the analytics v2 container
 resource "aws_ecs_service" "analytics_v2_service" {
   name            = "analytics-v2-service"
   cluster         = aws_ecs_cluster.app_cluster.id
@@ -42,6 +44,7 @@ resource "aws_ecs_service" "analytics_v2_service" {
   depends_on = [aws_lb.app_lb, aws_lb_target_group.analytics_v2_target_group]
 }
 
+# ECS service for the AI service container
 resource "aws_ecs_service" "ai_service" {
   name            = "ai-service"
   cluster         = aws_ecs_cluster.app_cluster.id
@@ -64,6 +67,7 @@ resource "aws_ecs_service" "ai_service" {
   depends_on = [aws_lb.app_lb, aws_lb_target_group.ai_service_target_group]
 }
 
+# ECS service for the auth service container
 resource "aws_ecs_service" "auth_service" {
   name            = "auth-service"
   cluster         = aws_ecs_cluster.app_cluster.id
@@ -86,6 +90,7 @@ resource "aws_ecs_service" "auth_service" {
   depends_on = [aws_lb.app_lb, aws_lb_target_group.auth_service_target_group]
 }
 
+# ECS service for the frontend container
 resource "aws_ecs_service" "frontend_service" {
   name            = "frontend-service"
   cluster         = aws_ecs_cluster.app_cluster.id
@@ -108,6 +113,7 @@ resource "aws_ecs_service" "frontend_service" {
   depends_on = [aws_lb.app_lb, aws_lb_target_group.frontend_target_group]
 }
 
+# ECS service for the MongoDB container
 resource "aws_ecs_service" "mongodb_service" {
   name            = "mongodb-service"
   cluster         = aws_ecs_cluster.app_cluster.id
