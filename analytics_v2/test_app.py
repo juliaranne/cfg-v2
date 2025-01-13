@@ -89,5 +89,3 @@ def test_graphql_all_exercises(mock_db, client):
     assert data["data"]["all_exercises"]["success"] is True
     assert len(data["data"]["all_exercises"]["results"]["exercises"]) == 2
 
-if __name__ == "__main__":
-    unittest.main()
