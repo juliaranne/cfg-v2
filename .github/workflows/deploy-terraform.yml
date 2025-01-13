@@ -6,7 +6,6 @@ on:
       - closed
     branches:
       - main
-      - SCRUM-73
     paths:
       - "terraform/**"
   workflow_dispatch:
