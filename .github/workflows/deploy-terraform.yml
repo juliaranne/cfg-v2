@@ -42,7 +42,7 @@ jobs:
 
       - name: Terraform Init
         run: |
-          terraform -chdir=terraform init -backend-config=backend_config/dev.conf
+          terraform -chdir=terraform init #-backend-config=backend_config/dev.conf
       
       - name: Terraform Workspace Select
         run: |
