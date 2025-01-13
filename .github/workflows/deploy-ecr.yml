@@ -1,0 +1,55 @@
+name: Deploy Services to AWS ECR
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+      # - SCRUM-73
+    paths:
+      - "activity-tracking/**"
+      - "analytics_v2/**"
+      - "authservice/**"
+      - "frontend/**"
+      - "ai_service/**"
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: 
+          - activity-tracking
+          - analytics
+          - analytics_v2
+          - authservice
+          - frontend
+          - ai_service
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Log in to Amazon ECR
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Build, tag, and push the image to ECR for the respective service
+      - name: Build and push image to AWS ECR for ${{ matrix.service }}
+        run: |
+          # Navigate to the respective service directory
+          cd ${{ matrix.service }}
+          
+          # Set ECR repository URI and tags
+          ECR_REPO_URI=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ matrix.service }}
+          IMAGE_TAG=latest
+          IMAGE_SHA=${{ github.sha }}
+
+          # Build the Docker image
+          docker build --platform linux/amd64 -t $ECR_REPO_URI:$IMAGE_TAG -t $ECR_REPO_URI:$IMAGE_SHA .
+
+          # Push the Docker image to ECR
+          docker push $ECR_REPO_URI:$IMAGE_TAG
+          docker push $ECR_REPO_URI:$IMAGE_SHA
