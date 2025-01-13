@@ -25,7 +25,6 @@ jobs:
       matrix:
         service: 
           - activity-tracking
-          - analytics
           - analytics_v2
           - authservice
           - frontend
