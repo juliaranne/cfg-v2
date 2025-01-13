@@ -30,16 +30,16 @@ jobs:
         with:
           python-version: 3.9
       - name: Install dependencies
-        working-directory: ./analytics_v2
         run: |
+           cd .\analytics_v2\
           python -m venv venv
           . venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run unit tests
         run: |
-          . venv/bin/activate
-          pytest --junitxml=test-results.xml
+          cd .\analytics_v2\
+          pytest test_app.py
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v3
