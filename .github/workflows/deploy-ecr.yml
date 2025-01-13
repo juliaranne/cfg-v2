@@ -12,14 +12,11 @@ on:
       - "authservice/**"
       - "frontend/**"
       - "ai_service/**"
-  push:
-    branches:
-      - SCRUM-73
   workflow_dispatch:
 
 jobs:
   build:
-    # if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     strategy:
       matrix:
