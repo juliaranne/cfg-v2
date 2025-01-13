@@ -1,25 +1,35 @@
 schema {
-    query: Query
+  query: Query
 }
 
 type Exercise {
-    exerciseType: String
-    description: String
-    totalDuration: Int
+  id: ID
+  exerciseType: String
+  description: String
+  totalDuration: Int
+  date: String
 }
 
 type Stats {
-    username: String
-    exercises: [Exercise]
+  username: String
+  exercises: [Exercise]
 }
 
 type Results {
-    results: Stats
-    success: Boolean!
-    error: String
+  results: Stats
+  success: Boolean!
+  error: String
 }
 
 type Query {
-    weekly_stats(start: String!, end: String!, username: String!): Results
-    stats(username: String!): Results
+  weekly_stats(start: String!, end: String!, username: String!): Results
+  stats(username: String!): Results
+  all_exercises(username: String!): Results
+  exercise(id: String!): ExerciseResult
+}
+
+type ExerciseResult {
+  exercise: Exercise
+  success: Boolean!
+  error: String
 }

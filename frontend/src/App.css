@@ -1,17 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap");
 
-body, html, div, h1, h2, h3, p, button {
+:root {
+  --color: #9d1555;
+  --color-on-hover: #e64a94;
+  --text-highlight: #9d1555;
+  --color-nav: #f194b8;
+}
+
+body,
+html,
+div,
+h1,
+h2,
+h3,
+p,
+button {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 100%;
-  font-family: 'Barlow', sans-serif;
+  font-family: "Barlow", sans-serif;
   vertical-align: baseline;
 }
 
 body {
   line-height: 1;
-  color: #333; 
+  color: #333;
 }
 
 #appLogo {
@@ -21,13 +35,13 @@ body {
 
 .App {
   text-align: center;
-  max-width: 650px;
+  max-width: 740px;
   margin: auto;
   padding: 20px;
 }
 
 .appTitle h1 {
-  color: #F54996ff;
+  color: var(--text-highlight);
   font-size: 36px;
   margin: 40px 0 40px 0;
 }
@@ -41,10 +55,8 @@ form {
   margin-bottom: 20px;
 }
 
-
 button.navigationButton {
-  background-color: #F54996ff; 
-  color: white; 
+  background-color: var(--color);
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -54,7 +66,7 @@ button.navigationButton {
 }
 
 button.navigationButton:hover {
-  background-color: #ff66b2;
+  background-color: var(--color-on-hover);
 }
 
 /* Style the success message */
@@ -65,33 +77,33 @@ p.successMessage {
 
 .componentContainer {
   padding: 30px;
-  background-color: #f0f0f0; 
+  background-color: #f0f0f0;
   border-radius: 5px;
 }
 
 .btn-primary {
-  background-color: #F54996 !important;
-  border-color: #F54996ff !important;
+  background-color: var(--color) !important;
+  border-color: var(--color) !important;
 }
 
 .btn-primary:hover {
-  background-color: #f03087 !important; 
-  border-color: #F54996ff !important; 
+  background-color: var(--color-on-hover) !important;
+  border-color: var(--color-on-hover) !important;
 }
 
 .btn-success {
-  background-color: #F54996 !important;
-  border-color: #F54996ff !important;
+  background-color: var(--color) !important;
+  border-color: var(--color) !important;
 }
 
 .btn-success:hover {
-  background-color: #f03087 !important;  
-  border-color: #F54996ff !important; 
+  background-color: var(--color-on-hover) !important;
+  border-color: var(--color-on-hover) !important;
 }
 
 input#duration {
-  width: 20%; 
-  margin: auto; 
+  width: 20%;
+  margin: auto;
 }
 
 .form-margin {
@@ -103,22 +115,23 @@ input#duration {
   text-align: center;
   padding: 10px;
   font-size: 12px;
-  color: lightgrey;
+  color: #575757;
   position: relative;
   bottom: 0;
   width: 100%;
 }
 
 .navbar {
-  background-color: #F54996;
+  background-color: var(--color-nav);
 }
 
 .navbar-nav {
   margin: 0 auto !important;
 }
 
-.custom-nav-link {
-  margin-right: 40px;
+.navbar-expand-lg .navbar-nav {
+  justify-content: space-around;
+  flex-grow: 1;
 }
 
 .signup {
@@ -130,7 +143,7 @@ input#duration {
   color: green;
   min-height: 24px;
   opacity: 0;
-  transition: opacity .2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .response-message.fade-in {
