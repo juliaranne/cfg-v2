@@ -71,7 +71,7 @@ button.navigationButton:hover {
 
 /* Style the success message */
 p.successMessage {
-  color: green;
+  color: greenyellow;
   margin-bottom: 20px;
 }
 
