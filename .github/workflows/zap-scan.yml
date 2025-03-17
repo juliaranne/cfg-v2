@@ -1,27 +1,30 @@
-name: ZAP scan
-on: workflow_dispatch
+name: ZAP Baseline DAST Scan
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  checkout-and-install:
+  zap_scan:
+    name: Run ZAP Baseline Scan
     runs-on: ubuntu-latest
-    name: Scan the web application
-    # defaults:
-    #   run:
-    #     working-directory: ./frontend
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - run: npm i
 
-  # runs-zap:
-  #   needs: checkout-and-install
-  #   name: ZAP scan
-  #   uses: zaproxy/action-baseline@v0.14.0
-  #   with:
-  #     token: ${{ secrets.GITHUB_TOKEN }}
-  #     docker_name: "ghcr.io/zaproxy/zaproxy:stable"
-  #     target: "http://localhost/login"
-  #     rules_file_name: '.zap/rules.tsv'
-  #     cmd_options: '-a'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.9.0
+        with:
+          target: "https://example.com" # Replace with your target URL
+          fail_action: false # Set to true to fail the job on vulnerabilities
+          rules_file_name: ".zap-rules" # Optional: Define custom rule exceptions
+          cmd_options: "-a" # Enable all passive scan rules
+
+      - name: Upload ZAP Scan Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-report
+          path: report_html.html # Adjust if needed for the generated report
