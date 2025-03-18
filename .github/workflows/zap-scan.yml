@@ -1,0 +1,29 @@
+name: ZAP Baseline DAST Scan
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  zap_scan:
+    name: Run ZAP Baseline Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.9.0
+        with:
+          target: "https://example.com" # Replace with your target URL
+          fail_action: false # Set to true to fail the job on vulnerabilities
+          # rules_file_name: ".zap-rules" # Optional: Define custom rule exceptions
+          # cmd_options: "-a" # Enable all passive scan rules
+
+      - name: Upload ZAP Scan Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-report
+          path: report_html.html # Adjust if needed for the generated report
