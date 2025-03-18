@@ -20,8 +20,8 @@ jobs:
         with:
           target: "https://example.com" # Replace with your target URL
           fail_action: false # Set to true to fail the job on vulnerabilities
-          rules_file_name: ".zap-rules" # Optional: Define custom rule exceptions
-          cmd_options: "-a" # Enable all passive scan rules
+          # rules_file_name: ".zap-rules" # Optional: Define custom rule exceptions
+          # cmd_options: "-a" # Enable all passive scan rules
 
       - name: Upload ZAP Scan Report
         uses: actions/upload-artifact@v4
